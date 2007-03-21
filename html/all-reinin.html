@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>
+            Все признаки Рейнина
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="../layout/styles.css" />
+        <script type="text/javascript" src="../scripts/utilities.js"></script>
+        <script type="text/javascript" src="../scripts/data.js"></script>
+        <script type="text/javascript" src="../scripts/extractors.js"></script>
+        <script type="text/javascript" src="../scripts/constructors.js"></script>
+        <script type="text/javascript" src="../scripts/cube.js"></script>
+        <script type="text/javascript" src="../scripts/matrix.js"></script>
+    </head>
+    <body>
+        <div id="fullCubeList" class="scriptedDisplay">
+            <script type="text/javascript">
+                var myParent = document.getElementById ( "fullCubeList" );
+
+                for( var myTimId = 0; myTimId < linearRepresentation.length; myTimId ++ )
+                {
+                    for( var myDichotomyId = 0; myDichotomyId < reininDichotomies.length; myDichotomyId ++ )
+                    {
+                        var myMessage = "ТИМ " + timFullNameById( myTimId ) + " наделён признаком Рейнина: "
+                            + resolveDichotomy( myTimId, myDichotomyId ) + "\n";
+                        myParent.appendChild( document.createTextNode ( myMessage ) );
+                        myParent.appendChild( document.createElement( "br" ) );
+                    }
+                }
+            </script>
+        </div>
+    </body>
+</html>

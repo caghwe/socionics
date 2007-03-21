@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>
+            Проверка таблицы умножения
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="../layout/styles.css" />
+        <script type="text/javascript" src="../scripts/utilities.js"></script>
+        <script type="text/javascript" src="../scripts/data.js"></script>
+        <script type="text/javascript" src="../scripts/extractors.js"></script>
+        <script type="text/javascript" src="../scripts/constructors.js"></script>
+        <script type="text/javascript" src="../scripts/cube.js"></script>
+        <script type="text/javascript" src="../scripts/matrix.js"></script>
+    </head>
+    <body>
+        <script>
+function check_lookup()
+{
+    var passedTest = true;
+    var myResult = "<table border='#' cellpadding='5'>";
+    for( var i = 0; i < linearRepresentation.length; i ++ )
+    {
+        for( var j = 0; j < linearRepresentation.length; j ++ )
+        {
+            var newId = relationIdByTimIds( i, j );
+            var oldId = findRelationId_OLD( i, j );
+            if( newId != oldId )
+            {
+                passedTest = false;
+                var oldDecision =  "OLD: (ТИМ '" + timNameById( j ) + "' ТИМу '" +  timNameById( i ) +  "') = "
+                    +  relationNameById( oldId );
+                var newDecision =  "NEW: (ТИМ '" + timNameById( j ) + "' ТИМу '" +  timNameById( i ) +  "') = "
+                    +  relationNameById( newId );
+                var myMessage =
+                    "<tr><td>" + i
+                        + "</td><td>" + j
+                        + "</td><td>" + oldId
+                        + "</td><td>" + newId
+                        + "</td><td>" + oldDecision
+                        + "</td><td>" + newDecision + "</td></tr>\n";
+
+
+                myResult +=  myMessage;
+            }
+        }
+    }
+    return passedTest? "passed test" : myResult + "</table>";
+}
+
+function findRelationId_OLD( firstTimId, secondTimId )
+{
+    var interTimRelations =
+    [
+        [ 0, 1, 2, 3, 12, 13, 6, 7, 8, 9, 10, 11, 4, 5, 14, 15 ],
+        [ 1, 0, 3, 2, 13, 12, 7, 6, 9, 8, 11, 10, 5, 4, 15, 14 ],
+        [ 2, 3, 0, 1, 14, 15, 4, 5, 10, 11, 8, 9, 6, 7, 12, 13 ],
+        [ 3, 2, 1, 0, 15, 14, 5, 4, 11, 10, 9, 8, 7, 6, 13, 12 ],
+        [ 4, 5, 14, 15, 0, 1, 2, 3, 12, 13, 6, 7, 8, 9, 10, 11 ],
+        [ 5, 4, 15, 14, 1, 0, 3, 2, 13, 12, 7, 6, 9, 8, 11, 10 ],
+        [ 6, 7, 12, 13, 2, 3, 0, 1, 14, 15, 4, 5, 10, 11, 8, 9 ],
+        [ 7, 6, 13, 12, 3, 2, 1, 0, 15, 14, 5, 4, 11, 10, 9, 8 ],
+        [ 8, 9, 10, 11, 4, 5, 14, 15, 0, 1, 2, 3, 12, 13, 6, 7 ],
+        [ 9, 8, 11, 10, 5, 4, 15, 14, 1, 0, 3, 2, 13, 12, 7, 6 ],
+        [ 10, 11, 8, 9, 6, 7, 12, 13, 2, 3, 0, 1, 14, 15, 4, 5 ],
+        [ 11, 10, 9, 8, 7, 6, 13, 12, 3, 2, 1, 0, 15, 14, 5, 4 ],
+        [ 12, 13, 6, 7, 8, 9, 10, 11, 4, 5, 14, 15, 0, 1, 2, 3 ],
+        [ 13, 12, 7, 6, 9, 8, 11, 10, 5, 4, 15, 14, 1, 0, 3, 2 ],
+        [ 14, 15, 4, 5, 10, 11, 8, 9, 6, 7, 12, 13, 2, 3, 0, 1 ],
+        [ 15, 14, 5, 4, 11, 10, 9, 8, 7, 6, 13, 12, 3, 2, 1, 0 ]
+    ];
+    // is now obsolete: the same result as relationIdByTimIds( firstTimId, secondTimId );
+    return interTimRelations[ secondTimId ][ firstTimId ];
+}
+        </script>
+    </head>
+    <body>
+        <div id="fullCubeList" class="scriptedDisplay">
+            <script type="text/javascript">
+                document.write( check_lookup() );
+            </script>
+        </div>
+    </body>
+</html>

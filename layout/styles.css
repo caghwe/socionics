@@ -1,0 +1,34 @@
+body
+{
+    font-family : verdana, arial, helvetica, sans-serif;
+    font-size: 80%;
+    font-variant : normal;
+}  
+p
+{
+    text-align: justify;
+}
+div.scriptedDisplay
+{
+    margin-left: 5em;
+}             
+li
+{   
+    padding-bottom: 1em;
+}
+.footnote_displayed
+{
+    position: "absolute";
+    right: "5";
+    width: 70%;
+    background-color: "white";
+    padding: 7px;
+    border: double black 4px;
+}
+.footnote-name
+{
+    border: dotted green 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+    cursor: hand;
+}
