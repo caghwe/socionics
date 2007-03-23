@@ -15,16 +15,29 @@
     </head>
     <body>
 
-<h3>Групповая структура Модели А</h3>
+<h2>Групповая структура Модели А</h2>
 
 <i>Александр Касюков</i> (<a href="mailto:kasiuka@sunysuffolk.edu">kasiuka@sunysuffolk.edu</a>)
 
-2007-03-20
+<br />
+Опубликовано
+<span class="footnote">
+    <span class="footnote-name">2007-03-20</span>
+    <span class="footnote-content">
+        Последняя редакция: 2007-03-22; 18:15 EST.
+    </span>
+</span>
+по адресу
+<a href="http://www2.sunysuffolk.edu/kasiuka/socionics/html/socio-theory.html">http://www2.sunysuffolk.edu/kasiuka/socionics/html/socio-theory.html</a>
 
-<h4>Основные идеи</h4>
+
+<h3>Основные идеи</h3>
 
 
 <ol>
+
+<li>Описана групповая структура на множестве всех интерТИМных отношений.</li>
+
 <li>Показано, что множество ТИМов &#8212;
 <span class="footnote">
     <span class="footnote-name">главное однородное пространство</span>
@@ -36,28 +49,30 @@
 </span> группы интерТИМных отношений.
 </li>
 
-<li>Описана групповая структура интерТИМных отношений.</li>
-
-<li>Дано явное
+<li>
+Дано явное
 <span class="footnote">
     <span class="footnote-name">координатное представление</span>
     <span class="footnote-content">
-        Это координатное представление
-    ТИМов и интерТИМных отношений удобно при компьютерном моделировании
-        соционического содержания.
+        Удобное при компьютерном моделировании соционического содержания.
     </span>
-</span> ТИМов и интерТИМных отношений.
+</span> ТИМов и интерТИМных отношений, выражающее соционическую информацию
+    на языке матричного умножения.
 </li>
 </ol>
 
-<h4>О чём речь</h4>
+<h3>О чём речь</h3>
 
-<p>Соционика является одной из ветвей дифференциальной психологии и классифицирует всех людей
-    по их принадлежности к 16 типам, называемых ТИМами (Типами Информационного Метаболизма).
-Хотя типология соционики примерно соответствует типологии Майерс-Бриггс
-    (Katharine Cook Briggs, Isabel Briggs Myers), в соционике (в дополнение к типологии)
+<p><a href="http://ru.wikipedia.org/wiki/%D0%A1%D0%BE%D1%86%D0%B8%D0%BE%D0%BD%D0%B8%D0%BA%D0%B0">Соционика</a>
+ является одной из ветвей дифференциальной психологии
+    и классифицирует всех людей по их принадлежности к 16 типам,
+        называемых <span class="term-firstuse">Типами Информационного Метаболизма</span> (далее: ТИМ).
+Хотя типология соционики примерно соответствует
+    <a href="http://en.wikipedia.org/wiki/Myers-Briggs_Type_Indicator">типологии Майерс-Бриггс</a>,
+    в соционике (в дополнение к типологии)
             вводится структурная модель человеческой психики.
-Эта модель названа "Модель А" по имени её создательницы, Аушры Аугустинавичюте.
+Эта модель названа <span class="term-firstuse">Модель А</span>
+    по имени её создательницы, Аушры Аугустинавичюте.
 Модель А позволяет наглядно описать каждый ТИМ и
 <span class="footnote">
     <span class="footnote-name">предсказать</span>
@@ -67,8 +82,9 @@
 </span> характер взаимодействия двух людей на основе информации об их ТИМах.</p>
 
 <p>Здесь рассматривается структура Модели А
-    и описывается удобный способ (математического и компьютерного) представления ТИМов и отношений между ними.
-В этом рассмотрении сознательно опускаются все содержательные характеристики относящиеся к психологии
+    и описывается способ (математического и компьютерного) представления ТИМов и отношений между ними.
+В этом рассмотрении
+    сознательно опускаются все содержательные характеристики относящиеся к психологии
     и делается упор на формальной математической стороне дела.
 Для понимания материала требуется
 <span class="footnote">
@@ -80,15 +96,54 @@
     </span>
 </span>в объёме первого курса института.</p>
 
-<p>Примеры (а, точнее, все случаи) использования &#8212; в <a href="#examples">самом конце</a>.</p>
+<p>Интерактивные примеры использования предложенной координатизации
+    приведены в <a href="#examples">самом конце</a>.
+    Эта статья аутореферентна в том смысле, что обслуживающий примеры
+<span class="footnote">
+    <span class="footnote-name">программный код</span>
+    <span class="footnote-content">
+        Программный код на этой странице написан на языке JavaScript и
+            сознательно сделан общедоступным.
+        Желающие могут скачать статью вместе с кодом в виде
+            <a href="../2007-03-22.zip">архива</a>.
+        На весь используемый код <a href="license.html">распространяется действие</a> лицензии,
+            известной как
+                <span class="term-firstuse">
+                    <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>
+                </span>.
+    </span>
+</span>
+основан на представлении ТИМов и отношений матрицами (и получает результат, вычисляя
+            матричное произведение).
+</p>
 
 
-<h4>Аспекты</h4>
+<h3>Основные понятия Модели А  &#8212; функции, аспекты, ТИМы</h3>
 
 <p>
-<span class="term">Аспект</span> характеризуется
-    <span class="term">признаком</span> и
-        <span class="term">цветом</span>.
+Психика человека подразделяется на восемь
+    <span class="term-firstuse">психических функций</span>  &#8212;
+        структурных единиц, осуществляющих информационное взаимодействие с внешним миром и
+            друг с другом.
+            Функции различаются по
+                характеру и контексту своего применения,
+                осознанности их использования индивидуумом
+                и степени развития (т.е. <span class="term-firstuse">размерности</span>).</p>
+
+<p>
+<span class="term-use">Функции</span> представляются вершинами трёхмерного куба
+    и нумеруются так, как показано на <a href="#cube">рисунке</a> ниже.
+Вершины куба, лежащие в нижней горизонтальной плоскости, называются
+    <span class="term-firstuse">ментальным кольцом</span>,
+    а в верхней горизонтальной плоскости &#8212;
+    <span class="term-firstuse">витальным кольцом</span>.</p>
+
+<p>
+<span class="term-firstuse">Аспект</span> определяет тип информационного взаимодействия
+    той или иной <span class="term-use">психических функций</span> с реальностью
+        и  характеризуется
+    <span class="term-firstuse">признаком</span> и
+        <span class="term-firstuse">цветом</span>.
 Признаков четыре и они группируются в две группы:</p>
 
 <ol>
@@ -103,7 +158,7 @@
     <li>белый (интровертный).</li>
 </ol>
 
-<p>Таким образом, всего различных аспектов &#8212;
+<p>Таким образом, всего различных <span class="term-use">аспектов</span> &#8212;
     <span id="myAspectCount" class="scriptedDisplay">
         <script type="text/javascript">
             var myCount = document.getElementById( "myAspectCount" );
@@ -122,15 +177,8 @@
     </script>
 </div>
 
-<h4>Функции и ТИМы</h4>
-
-<p>Модель психики в соционике состоит из функций.
- Функции психики представляются вершинами трёхмерного куба и нумеруются так,
-    как показано на рисунке ниже.
-Вершины куба лежащие в нижней горизонтальной плоскости называется ментальным кольцом,
-в верхней горизонтальной плоскости &#8212; витальным кольцом.</p>
-
-<p>ТИМ &#8212; это взаимно однозначное соответствие вершин куба и аспектов,
+<p><span class="term-defined">ТИМ</span> &#8212;
+    это взаимно однозначное соответствие вершин куба и аспектов,
         удовлетворяющее следующим требованиям:</p>
 
 <ol>
@@ -149,18 +197,14 @@
 <p>Например, следующее соответствие аспектов вершинам
      удовлетворяет вышеуказанным требованиям и соответствует ТИМу</p>
 
-
+<a name="cube">
 <div id="myCubeExample" class="scriptedDisplay"></div>
 <script type="text/javascript">
 function cubeOptionMaker( givenName )
 {
-    this.name = givenName;
-    this.caption = function ( givenTimId ) { return timFullNameById( givenTimId ) };
-    this.action = function ( givenTimId, givenParent )
-        {
-            removeAllChildren( givenParent );
-            appendCube( givenTimId, givenParent );
-        }
+    this.name       = givenName;
+    this.caption    = function ( givenTimId ) { return timFullNameById( givenTimId ) };
+    this.action     = function ( givenTimId, givenParent ){ appendCube( givenTimId, givenParent ); }
 }
 function appendCubeSelector( givenName, givenInitialSelection )
 {
@@ -177,7 +221,7 @@ appendCubeSelector( "myCubeExample", 0 )
 как оснащение куба аспектами и изображать соответствующей картинкой.
 Здесь можно посмотреть <a href="all-cubes.html">полный список ТИМов и соответствующих им оснащений куба</a>.</p>
 
-<h4>Группа отношений и её ортогональное линейное представление</h4>
+<h3>Группа отношений и её ортогональное линейное представление</h3>
 
 <p>Множество отношений <i>R</i> между ТИМами образует группу из 16 элементов.
 Эта группа эффективно и транзитивно действует на множестве <i>T</i> всех ТИМов.
@@ -221,7 +265,7 @@ appendCubeSelector( "myCubeExample", 0 )
 Таким образом, для задания группы отношений <i>R</i> достаточно трёх образующих
  &#8212; по одной для каждой из групп-сомножителей.</p>
 
-<h4>Явный вид образующих группы <i>R</i></h4>
+<h3>Явный вид образующих группы <i>R</i></h3>
 
 <p>Дадим явный вид
 <span class="footnote">
@@ -357,7 +401,7 @@ appendCubeSelector( "myCubeExample", 0 )
 </p>
 
 <!--
-<h4>Некоторые соотношения между отношениями</h4>
+<h3>Некоторые соотношения между отношениями</h3>
 
 <p>
 Квадрат этого отношения даёт отношение (второго порядка, т.е. симметричное) супер-эго.
@@ -387,7 +431,7 @@ appendCubeSelector( "myCubeExample", 0 )
 
 -->
 
-<h4>Матричное представление множества ТИМов</h4>
+<h3>Матричное представление множества ТИМов</h3>
 
 <p>Как только во множестве ТИМов <i>T</i> совершенно произвольно выбран один единственный элемент,
     мы получаем взаимно однозначное соответствие между
@@ -396,13 +440,9 @@ appendCubeSelector( "myCubeExample", 0 )
     в соответствие тождественное отношение (т.е. единица группы <i>R</i>).
 </p>
 
-<p>Это соответствие между ТИМами и отношениями позволяет интерпретировать
-    таблицу умножения группы <i>R</i>
-        как таблицу интерТИМных отношений.</p>
-
 
 <a name="examples"></a>
-<h4>Примеры вычислений</h4>
+<h3>Примеры вычислений</h3>
 
 <p>Для того, читатель смог лучше разобраться с конкретными
 вычислениями, в этом разделе даны примеры использования
@@ -412,13 +452,22 @@ appendCubeSelector( "myCubeExample", 0 )
 <p>
 Для определённости, мы считаем что матрицы отношений действуют на матрицы ТИМов слева,
     как обычно принято для функций и их аргументов. То есть если Борис приходится Анатолию
-    <i><b>X</b></i>-ом, где <i><b>X</b></i>  &#8212; это некоторое интерТИМное отношение,
+    <i><b>X</b></i>-ом, где <i><b>X</b></i> &#8212; это некоторое интерТИМное отношение,
         то
             <br />
             <center>
                 <br />
                 Борис = <i><b>X</b></i> ( Анатолий ).
             </center></p>
+
+<p>Здесь и далее, слова "Борис" и "Анатолий"
+обозначают матрицы ТИМов Бориса и Анатолия, соответственно, полученные в предположении что
+    что ТИМ 'Дон Кихот' выбран в качестве "начала координат", т.е.
+    соответствует единичной матрице.
+    Впрочем, сам результат вычислений (в отличие от соответствующей ему матрицы)
+        совершенно не зависит от этого произвольного выбора.</p>
+
+<h4>Групповое умножение</h4>
 
 <p>Первое следствие рассмотренного выше следующее. Если мы знаем,
 что Борис приходится Анатолию <i><b>X</b></i>-ом, а Виталий, в свою
@@ -437,68 +486,166 @@ appendCubeSelector( "myCubeExample", 0 )
 ... и затем вычислить произведение матриц: <i><b>Y</b> x <b>X</b></i>:
 </p>
 
-<form name="relationMultiplication">
-    <table>
-        <tr>
-            <td align="center" valign="center">Кем Виталий приходится Анатолию, матрица <i><b>Y</b> x <b>X</b></i>:</td>
-            <td align="center" valign="center">&nbsp;</td>
-            <td align="center" valign="center">Кем Виталий приходится Борису, матрица <i><b>Y</b></i>:</td>
-            <td align="center" valign="center">&nbsp;</td>
-            <td align="center" valign="center">Кем Борис приходится Анатолию, матрица <i><b>X</b></i>:</td>
-        </tr>
-        <tr>
-            <td align="center" valign="top" id="YXmatrix" width="30%"></td>
-            <td align="center" valign="center">=</td>
-            <td align="center" valign="top" id="Ymatrix" width="30%"></td>
-            <td align="center" valign="center">x</td>
-            <td align="center" valign="top" id="Xmatrix" width="30%"></td>
-        </tr>
-    </table>
-</form>
+
+<table>
+    <tr>
+        <td align="center" valign="center">Кем Виталий приходится Анатолию, матрица <i><b>Y</b> x <b>X</b></i>:</td>
+        <td align="center" valign="center">&nbsp;</td>
+        <td align="center" valign="center">Кем Виталий приходится Борису, матрица <i><b>Y</b></i>:</td>
+        <td align="center" valign="center">&nbsp;</td>
+        <td align="center" valign="center">Кем Борис приходится Анатолию, матрица <i><b>X</b></i>:</td>
+    </tr>
+    <tr>
+        <td align="center" valign="top" id="multYX" width="30%"></td>
+        <td align="center" valign="center">=</td>
+        <td align="center" valign="top" id="multY" width="30%"></td>
+        <td align="center" valign="center">x</td>
+        <td align="center" valign="top" id="multX" width="30%"></td>
+    </tr>
+</table>
+
 
 <script type="text/javascript">
-function factorMatrixOptionMaker( givenName )
+function multXY()
+{
+    var myMatrixX = readSelectedMatrix( "multX" );
+    var myMatrixY = readSelectedMatrix( "multY" );
+
+    if( myMatrixX && myMatrixX )
+    {
+        var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, myMatrixX ) );
+
+        var myParent = document.getElementById( "multYX" );
+        removeAllChildren( myParent );
+        myDiv = document.createElement( "div" );
+        myParent.appendChild( myDiv );
+        myDiv.className = "like-select";
+        myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
+        appendMatrix( myRelationIdYX, myParent );
+    }
+}
+function multOptionMaker( givenName )
 {
     this.name = givenName;
     this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            removeAllChildren( givenParent );
             appendMatrix( givenRelId, givenParent );
-            multiplyXY();
+            multXY();
         }
 }
-function appendMatrixSelector( givenName, givenInitialSelection )
+function appendMultSelector( givenName, givenInitialSelection )
 {
-    var myMatrixOptionProcessor = new factorMatrixOptionMaker( givenName );
-    makeSelector( myMatrixOptionProcessor, givenInitialSelection );
+    var myMultOptionProcessor = new multOptionMaker( givenName );
+    makeSelector( myMultOptionProcessor, givenInitialSelection );
 }
-function multiplyXY()
-{
-    var myXSelection = document.getElementById( "XmatrixSelect" );
-    var myYSelection = document.getElementById( "YmatrixSelect" );
-    if( myXSelection && myYSelection )
-    {
-        var myXId = myXSelection.selectedIndex;
-        var myYId = myYSelection.selectedIndex;
-
-        var myXMatrix = linearRepresentation[ myXId ].matrix;
-        var myYMatrix = linearRepresentation[ myYId ].matrix;
-
-        var myYXMatrix = productOfMatricies( myYMatrix, myXMatrix );
-        var myYXId = lookupRelationId( myYXMatrix );
-
-        var myParent = document.getElementById( "YXmatrix" );
-        removeAllChildren( myParent );
-        myParent.appendChild( document.createTextNode( relationNameById( myYXId )  + ":" ) );
-        appendMatrix( myYXId, myParent );
-    }
-}
-appendMatrixSelector( "Ymatrix", 0 );
-appendMatrixSelector( "Xmatrix", 0 );
+appendMultSelector( "multY", 4 );
+appendMultSelector( "multX", 7 );
+multXY();
 </script>
 
+<h4>Групповое действие</h4>
+
 <p>Второе следствие рассмотренного выше следующее.
+    Если мы знаем кем Борис приходится Анатолию и ТИМ Анатолия,
+    то ТИМ Бориса может быть вычислен по формуле:
+        <center>
+            <br />
+            Борис = <i><b>X</b></i>( Анатолий )
+            <br /><br />
+        </center>
+     (где <i><b>X</b></i> &#8212; отношение,
+        выражающее кем Борис приходится Анатолию)
+</p>
+
+
+<table>
+    <tr>
+        <td align="center" valign="center">Борис,
+            матрица
+            <br /><i><b>X</b></i>( Анатолий ):</td>
+        <td align="center" valign="center">&nbsp;</td>
+        <td align="center" valign="center">Кем Борис приходится Анатолию,
+            матрица <i><b>X</b></i>:</td>
+        <td align="center" valign="center">Анатолий:</td>
+    </tr>
+    <tr>
+        <td align="center" valign="top" id="actionYX" width="30%"></td>
+        <td align="center" valign="center">=</td>
+        <td align="center" valign="top" id="actionY" width="30%"></td>
+        <td align="center" valign="top" width="30%">
+            <table>
+                <tr>
+                    <td align="center">
+                        <span style="font-size: 400%; display: inline;">(</span>
+                    </td>
+                    <td align="center" id="actionX"></td>
+                    <td align="center">
+                        <span style="font-size: 400%; display: inline;">)</span>
+                    </td>
+                </td>
+            </table>
+    </tr>
+</table>
+
+
+<script type="text/javascript">
+function actionXY()
+{
+    var myMatrixX = readSelectedMatrix( "actionX" );
+    var myMatrixY = readSelectedMatrix( "actionY" );
+
+    if( myMatrixX && myMatrixX )
+    {
+        var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, myMatrixX ) );
+
+        var myParent = document.getElementById( "actionYX" );
+        removeAllChildren( myParent );
+        myDiv = document.createElement( "div" );
+        myParent.appendChild( myDiv );
+        myDiv.className = "like-select";
+        myDiv.appendChild( document.createTextNode( timNameById( myRelationIdYX ) ) );
+        appendMatrix( myRelationIdYX, myParent );
+    }
+}
+function actionRELOptionMaker( givenName )
+{
+    this.name = givenName;
+    this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
+    this.action = function ( givenRelId, givenParent )
+        {
+            appendMatrix( givenRelId, givenParent );
+            actionXY();
+        }
+}
+function actionTIMOptionMaker( givenName )
+{
+    this.name = givenName;
+    this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
+    this.action = function ( givenRelId, givenParent )
+        {
+            appendMatrix( givenRelId, givenParent );
+            actionXY();
+        }
+}
+function appendActionRELSelector( givenName, givenInitialSelection )
+{
+    var myRELOptionProcessor = new actionRELOptionMaker( givenName );
+    makeSelector( myRELOptionProcessor, givenInitialSelection );
+}
+function appendActionTIMSelector( givenName, givenInitialSelection )
+{
+    var myTIMOptionProcessor = new actionTIMOptionMaker( givenName );
+    makeSelector( myTIMOptionProcessor, givenInitialSelection );
+}
+appendActionRELSelector( "actionY", 4 );
+appendActionTIMSelector( "actionX", 7 );
+actionXY();
+</script>
+
+<h4>Транзиты действия</h4>
+
+<p>Третье следствие рассмотренного выше следующее.
     Если мы знаем какое бы то ни было представление ТИМов Бориса и Анатолия в матричном виде,
     то отношение <i><b>X</b></i> между ними (точнее, кем Борис приходится Анатолию)
         может быть вычислено по формуле
@@ -514,78 +661,67 @@ appendMatrixSelector( "Xmatrix", 0 );
             Борис = <i><b>X</b></i> ( Анатолий )
             <br /><br />
         </center>
-рассмотренного выше. (Слова "Борис" и "Анатолий" в двух предыдущих формулах
-обозначают матрицы ТИМов Бориса и Анатолия, соответственно.)</p>
+рассмотренного выше.</p>
 
-<p>Ниже мы предполагаем, что 'Дон Кихот' выбран в качестве "начала координат", т.е.
-    соответствует единичной матрице.
-    Впрочем, само отношение, получающееся слева как результат,
-        совершенно не зависит от этого произвольного выбора.</p>
-
-<form name="relationDifference">
-    <table>
-        <tr>
-            <td align="center" valign="center">Кем Борис приходится Анатолию, матрица <br />( Борис ) x ( Анатолий )<sup>-1</sup>:</td>
-            <td align="center" valign="center">&nbsp;</td>
-            <td align="center" valign="center">( Борис ):</td>
-            <td align="center" valign="center">&nbsp;</td>
-            <td align="center" valign="center">( Анатолий ):</td>
-            <td align="center" valign="center"></td>
-        </tr>
-        <tr>
-            <td align="center" valign="top" id="YXmatrixD" width="30%"></td>
-            <td align="center" valign="center">=</td>
-            <td align="center" valign="top" id="YmatrixD" width="30%"></td>
-            <td align="center" valign="center">x</td>
-            <td align="center" valign="top" id="XmatrixD" width="30%"></td>
-            <td align="left" valign="top"><span style="position: relative; left: -5em; top: +1.5em;">-1</span></td>
-        </tr>
-    </table>
-</form>
+<table>
+    <tr>
+        <td align="center" valign="center">Кем Борис приходится Анатолию, матрица
+                <br />( Борис ) x ( Анатолий )<sup>-1</sup>:</td>
+        <td align="center" valign="center">&nbsp;</td>
+        <td align="center" valign="center">Борис:</td>
+        <td align="center" valign="center">&nbsp;</td>
+        <td align="center" valign="center">Анатолий:
+            <span style="position: relative; top: +4.7em;">-1</span></td>
+    </tr>
+    <tr>
+        <td align="center" valign="top" id="transitYX" width="30%"></td>
+        <td align="center" valign="center">=</td>
+        <td align="center" valign="top" id="transitY" width="30%"></td>
+        <td align="center" valign="center">x</td>
+        <td align="center" valign="top" id="transitX" width="30%"></td>
+    </tr>
+</table>
 
 <script type="text/javascript">
-function subtractMatrixOptionMaker( givenName )
+function transitXY()
+{
+    var myMatrixX = readSelectedMatrix( "transitX" );
+    var myMatrixY = readSelectedMatrix( "transitY" );
+
+    if( myMatrixX && myMatrixX )
+    {
+        var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, transposeMatrix( myMatrixX ) ) );
+
+        var myParent = document.getElementById( "transitYX" );
+        removeAllChildren( myParent );
+        myDiv = document.createElement( "div" );
+        myParent.appendChild( myDiv );
+        myDiv.className = "like-select";
+        myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
+        appendMatrix( myRelationIdYX, myParent );
+    }
+}
+function transitOptionMaker( givenName )
 {
     this.name = givenName;
     this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            removeAllChildren( givenParent );
             appendMatrix( givenRelId, givenParent );
-            subtractXY();
+            transitXY();
         }
 }
-function appendSubtractMatrixSelector( givenName, givenInitialSelection )
+function appendTransitSelector( givenName, givenInitialSelection )
 {
-    var myMatrixOptionProcessor = new subtractMatrixOptionMaker( givenName );
-    makeSelector( myMatrixOptionProcessor, givenInitialSelection );
+    var myTransitOptionProcessor = new transitOptionMaker( givenName );
+    makeSelector( myTransitOptionProcessor, givenInitialSelection );
 }
-function subtractXY()
-{
-    var myXSelection = document.getElementById( "XmatrixDSelect" );
-    var myYSelection = document.getElementById( "YmatrixDSelect" );
-    if( myXSelection && myYSelection )
-    {
-        var myXId = myXSelection.selectedIndex;
-        var myYId = myYSelection.selectedIndex;
-
-        var myXMatrix = linearRepresentation[ myXId ].matrix;
-        var myYMatrix = linearRepresentation[ myYId ].matrix;
-
-        var myYXMatrix = productOfMatricies( myYMatrix, transposeMatrix( myXMatrix ) );
-        var myYXId = lookupRelationId( myYXMatrix );
-
-        var myParent = document.getElementById( "YXmatrixD" );
-        removeAllChildren( myParent );
-        myParent.appendChild( document.createTextNode( relationNameById( myYXId )  + ":" ) );
-        appendMatrix( myYXId, myParent );
-    }
-}
-appendSubtractMatrixSelector( "YmatrixD", 0 );
-appendSubtractMatrixSelector( "XmatrixD", 0 );
+appendTransitSelector( "transitY", 4 );
+appendTransitSelector( "transitX", 7 );
+transitXY();
 </script>
 
-<hr/>
+<hr class="section-separator" />
 
 <script language="javaScript" type="text/javascript">
     initialize_all_footnotes();

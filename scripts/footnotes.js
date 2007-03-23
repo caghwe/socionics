@@ -4,7 +4,7 @@ var FootnoteIntroCaption = "Примечание ";
 
 function initialize_all_footnotes()
 {
-    var endFootnotes = document.createElement( "h4")
+    var endFootnotes = document.createElement( "h3")
     endFootnotes.innerText = FootnoteSectionTitle;
     document.body.appendChild( endFootnotes );
 

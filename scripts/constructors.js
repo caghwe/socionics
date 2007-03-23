@@ -1,12 +1,20 @@
+function readSelectedMatrix( givenName )
+{
+    var mySelector =  document.getElementById( givenName + "Select" );
+    if( mySelector )
+    {
+        var myId = mySelector.selectedIndex;
+        var myMatrix = linearRepresentation[ myId ].matrix;
+        return myMatrix;
+    }
+}
 function makeSelector( givenOptionProcessor, givenInitialSelection )
 {
     var myParent = document.getElementById( givenOptionProcessor.name );
-    var myForm = document.createElement( "<form name='" + givenOptionProcessor.name + "Form'>" );
+    var myForm      = document.createElement( "<form name='" + givenOptionProcessor.name + "Form'> id='" + givenOptionProcessor.name + "Form'>" );
+    var myContent   = document.createElement( "<div id='" + givenOptionProcessor.name + "Div'>" );
+    var mySelect    = document.createElement( "<select name='" + givenOptionProcessor.name + "Select'> id='" + givenOptionProcessor.name + "Select'>" );
     myParent.appendChild( myForm );
-
-    var myContent = document.createElement( "<div id='" + givenOptionProcessor.name + "Div'>" );
-
-    var mySelect = document.createElement( "<select name='" + givenOptionProcessor.name + "Select'>" );
     myForm.appendChild( mySelect );
     myForm.appendChild( myContent );
     function makeSelection( givenOption )
@@ -18,10 +26,10 @@ function makeSelector( givenOptionProcessor, givenInitialSelection )
     mySelect.onchange = function () { makeSelection( mySelect.selectedIndex ); };
     for( i = 0; i < linearRepresentation.length; i ++ )
     {
-        var myTimOption = document.createElement( "option" );
-        mySelect.appendChild( myTimOption );
-        myTimOption.value = i;
-        myTimOption.appendChild( document.createTextNode( givenOptionProcessor.caption( i ) ) );
+        var myOption = document.createElement( "option" );
+        mySelect.appendChild( myOption );
+        myOption.value = i;
+        myOption.appendChild( document.createTextNode( givenOptionProcessor.caption( i ) ) );
     }
     makeSelection( givenInitialSelection );
 }

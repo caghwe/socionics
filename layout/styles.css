@@ -32,3 +32,26 @@ li
     padding-right: 3px;
     cursor: hand;
 }
+.term-firstuse
+{
+    font-family: Times New Roman;
+    font-style: italic;
+    font-size: 115%;
+}
+.like-select
+{
+    border-top: 2px inset;
+    border-bottom: 2px inset;
+    border-left:  2px inset;
+    border-right: 2px inset;
+}
+.section-separator
+{
+    color:#009;
+    height:2px;
+    border:1px solid #009;
+    clear:both;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}

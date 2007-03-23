@@ -1,0 +1,214 @@
+<h4>Групповое умножение</h4>
+
+<p>Первое следствие рассмотренного выше следующее. Если мы знаем,
+что Борис приходится Анатолию <i><b>X</b></i>-ом, а Виталий, в свою
+очередь, приходится Борису <i><b>Y</b></i>-ом (где <i><b>X</b></i> и <i><b>Y</b></i>
+&#8212; некоторые отношения между ТИМами), то мы можем узнать кем
+приходится Виталий Анатолию, не зная ничего о ТИМах этих троих. В
+самом деле, для этого достаточно подставить уравнение
+            <br />
+            <center>
+                <br />
+                Борис = <i><b>X</b></i> ( Анатолий )
+                &nbsp;&nbsp;в уравнение&nbsp;&nbsp;
+                Виталий = <i><b>Y</b></i> ( Борис ).
+                <br /><br />
+            </center>
+... и затем вычислить произведение матриц: <i><b>Y</b> x <b>X</b></i>:
+</p>
+
+
+<table border="#">
+    <tbody>
+    <tr>
+        <td align="center" valign="center">Кем Виталий приходится Анатолию, матрица <i><b>Y</b> x <b>X</b></i>:</td>
+        <td align="center" valign="center">&nbsp;</td>
+        <td align="center" valign="center">Кем Виталий приходится Борису, матрица <i><b>Y</b></i>:</td>
+        <td align="center" valign="center">&nbsp;</td>
+        <td align="center" valign="center">Кем Борис приходится Анатолию, матрица <i><b>X</b></i>:</td>
+    </tr>
+    <tr
+        class="clicked-onpageload"
+        onclick="appendGroupMultiplicationRow( this, 2, 7 )">
+    </tr>
+    </tbody>
+</table>
+
+<h4>Групповое действие</h4>
+
+<p>Второе следствие рассмотренного выше следующее.
+    Если мы знаем кем Борис приходится Анатолию и ТИМ Анатолия,
+    то ТИМ Бориса может быть вычислен по формуле:
+        <center>
+            <br />
+            Борис = <i><b>X</b></i>( Анатолий )
+            <br /><br />
+        </center>
+     (где <i><b>X</b></i> &#8212; отношение,
+        выражающее кем Борис приходится Анатолию)
+</p>
+
+
+<table>
+    <tr>
+        <td align="center" valign="center">Борис,
+            матрица
+            <br /><i><b>X</b></i>( Анатолий ):</td>
+        <td align="center" valign="center">&nbsp;</td>
+        <td align="center" valign="center">Кем Борис приходится Анатолию,
+            матрица <i><b>X</b></i>:</td>
+        <td align="center" valign="center">Анатолий:</td>
+    </tr>
+    <tr>
+        <td align="center" valign="top" id="actionYX" width="30%"></td>
+        <td align="center" valign="center">=</td>
+        <td align="center" valign="top" id="actionY" width="30%"></td>
+        <td align="center" valign="top" width="30%">
+            <table>
+                <tr>
+                    <td align="center">
+                        <span style="font-size: 400%; display: inline;">(</span>
+                    </td>
+                    <td align="center" id="actionX"></td>
+                    <td align="center">
+                        <span style="font-size: 400%; display: inline;">)</span>
+                    </td>
+                </td>
+            </table>
+    </tr>
+</table>
+
+
+<script type="text/javascript">
+function actionXY()
+{
+    var myMatrixX = readSelectedMatrix( "actionX" );
+    var myMatrixY = readSelectedMatrix( "actionY" );
+
+    if( myMatrixX && myMatrixX )
+    {
+        var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, myMatrixX ) );
+
+        var myParent = document.getElementById( "actionYX" );
+        removeAllChildren( myParent );
+        myDiv = document.createElement( "div" );
+        myParent.appendChild( myDiv );
+        myDiv.className = "like-select";
+        myDiv.appendChild( document.createTextNode( timNameById( myRelationIdYX ) ) );
+        appendMatrix( myParent, myRelationIdYX );
+    }
+}
+function actionRELOptionMaker( givenName )
+{
+    this.name = givenName;
+    this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
+    this.action = function ( givenRelId, givenParent )
+        {
+            appendMatrix( givenParent, givenRelId );
+            actionXY();
+        }
+}
+function actionTIMOptionMaker( givenName )
+{
+    this.name = givenName;
+    this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
+    this.action = function ( givenRelId, givenParent )
+        {
+            appendMatrix( givenParent, givenRelId );
+            actionXY();
+        }
+}
+function appendActionRELSelector( givenName, givenInitialSelection )
+{
+    var myRELOptionProcessor = new actionRELOptionMaker( givenName );
+    makeSelector( myRELOptionProcessor, givenInitialSelection );
+}
+function appendActionTIMSelector( givenName, givenInitialSelection )
+{
+    var myTIMOptionProcessor = new actionTIMOptionMaker( givenName );
+    makeSelector( myTIMOptionProcessor, givenInitialSelection );
+}
+appendActionRELSelector( "actionY", 4 );
+appendActionTIMSelector( "actionX", 7 );
+actionXY();
+</script>
+
+<h4>Транзиты действия</h4>
+
+<p>Третье следствие рассмотренного выше следующее.
+    Если мы знаем какое бы то ни было представление ТИМов Бориса и Анатолия в матричном виде,
+    то отношение <i><b>X</b></i> между ними (точнее, кем Борис приходится Анатолию)
+        может быть вычислено по формуле
+        <center>
+            <br />
+            <i><b>X</b> = </i> ( Борис ) x ( Анатолий )<sup>-1</sup>
+            <br /><br />
+        </center>
+
+Этот простой факт следует из матричного равенства
+        <center>
+            <br />
+            Борис = <i><b>X</b></i> ( Анатолий )
+            <br /><br />
+        </center>
+рассмотренного выше.</p>
+
+<table>
+    <tr>
+        <td align="center" valign="center">Кем Борис приходится Анатолию, матрица
+                <br />( Борис ) x ( Анатолий )<sup>-1</sup>:</td>
+        <td align="center" valign="center">&nbsp;</td>
+        <td align="center" valign="center">Борис:</td>
+        <td align="center" valign="center">&nbsp;</td>
+        <td align="center" valign="center">Анатолий:
+            <span style="position: relative; top: +4.7em;">-1</span></td>
+    </tr>
+    <tr>
+        <td align="center" valign="top" id="transitYX" width="30%"></td>
+        <td align="center" valign="center">=</td>
+        <td align="center" valign="top" id="transitY" width="30%"></td>
+        <td align="center" valign="center">x</td>
+        <td align="center" valign="top" id="transitX" width="30%"></td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+function transitXY()
+{
+    var myMatrixX = readSelectedMatrix( "transitX" );
+    var myMatrixY = readSelectedMatrix( "transitY" );
+
+    if( myMatrixX && myMatrixX )
+    {
+        var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, transposeMatrix( myMatrixX ) ) );
+
+        var myParent = document.getElementById( "transitYX" );
+        removeAllChildren( myParent );
+        myDiv = document.createElement( "div" );
+        myParent.appendChild( myDiv );
+        myDiv.className = "like-select";
+        myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
+        appendMatrix( myParent, myRelationIdYX );
+    }
+}
+function transitOptionMaker( givenName )
+{
+    this.name = givenName;
+    this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
+    this.action = function ( givenRelId, givenParent )
+        {
+            appendMatrix( givenParent, givenRelId );
+            transitXY();
+        }
+}
+function appendTransitSelector( givenName, givenInitialSelection )
+{
+    var myTransitOptionProcessor = new transitOptionMaker( givenName );
+    makeSelector( myTransitOptionProcessor, givenInitialSelection );
+}
+appendTransitSelector( "transitY", 4 );
+appendTransitSelector( "transitX", 7 );
+transitXY();
+</script>
+
+<hr class="section-separator" />
