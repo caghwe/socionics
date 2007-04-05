@@ -1,0 +1,29 @@
+.footnote-body-displayed
+{
+    position: absolute;
+    right: 1em;
+    width: 70%;
+    background-color: rgb( 230, 230, 230 );
+    padding: 1.5em;
+    border: outset .2em;
+    cursor: pointer;
+}
+.footnote-body-hidden
+{
+    display: none;
+}
+.footnote-caption
+{
+    border: dotted green .1em;
+    padding-left: .2em;
+    padding-right: .2em;
+    cursor: pointer;
+}
+.footnote-superscript-link
+{
+    text-decoration: none;
+}
+.footnote-endnote
+{
+    margin-bottom: 1em;
+}

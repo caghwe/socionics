@@ -1,7 +1,51 @@
-function appendCube( givenTimId, givenParent )
+function appendCubeSelector( givenParent, givenInitialSelection )
+{   
+    function timCubeOptionMaker()
+    {
+        this.range = linearRepresentation.length;
+        this.caption    = function ( givenTimId ) { return timFullNameById( givenTimId ) };
+    }
+    var timOptions = new timCubeOptionMaker();
+    var mySelector = makeSelectorNEW( givenParent, timOptions );
+    var myContent = makeContent( givenParent );
+    function makeTimCubeSelection( givenTimId )
+    {
+        removeAllChildren( myContent );
+        appendCube( myContent, givenTimId );
+        mySelector.selectedIndex = givenTimId;
+    }
+    mySelector.onchange = function () 
+    { 
+        makeTimCubeSelection( mySelector.selectedIndex ); 
+    };
+    makeTimCubeSelection( givenInitialSelection );
+}
+function makeSelectorNEW( givenParent, givenOptions  )
+{
+    var myForm = document.createElement( "form" );
+    givenParent.appendChild( myForm );
+
+    var mySelect    = document.createElement( "select" );
+    myForm.appendChild( mySelect );
+    for( i = 0; i < givenOptions.range; i ++ )
+    {
+        var myOption = document.createElement( "option" );
+        mySelect.appendChild( myOption );
+        myOption.value = i;
+        myOption.appendChild( document.createTextNode( givenOptions.caption( i ) ) );
+    }
+    return mySelect;
+}
+function makeContent( givenParent )
+{
+    var myContent = document.createElement( "div" );
+    givenParent.appendChild( myContent );
+    return myContent;
+}
+function appendCube( givenParent, givenTimId )
 {
     var myDispatchTable = fillInCube();
-    appendTable( myDispatchTable, givenTimId, givenParent );
+    appendTable( givenParent, myDispatchTable, givenTimId );
 }
 function fillInCube()
 {

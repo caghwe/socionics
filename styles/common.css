@@ -16,22 +16,6 @@ li
 {   
     padding-bottom: 1em;
 }
-.footnote_displayed
-{
-    position: "absolute";
-    right: "5";
-    width: 70%;
-    background-color: "white";
-    padding: 7px;
-    border: double black 4px;
-}
-.footnote-name
-{
-    border: dotted green 1px;
-    padding-left: 3px;
-    padding-right: 3px;
-    cursor: hand;
-}
 .term-firstuse
 {
     font-family: Times New Roman;
@@ -47,11 +31,18 @@ li
 }
 .section-separator
 {
-    color:#009;
-    height:2px;
-    border:1px solid #009;
-    clear:both;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    color: #009;
+    height: .2em;
+    border: .2em solid #009;
+    clear: both;
+    margin-top: 1em;
+    margin-bottom: 1em;
     width: 100%;
+}
+.display-interactive
+{
+    border: .3em outset;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    padding: 1em;
 }

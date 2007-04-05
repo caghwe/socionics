@@ -1,3 +1,10 @@
+function appendAspects( givenParent )
+{
+    for( var myAspectId = 0; myAspectId < psychicFunctions.length; myAspectId ++ )
+    {
+        appendAspectIconById( givenParent, myAspectId );
+    }
+}
 function readSelectedMatrix( givenName )
 {
     var mySelector =  document.getElementById( givenName + "Select" );
@@ -11,9 +18,17 @@ function readSelectedMatrix( givenName )
 function makeSelector( givenOptionProcessor, givenInitialSelection )
 {
     var myParent = document.getElementById( givenOptionProcessor.name );
-    var myForm      = document.createElement( "<form name='" + givenOptionProcessor.name + "Form'> id='" + givenOptionProcessor.name + "Form'>" );
-    var myContent   = document.createElement( "<div id='" + givenOptionProcessor.name + "Div'>" );
-    var mySelect    = document.createElement( "<select name='" + givenOptionProcessor.name + "Select'> id='" + givenOptionProcessor.name + "Select'>" );
+    var myForm      = document.createElement( "form" );
+    myForm.name = givenOptionProcessor.name + "Form";
+    myForm.id = givenOptionProcessor.name + "Form";
+    
+    var myContent   = document.createElement( "div" );
+    myContent.id = givenOptionProcessor.name + "Div";
+    
+    var mySelect    = document.createElement( "select" );
+    mySelect.name = givenOptionProcessor.name + "Select";
+    mySelect.id = givenOptionProcessor.name + "Select";
+    
     myParent.appendChild( myForm );
     myForm.appendChild( mySelect );
     myForm.appendChild( myContent );
@@ -33,18 +48,11 @@ function makeSelector( givenOptionProcessor, givenInitialSelection )
     }
     makeSelection( givenInitialSelection );
 }
-function removeAllChildren( givenParent )
-{
-    while( givenParent.hasChildNodes() )
-    {
-        givenParent.removeChild( givenParent.firstChild );
-    }
-}
 function getAspectIconPath( givenAspect )
 {
-    return "../layout/" + givenAspect + ".gif";
+    return "../images/" + givenAspect + ".gif";
 }
-function appendAspectIconById( givenAspectId, givenParent )
+function appendAspectIconById( givenParent, givenAspectId )
 {
     var myDiv = document.createElement( "div" );
     givenParent.appendChild( myDiv );
@@ -58,7 +66,7 @@ function appendAspectIconById( givenAspectId, givenParent )
 
     myDiv.appendChild( document.createTextNode( myAspectName ) );
 }
-function appendTable( givenDispatchTable, givenObject, givenParent )
+function appendTable( givenParent, givenDispatchTable, givenObject )
 {
     var myTable = document.createElement( "table" );
     givenParent.appendChild( myTable );
@@ -78,6 +86,29 @@ function appendTable( givenDispatchTable, givenObject, givenParent )
             givenDispatchTable[i][j]( givenObject, myCell );
         }
     }
+}
+function appendMatrix( givenParent, givenTimId )
+{
+    var myDispatchTable = fillInMatrix();
+    appendTable( givenParent, myDispatchTable, givenTimId );
+}
+function fillInMatrix()
+{
+    var myDispatchTable =
+        [
+            [ fillV, fillMatrixEntry(0,0), fillMatrixEntry(0,1), fillMatrixEntry(0,2), fillV ],
+            [ fillV, fillMatrixEntry(1,0), fillMatrixEntry(1,1), fillMatrixEntry(1,2), fillV ],
+            [ fillV, fillMatrixEntry(2,0), fillMatrixEntry(2,1), fillMatrixEntry(2,2), fillV ]
+        ];
+    return myDispatchTable;
+}
+function fillMatrixEntry( givenRow, givenColumn )
+{
+    return function ( givenTimId, givenParent )
+        {
+            var myMatrix = linearRepresentation[ givenTimId ].matrix;
+            givenParent.appendChild( document.createTextNode(  myMatrix[ givenRow ][ givenColumn ] ) );
+        };
 }
 function fillB( givenTimId, givenParent )
 {

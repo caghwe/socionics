@@ -3,23 +3,36 @@
         <title>
             Все кубы ТИМов
         </title>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" href="../layout/styles.css" />
+
+        <link rel="stylesheet" type="text/css" href="../styles/common.css" />
+        <link rel="stylesheet" type="text/css" href="../styles/footnotes.css" />
+
+        <script type="text/javascript" src="../scripts/dom.js"></script>
         <script type="text/javascript" src="../scripts/utilities.js"></script>
+
+        <script type="text/javascript" src="../scripts/footnotes.js"></script>
+        <script type="text/javascript" src="../scripts/timestamp.js"></script>
+        <script type="text/javascript" src="../scripts/clickonpageload.js"></script>
+        <script type="text/javascript" src="../scripts/initialize.js"></script>
+
         <script type="text/javascript" src="../scripts/data.js"></script>
         <script type="text/javascript" src="../scripts/extractors.js"></script>
         <script type="text/javascript" src="../scripts/constructors.js"></script>
         <script type="text/javascript" src="../scripts/cube.js"></script>
         <script type="text/javascript" src="../scripts/matrix.js"></script>
+
     </head>
-    <body>
+    <body onload="initializePage()">
+
         <div id="fullCubeList" class="scriptedDisplay">
             <script type="text/javascript">
                 var myParent = document.getElementById ( "fullCubeList" );
                 for( var myTimId = 0; myTimId < linearRepresentation.length; myTimId ++ )
                 {
                     myParent.appendChild( document.createTextNode( timFullNameById( myTimId )  + ":" ) );
-                    appendCube( myTimId, myParent );
+                    appendCube( myParent, myTimId );
                     myParent.appendChild( document.createElement( "hr" ) );
                 }
             </script>

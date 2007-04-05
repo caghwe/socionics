@@ -44,13 +44,12 @@ function transformPoint( givenMatrix, givenPoint )
 {
     if( ! isArray( givenMatrix ) && ! isArray( givenMatrix[0] ) )
     {
-        alert( "transformPoint failed: given Matrix\n" 
-            + listObject( givenMatrix ) + "\nis not a two-dimensional array" );
+        alert( "transformPoint failed: given Matrix is not a two-dimensional array" );
         return null;
     }
     if( ! isArray( givenPoint ) )
     {
-        alert( "transformPoint failed: given Point\n" + listObject( givenPoint ) + "\nis not an array" );
+        alert( "transformPoint failed: given Point is not an array" );
         return null;
     }
     if( givenMatrix[0].length != givenPoint.length )
@@ -73,7 +72,7 @@ function transposeMatrix( givenMatrix )
 {
     if( !isArray( givenMatrix ) )
     {
-        alert( "transposeMatrix failed -- the matrix\n" + listObject( givenMatrix ) + "\nis not an array"  );
+        alert( "transposeMatrix failed -- the argument not an array" );
         return null;
     }
     var oneDim = false;
@@ -92,4 +91,3 @@ function transposeMatrix( givenMatrix )
     }
     return myResult;
 }
-

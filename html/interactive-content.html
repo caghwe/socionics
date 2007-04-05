@@ -3,40 +3,43 @@
         <title>
             Групповая структура Модели А
         </title>
+
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" href="../layout/styles.css" />
+
+        <link rel="stylesheet" type="text/css" href="../styles/common.css" />
+        <link rel="stylesheet" type="text/css" href="../styles/footnotes.css" />
+
+        <script type="text/javascript" src="../scripts/dom.js"></script>
         <script type="text/javascript" src="../scripts/utilities.js"></script>
+
+        <script type="text/javascript" src="../scripts/footnotes.js"></script>
+        <script type="text/javascript" src="../scripts/timestamp.js"></script>
+        <script type="text/javascript" src="../scripts/clickonpageload.js"></script>
+        <script type="text/javascript" src="../scripts/initialize.js"></script>
+
         <script type="text/javascript" src="../scripts/data.js"></script>
         <script type="text/javascript" src="../scripts/extractors.js"></script>
         <script type="text/javascript" src="../scripts/constructors.js"></script>
         <script type="text/javascript" src="../scripts/cube.js"></script>
         <script type="text/javascript" src="../scripts/matrix.js"></script>
-        <script type="text/javascript" src="../scripts/footnotes.js"></script>
+
     </head>
-    <body>
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <body onload="initializePage()">
+
+
+Выберете нужные вводные в выпадающих меню:
 <hr class="section-separator" />
-<a name="cube">
-<center>
-<div id="myCubeExample"></div>
-</center>
-<script type="text/javascript">
-function cubeOptionMaker( givenName )
-{
-    this.name       = givenName;
-    this.caption    = function ( givenTimId ) { return timFullNameById( givenTimId ) };
-    this.action     = function ( givenTimId, givenParent ){ appendCube( givenTimId, givenParent ); }
-}
-function appendCubeSelector( givenName, givenInitialSelection )
-{
-    var myCubeOptionProcessor = new cubeOptionMaker( givenName );
-    makeSelector( myCubeOptionProcessor, 0 );
-}
-appendCubeSelector( "myCubeExample", 0 )
-</script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<hr class="section-separator" />
+<div class="display-interactive">
+    <span
+        class="clicked-onpageload"
+        onclick="appendCubeSelector( this, 0 )">
+    </span>
+</div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="display-interactive">
 <table>
     <tr>
         <td align="center" valign="center">Кем Виталий приходится Анатолию, матрица <i><b>Y</b> x <b>X</b></i>:</td>
@@ -70,7 +73,7 @@ function multXY()
         myParent.appendChild( myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
-        appendMatrix( myRelationIdYX, myParent );
+        appendMatrix( myParent, myRelationIdYX );
     }
 }
 function multOptionMaker( givenName )
@@ -79,7 +82,7 @@ function multOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenRelId, givenParent );
+            appendMatrix( givenParent, givenRelId );
             multXY();
         }
 }
@@ -92,9 +95,9 @@ appendMultSelector( "multY", 4 );
 appendMultSelector( "multX", 7 );
 multXY();
 </script>
-
+</div>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<hr class="section-separator" />
+<div class="display-interactive">
 <table>
     <tr>
         <td align="center" valign="center">Борис,
@@ -140,7 +143,7 @@ function actionXY()
         myParent.appendChild( myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( timNameById( myRelationIdYX ) ) );
-        appendMatrix( myRelationIdYX, myParent );
+        appendMatrix( myParent, myRelationIdYX );
     }
 }
 function actionRELOptionMaker( givenName )
@@ -149,7 +152,7 @@ function actionRELOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenRelId, givenParent );
+            appendMatrix( givenParent, givenRelId );
             actionXY();
         }
 }
@@ -159,7 +162,7 @@ function actionTIMOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenRelId, givenParent );
+            appendMatrix( givenParent, givenRelId );
             actionXY();
         }
 }
@@ -177,9 +180,9 @@ appendActionRELSelector( "actionY", 4 );
 appendActionTIMSelector( "actionX", 7 );
 actionXY();
 </script>
-
+</div>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<hr class="section-separator" />
+<div class="display-interactive">
 <table>
     <tr>
         <td align="center" valign="center">Кем Борис приходится Анатолию, матрица
@@ -215,7 +218,7 @@ function transitXY()
         myParent.appendChild( myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
-        appendMatrix( myRelationIdYX, myParent );
+        appendMatrix( myParent, myRelationIdYX );
     }
 }
 function transitOptionMaker( givenName )
@@ -224,7 +227,7 @@ function transitOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenRelId, givenParent );
+            appendMatrix( givenParent, givenRelId );
             transitXY();
         }
 }
@@ -237,5 +240,7 @@ appendTransitSelector( "transitY", 4 );
 appendTransitSelector( "transitX", 7 );
 transitXY();
 </script>
-
-<hr class="section-separator" />
+</div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+</body>
+</html>

@@ -31,7 +31,7 @@ function lookupRelationId( givenMatrix )
     {
         if( areEqualMatricies( linearRepresentation[ i ].matrix, givenMatrix ) ) return i;
     }
-    alert( "lookupRelationId FAILED on input " + list_object( givenMatrix ) );
+    alert( "lookupRelationId FAILED on input " + listObject( givenMatrix ) );
     return null;
 }
 function lookupFunctionId( givenCoordinates )
@@ -43,7 +43,7 @@ function lookupFunctionId( givenCoordinates )
             return i;
         }
     }
-    alert( "lookupFunctionId FAILED on input " + list_object( givenCoordinates ) );
+    alert( "lookupFunctionId FAILED on input " + listObject( givenCoordinates ) );
     return null;
 }
 function resolveDichotomy( givenTimId, givenDichotomyId )

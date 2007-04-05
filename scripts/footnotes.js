@@ -1,53 +1,61 @@
-var FootnoteSectionTitle = "Примечания";
+var SectionIntro = "Примечания";
 var FootnoteBackToTextCaption ="[обратно в текст]";
 var FootnoteIntroCaption = "Примечание ";
 
-function initialize_all_footnotes()
+function initializeFootnotes()
 {
-    var endFootnotes = document.createElement( "h3")
-    endFootnotes.innerText = FootnoteSectionTitle;
-    document.body.appendChild( endFootnotes );
-
     var myFootnotes = array_elements_by_name_with_className( "span", "footnote" );
-    apply_to_array( myFootnotes, initialize_single_footnote );
+    if( myFootnotes.length > 0 )
+    {
+        var endFootnotes = document.createElement( "h3")
+        endFootnotes.appendChild( document.createTextNode( SectionIntro ) );
+        document.body.appendChild( endFootnotes );
+
+        apply_to_array( myFootnotes, initialize_single_footnote );
+    }
 }
 function initialize_single_footnote( givenNumber, givenFootnote )
 {
-    var myName = first_child_with_className( givenFootnote, "footnote-name" );
-    var myContent = first_child_with_className( givenFootnote, "footnote-content" );
-
-    myName.onmousedown = function()
-        {
-            display_content( givenFootnote, myContent )
+    var myFootnoteBody = first_child_with_className( givenFootnote, "footnote-body" );
+    myFootnoteBody.className = "footnote-body-hidden";
+    myFootnoteBody.onmousedown = function() 
+        { 
+            myFootnoteBody.className = "footnote-body-hidden"; 
         };
-    myName.className = "footnote-name";
 
-    myContent.style.display = "none";
-
-    fix_links( givenNumber, givenFootnote, myContent );
+    var myFootnoteCaption = first_child_with_className( givenFootnote, "footnote-caption" );
+    myFootnoteCaption.className = "footnote-caption";    
+    myFootnoteCaption.onmousedown = function() 
+        { 
+            myFootnoteBody.className = "footnote-body-displayed"; 
+        };
+    linkToEndNote( givenNumber, givenFootnote, myFootnoteBody );
+    makeEndNote( givenNumber, givenFootnote, myFootnoteBody );
 }
-function fix_links( givenNumber, givenFootnote, givenContent )
+function linkToEndNote( givenNumber, givenFootnote, givenContent )
 {
     var mySup = document.createElement( "sup" );
     givenFootnote.appendChild( mySup );
     givenFootnote.appendChild( document.createTextNode( " " ) );
 
-    var myID = "footnote" + givenNumber;
-    var myAnchor = document.createElement( "<a name='" + myID + "'>" );
+    var myAnchor = document.createElement( "a" );
     mySup.appendChild( myAnchor );
-
-    myAnchor.innerText = givenNumber + 1;
-    myAnchor.href = make_end_note( givenNumber, givenFootnote, givenContent );
+    
+    myAnchor.id = footnoteId( givenNumber );
+    myAnchor.href = "#" + endnoteId( givenNumber );
+    myAnchor.appendChild( document.createTextNode( givenNumber + 1 ) );
+    myAnchor.className = "footnote-superscript-link";
 }
-function make_end_note( givenNumber, givenFootnote, givenContent )
+function makeEndNote( givenNumber, givenFootnote, givenContent )
 {
     var endNoteContainer = document.createElement( "div" );
     document.body.appendChild( endNoteContainer );
-    endNoteContainer.className = "endNote";
+    endNoteContainer.className = "footnote-endnote";
 
-    var myTitle = document.createElement( "<a name='endNote" + givenNumber + "'>" );
+    var myTitle = document.createElement( "a" );
+    myTitle.id = endnoteId( givenNumber );
     endNoteContainer.appendChild( myTitle );
-    myTitle.innerHTML = "<b>" +FootnoteIntroCaption + (givenNumber + 1 )+ ".</b> ";
+    myTitle.innerHTML = "<b>" + FootnoteIntroCaption + ( givenNumber + 1 ) + ".</b> ";
 
     var myContent = document.createElement( "span");
     endNoteContainer.appendChild( myContent );
@@ -56,50 +64,13 @@ function make_end_note( givenNumber, givenFootnote, givenContent )
     var goBack = document.createElement( "a" );
     endNoteContainer.appendChild( goBack );
     goBack.innerHTML = "<span>" + FootnoteBackToTextCaption + "</span>";
-    goBack.name = givenNumber;
-    goBack.href = "#footnote" + givenNumber;
-    return "#endNote" + givenNumber;
+    goBack.href = "#" + footnoteId( givenNumber );
 }
-function display_content( givenParent, givenElement )
+function footnoteId( givenFootnoteNumber )
 {
-    givenElement.className = "footnote_displayed";
-    givenElement.style.display = "block";
-//    givenElement.onmouseup = function()
-    givenElement.onmousedown = function()
-    {
-        givenElement.style.display = "none";
-        givenElement.className = null;
-    };
-
+    return "footnote" + givenFootnoteNumber;
 }
-function first_child_with_className( givenParent, givenClassName )
+function endnoteId( givenFootnoteNumber )
 {
-    for ( var i=0; i < givenParent.childNodes.length; i++ )
-    {
-        var currentChild = givenParent.childNodes[ i ];
-        if( currentChild.className == givenClassName ) return currentChild;
-    }
-    return null;
-}
-function array_elements_by_name_with_className( givenElementName, givenClassName )
-{
-    // can I use XPath here?
-    var newArray = new Array();
-    var elementsWithGivenClassName = document.getElementsByTagName( givenElementName );
-    for( var i = 0; i < elementsWithGivenClassName.length; i++ )
-    {
-        var currentElement = elementsWithGivenClassName( i );
-        if( currentElement.className == givenClassName )
-        {
-            newArray[ newArray.length ] = currentElement;
-        }
-    }
-    return newArray;
-}
-function apply_to_array( givenArray, givenFunction )
-{
-    for( var i = 0; i < givenArray.length; i++ )
-    {
-        givenFunction( i, givenArray[ i ] );
-    }
+    return "endNote" + givenFootnoteNumber;
 }

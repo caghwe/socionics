@@ -1,13 +1,14 @@
-function removeAllChildren( givenParent )
+function first_child_with_className( givenParent, givenClassName )
 {
-    while( givenParent.hasChildNodes() )
+    for ( var i=0; i < givenParent.childNodes.length; i++ )
     {
-        givenParent.removeChild( givenParent.firstChild );
+        var currentChild = givenParent.childNodes[ i ];
+        if( currentChild.className == givenClassName ) return currentChild;
     }
+    return null;
 }
 function array_elements_by_name_with_className( givenElementName, givenClassName )
 {
-
     // can I use XPath here?
     var newArray = new Array();
     var elementsWithGivenClassName = document.getElementsByTagName( givenElementName );
@@ -21,10 +22,10 @@ function array_elements_by_name_with_className( givenElementName, givenClassName
     }
     return newArray;
 }
-function array_elements_by_className( givenClassName )
+function array_elements_with_className( givenClassName )
 {
     var myArray = new Array();
-    var myElements = document.all;
+    var myElements = ( document.getElementsByTagName('*') ? document.getElementsByTagName('*') : document.all );
     for( var i = 0; i < myElements.length; i++ )
     {
         var currentElement = myElements.item( i );
@@ -35,12 +36,10 @@ function array_elements_by_className( givenClassName )
     }
     return myArray;
 }
-function first_child_with_className( givenParent, givenClassName )
+function removeAllChildren( givenParent )
 {
-    for ( var i=0; i < givenParent.childNodes.length; i++ )
+    while( givenParent.hasChildNodes() )
     {
-        var currentChild = givenParent.childNodes[ i ];
-        if( currentChild.className == givenClassName ) return currentChild;
+        givenParent.removeChild( givenParent.firstChild );
     }
-    return null;
 }

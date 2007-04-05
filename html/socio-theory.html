@@ -1,38 +1,55 @@
 <html>
     <head>
+
         <title>
             Групповая структура Модели А
         </title>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" href="../layout/styles.css" />
+
+        <link rel="stylesheet" type="text/css" href="../styles/common.css" />
+        <link rel="stylesheet" type="text/css" href="../styles/footnotes.css" />
+
+        <script type="text/javascript" src="../scripts/dom.js"></script>
         <script type="text/javascript" src="../scripts/utilities.js"></script>
+
+        <script type="text/javascript" src="../scripts/footnotes.js"></script>
+        <script type="text/javascript" src="../scripts/timestamp.js"></script>
+        <script type="text/javascript" src="../scripts/clickonpageload.js"></script>
+        <script type="text/javascript" src="../scripts/initialize.js"></script>
+
         <script type="text/javascript" src="../scripts/data.js"></script>
         <script type="text/javascript" src="../scripts/extractors.js"></script>
         <script type="text/javascript" src="../scripts/constructors.js"></script>
         <script type="text/javascript" src="../scripts/cube.js"></script>
         <script type="text/javascript" src="../scripts/matrix.js"></script>
-        <script type="text/javascript" src="../scripts/footnotes.js"></script>
+
     </head>
-    <body>
+    <body onload="initializePage()">
 
 <h2>Групповая структура Модели А</h2>
 
 <i>Александр Касюков</i> (<a href="mailto:kasiuka@sunysuffolk.edu">kasiuka@sunysuffolk.edu</a>)
 
-<br />
+<p>
 Опубликовано
 <span class="footnote">
-    <span class="footnote-name">2007-03-20</span>
-    <span class="footnote-content">
-        Последняя редакция: 2007-03-22; 18:15 EST.
+    <span class="footnote-caption">2007-03-20</span>
+        <span class="footnote-body">
+            Последняя редакция:
+            <span
+                class="clicked-onpageload"
+                onclick="appendTimestamp( this )">
+            </span>.
+        </span>
     </span>
-</span>
 по адресу
 <a href="http://www2.sunysuffolk.edu/kasiuka/socionics/html/socio-theory.html">http://www2.sunysuffolk.edu/kasiuka/socionics/html/socio-theory.html</a>
+</p>
 
+<hr class="section-separator" />
 
 <h3>Основные идеи</h3>
-
 
 <ol>
 
@@ -40,8 +57,8 @@
 
 <li>Показано, что множество ТИМов &#8212;
 <span class="footnote">
-    <span class="footnote-name">главное однородное пространство</span>
-    <span class="footnote-content">
+    <span class="footnote-caption">главное однородное пространство</span>
+    <span class="footnote-body">
         Эта точка зрения позволяет осмыслить
             "равноправие" ТИМов с одной стороны
             и неравноправие отношений между ТИМами &#8212; с другой.
@@ -52,60 +69,74 @@
 <li>
 Дано явное
 <span class="footnote">
-    <span class="footnote-name">координатное представление</span>
-    <span class="footnote-content">
+    <span class="footnote-caption">координатное представление</span>
+    <span class="footnote-body">
         Удобное при компьютерном моделировании соционического содержания.
     </span>
 </span> ТИМов и интерТИМных отношений, выражающее соционическую информацию
     на языке матричного умножения.
 </li>
+
 </ol>
 
 <h3>О чём речь</h3>
 
-<p><a href="http://ru.wikipedia.org/wiki/%D0%A1%D0%BE%D1%86%D0%B8%D0%BE%D0%BD%D0%B8%D0%BA%D0%B0">Соционика</a>
+<p>
+<a href="http://ru.wikipedia.org/wiki/%D0%A1%D0%BE%D1%86%D0%B8%D0%BE%D0%BD%D0%B8%D0%BA%D0%B0">Соционика</a>
  является одной из ветвей дифференциальной психологии
     и классифицирует всех людей по их принадлежности к 16 типам,
-        называемых <span class="term-firstuse">Типами Информационного Метаболизма</span> (далее: ТИМ).
+        называемых
+        <span class="term-firstuse">
+            Типами Информационного Метаболизма
+        </span> (далее: ТИМ).
 Хотя типология соционики примерно соответствует
     <a href="http://en.wikipedia.org/wiki/Myers-Briggs_Type_Indicator">типологии Майерс-Бриггс</a>,
     в соционике (в дополнение к типологии)
             вводится структурная модель человеческой психики.
-Эта модель названа <span class="term-firstuse">Модель А</span>
+Эта модель названа
+    <span class="term-firstuse">
+        Модель А
+    </span>
     по имени её создательницы, Аушры Аугустинавичюте.
 Модель А позволяет наглядно описать каждый ТИМ и
 <span class="footnote">
-    <span class="footnote-name">предсказать</span>
-    <span class="footnote-content">
+    <span class="footnote-caption">предсказать</span>
+    <span class="footnote-body">
         По крайней мере, в этом состоит основной посыл адептов соционики.
     </span>
-</span> характер взаимодействия двух людей на основе информации об их ТИМах.</p>
+</span> характер взаимодействия двух людей на основе информации об их ТИМах.
+</p>
 
-<p>Здесь рассматривается структура Модели А
+<p>
+Здесь рассматривается структура Модели А
     и описывается способ (математического и компьютерного) представления ТИМов и отношений между ними.
 В этом рассмотрении
     сознательно опускаются все содержательные характеристики относящиеся к психологии
     и делается упор на формальной математической стороне дела.
 Для понимания материала требуется
 <span class="footnote">
-    <span class="footnote-name">математическая подготовка</span>
-    <span class="footnote-content">
+    <span class="footnote-caption">математическая подготовка</span>
+    <span class="footnote-body">
         Группы и их действия, подгруппы,
             прямое и полупрямое произведение групп, порядок элемента группы,
                 линейные преобразования и их матрицы, ортогональные преобразования.
     </span>
-</span>в объёме первого курса института.</p>
+</span>в объёме первого курса института.
+</p>
 
-<p>Интерактивные примеры использования предложенной координатизации
-    приведены в <a href="#examples">самом конце</a>.
+<p>
+Интерактивные примеры использования предложенной координатизации
+    приведены в <a href="#examples">самом конце</a>
+        (а для людей, желающих полностью избежать разбирательства с математикой,
+            все эти примеры собраны <a href="interactive-content.html">здесь</a>).
     Эта статья аутореферентна в том смысле, что обслуживающий примеры
 <span class="footnote">
-    <span class="footnote-name">программный код</span>
-    <span class="footnote-content">
+    <span class="footnote-caption">программный код</span>
+    <span class="footnote-body">
         Программный код на этой странице написан на языке JavaScript и
             сознательно сделан общедоступным.
         Желающие могут скачать статью вместе с кодом в виде
-            <a href="../2007-03-22.zip">архива</a>.
+            <a href="../all-in-one.zip">архива</a>.
         На весь используемый код <a href="license.html">распространяется действие</a> лицензии,
             известной как
                 <span class="term-firstuse">
@@ -128,7 +159,8 @@
             Функции различаются по
                 характеру и контексту своего применения,
                 осознанности их использования индивидуумом
-                и степени развития (т.е. <span class="term-firstuse">размерности</span>).</p>
+                и степени развития (т.е. <span class="term-firstuse">размерности</span>).
+</p>
 
 <p>
 <span class="term-use">Функции</span> представляются вершинами трёхмерного куба
@@ -136,7 +168,8 @@
 Вершины куба, лежащие в нижней горизонтальной плоскости, называются
     <span class="term-firstuse">ментальным кольцом</span>,
     а в верхней горизонтальной плоскости &#8212;
-    <span class="term-firstuse">витальным кольцом</span>.</p>
+    <span class="term-firstuse">витальным кольцом</span>.
+</p>
 
 <p>
 <span class="term-firstuse">Аспект</span> определяет тип информационного взаимодействия
@@ -158,23 +191,19 @@
     <li>белый (интровертный).</li>
 </ol>
 
-<p>Таким образом, всего различных <span class="term-use">аспектов</span> &#8212;
-    <span id="myAspectCount" class="scriptedDisplay">
-        <script type="text/javascript">
-            var myCount = document.getElementById( "myAspectCount" );
-            myCount.appendChild( document.createTextNode( psychicFunctions.length ) );
-        </script>
+<p>
+Таким образом, всего различных <span class="term-use">аспектов</span> &#8212;
+    <span
+        class="clicked-onpageload"
+        onclick="this.appendChild( document.createTextNode( psychicFunctions.length ) )">
     </span>:
 </p>
 
-<div id="myAspects" class="scriptedDisplay">
-    <script type="text/javascript">
-        var myParent = document.getElementById ( "myAspects");
-        for( givenAspectId = 0; givenAspectId < psychicFunctions.length; givenAspectId ++ )
-        {
-            appendAspectIconById( givenAspectId, myParent );
-        }
-    </script>
+<div class="display-interactive">
+    <span
+        class="clicked-onpageload"
+        onclick="appendAspects( this )">
+    </span>
 </div>
 
 <p><span class="term-defined">ТИМ</span> &#8212;
@@ -198,22 +227,13 @@
      удовлетворяет вышеуказанным требованиям и соответствует ТИМу</p>
 
 <a name="cube">
-<div id="myCubeExample" class="scriptedDisplay"></div>
-<script type="text/javascript">
-function cubeOptionMaker( givenName )
-{
-    this.name       = givenName;
-    this.caption    = function ( givenTimId ) { return timFullNameById( givenTimId ) };
-    this.action     = function ( givenTimId, givenParent ){ appendCube( givenTimId, givenParent ); }
-}
-function appendCubeSelector( givenName, givenInitialSelection )
-{
-    var myCubeOptionProcessor = new cubeOptionMaker( givenName );
-    makeSelector( myCubeOptionProcessor, 0 );
-}
-appendCubeSelector( "myCubeExample", 0 )
-</script>
 
+<div class="display-interactive">
+    <span
+        class="clicked-onpageload"
+        onclick="appendCubeSelector( this, 7 )">
+    </span>
+</div>
 
 <p>В силу упомянутых выше требований, заполнение первых двух вершин аспектами
 полностью определяет заполнение остальных вершин. Поэтому ТИМов всего 16.
@@ -225,24 +245,35 @@ appendCubeSelector( "myCubeExample", 0 )
 
 <p>Множество отношений <i>R</i> между ТИМами образует группу из 16 элементов.
 Эта группа эффективно и транзитивно действует на множестве <i>T</i> всех ТИМов.
-(Иначе говоря, множество ТИМов <i>T</i> является главным однородным пространством
+(Иначе говоря, множество ТИМов <i>T</i> является
+    <a href="http://en.wikipedia.org/wiki/Principal_homogeneous_space">главным однородным пространством</a>
 группы отношений <i>R</i>.)</p>
 
-<p>Группа <i>R</i> также эффективно действует ортогональными преобразованиями на кубе,
+<p>
+Группа <i>R</i> также эффективно действует ортогональными преобразованиями на кубе,
     но строго меньше полной группы движений куба &#8212; в силу того, что преобразования из <i>R</i>
     обязаны сохранять симметрии оснащения куба аспектами, делающие данное оснащение ТИМом.
 Тот факт, что группа <i>R</i> допускает вложение в группу ортогональных матриц размерности три,
-даёт очень удобное представление отношений между ТИМами. Дополнительное
-удобство &#8212; в лёгкости вычисления обратного элемента (путём взятия транспонированной матрицы).
+даёт очень удобное представление отношений между ТИМами.
+    Дополнительное удобство этого представления в том, что обратный элемент ортогональной матрицы
+         &#8212; это результат её транспонирования.
+</p>
+
+<p>
 Здесь можно посмотреть
     <a href="all-relations.html">полный список интерТИМных отношений
-        и соответствующих им ортогональных матриц</a>. (Матрицы указанные в этом списке соответствуют
+        и соответствующих им ортогональных матриц</a>.
+Матрицы, указанные в этом списке, соответствуют
         выбору системы координат, в которой началом координат является центр куба и базисные векторы
-         &#8212; половины сторон 1-2, 1-4 и 1-7 куба.)</p>
+         &#8212; половины сторон 1-2, 1-4 и 1-7 этого куба.
+</p>
 
-<p>Структурно, группа отношений <i>R</i> является прямым произведением
+<p>
+Структурно, группа отношений <i>R</i> является
+    <a href="http://en.wikipedia.org/wiki/Direct_product">прямым произведением</a>
     группы диэдра <i>D<sub>4</sub></i> из восьми элементов
     и <i>Z/2Z</i> &#8212; группы вычетов по модулю два:
+</p>
 
     <center>
         <br />
@@ -250,8 +281,13 @@ appendCubeSelector( "myCubeExample", 0 )
         <br /><br />
     </center>
 
-Группа диэдра <i>D<sub>4</sub></i>, в свою очередь, является полупрямым произведением
-<i>Z/4Z</i> &#8212; группы вычетов по модулю четыре и <i>Z/2Z</i> &#8212; группы вычетов по модулю два:
+<p>
+<a href="http://en.wikipedia.org/wiki/Dihedral_group">Группа диэдра</a> <b><i>D<sub>4</sub></i></b>, в свою очередь, является
+    <a href="http://en.wikipedia.org/wiki/Semidirect_product">полупрямым произведением</a>
+
+            <i>Z/4Z</i> &#8212; группы вычетов по модулю четыре
+            и <i>Z/2Z</i> &#8212; группы вычетов по модулю два:
+</p>
 
     <center>
         <br />
@@ -259,18 +295,22 @@ appendCubeSelector( "myCubeExample", 0 )
         <br /><br />
     </center>
 
-(Действие группы <i>Z/2Z</i> на группе <i>Z/4Z</i> задаётся как взятие обратного элемента и является
-групповым гомоморфизмом в силу того, что группа <i>Z/4Z</i> &#8212; коммутативная.)
+<p>
+Действие группы <i>Z/2Z</i> на группе <i>Z/4Z</i> задаётся как взятие обратного элемента и является
+групповым гомоморфизмом в силу того, что группа <i>Z/4Z</i> коммутативна.
+</p>
 
+<p>
 Таким образом, для задания группы отношений <i>R</i> достаточно трёх образующих
- &#8212; по одной для каждой из групп-сомножителей.</p>
+ &#8212; по одной для каждой из групп-сомножителей.
+</p>
 
 <h3>Явный вид образующих группы <i>R</i></h3>
 
 <p>Дадим явный вид
 <span class="footnote">
-    <span class="footnote-name">образующих</span>
-    <span class="footnote-content">
+    <span class="footnote-caption">образующих</span>
+    <span class="footnote-body">
         В этом месте изложения "телега следует впереди лошади".
         На самом деле сначала были получены образующие группы <i>R</i>,
         и только потом &#8212; выписаны явно ортогональные матрицы, фигурирующие в предыдущем разделе.
@@ -297,7 +337,7 @@ appendCubeSelector( "myCubeExample", 0 )
     </span> &nbsp; и задаётся матрицей
 <div id="relationRelativeExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( relationRelative, document.getElementById ( "relationRelativeExample") );
+        appendMatrix( document.getElementById ( "relationRelativeExample"), relationRelative );
     </script>
 </div>
 Это отношение сохраняет вертность и нальность.
@@ -315,7 +355,7 @@ appendCubeSelector( "myCubeExample", 0 )
     </span> &nbsp; и задаётся матрицей
 <div id="relationBusinessExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( relationBusiness, document.getElementById ( "relationBusinessExample") );
+        appendMatrix( document.getElementById ( "relationBusinessExample"), relationBusiness );
     </script>
 </div>
 Это отношение меняет логика на этика и сенсорика на интуита, но сохраняет вертность и нальность.
@@ -333,7 +373,7 @@ appendCubeSelector( "myCubeExample", 0 )
     </span> &nbsp; и задаётся матрицей
 <div id="relationConflictExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( relationConflict, document.getElementById ( "relationConflictExample") );
+        appendMatrix( document.getElementById ( "relationConflictExample"), relationConflict  );
     </script>
 </div>
 Это отношение меняет вертность и нальность.
@@ -351,7 +391,7 @@ appendCubeSelector( "myCubeExample", 0 )
     </span> &nbsp; и задаётся матрицей
 <div id="relationMirrorExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( relationMirror, document.getElementById ( "relationMirrorExample") );
+        appendMatrix( document.getElementById ( "relationMirrorExample"), relationMirror );
     </script>
 </div>
 Это отношение меняет вертность и нальность.
@@ -375,7 +415,7 @@ appendCubeSelector( "myCubeExample", 0 )
     </span> &nbsp; задаётся матрицей
 <div id="relationOppositionExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( relationOpposition, document.getElementById ( "relationOppositionExample") );
+        appendMatrix( document.getElementById ( "relationOppositionExample"), relationOpposition );
     </script>
 </div>
 </p>
@@ -394,42 +434,11 @@ appendCubeSelector( "myCubeExample", 0 )
 
 <div id="relationRevisorExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( relationRevisor, document.getElementById ( "relationRevisorExample") );
+        appendMatrix( document.getElementById ( "relationRevisorExample"), relationRevisor );
     </script>
 </div>
 
 </p>
-
-<!--
-<h3>Некоторые соотношения между отношениями</h3>
-
-<p>
-Квадрат этого отношения даёт отношение (второго порядка, т.е. симметричное) супер-эго.
-Куб этого отношения даёт отношение четвёртого порядка, переводящее ТИМ в его подревизного.
-Орбиты <i>Z/4Z</i> во множестве <i>T</i> называются кольцами ревизии. Любые два члена
-такого кольца находятся либо в отношении ревизии, либо в отношении супер-эго.</p>
-
-<p>Оставшиеся два элемента порядка четыре можно получить, перемножив отношение ревизии (и его обратное)
-на отношение полной противоположности. Так получается отношение заказчик и его обратное (подзаказный).</p>
-
-<table>
-    <tr>
-        <td id="multResult" valign="center"></td>
-        <td valign="center">=</td>
-        <td id="multFirst" valign="center"></td>
-        <td valign="center">x</td>
-        <td id="multSecond" valign="center"></td>
-    </tr>
-</table>
-
-        <script type="text/javascript">
-            appendMatrix( relationRevisor, document.getElementById( "multFirst" ) );
-            appendMatrix( relationOpposition, document.getElementById( "multSecond" ) );
-        </script>
-
-Произведение супер-это и полной противоположности даёт
-
--->
 
 <h3>Матричное представление множества ТИМов</h3>
 
@@ -521,7 +530,7 @@ function multXY()
         myParent.appendChild( myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
-        appendMatrix( myRelationIdYX, myParent );
+        appendMatrix( myParent, myRelationIdYX );
     }
 }
 function multOptionMaker( givenName )
@@ -530,7 +539,7 @@ function multOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenRelId, givenParent );
+            appendMatrix( givenParent, givenRelId );
             multXY();
         }
 }
@@ -605,7 +614,7 @@ function actionXY()
         myParent.appendChild( myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( timNameById( myRelationIdYX ) ) );
-        appendMatrix( myRelationIdYX, myParent );
+        appendMatrix( myParent, myRelationIdYX );
     }
 }
 function actionRELOptionMaker( givenName )
@@ -614,7 +623,7 @@ function actionRELOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenRelId, givenParent );
+            appendMatrix( givenParent, givenRelId );
             actionXY();
         }
 }
@@ -624,7 +633,7 @@ function actionTIMOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenRelId, givenParent );
+            appendMatrix( givenParent, givenRelId );
             actionXY();
         }
 }
@@ -698,7 +707,7 @@ function transitXY()
         myParent.appendChild( myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
-        appendMatrix( myRelationIdYX, myParent );
+        appendMatrix( myParent, myRelationIdYX );
     }
 }
 function transitOptionMaker( givenName )
@@ -707,7 +716,7 @@ function transitOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenRelId, givenParent );
+            appendMatrix( givenParent, givenRelId );
             transitXY();
         }
 }
@@ -723,6 +732,6 @@ transitXY();
 
 <hr class="section-separator" />
 
-<script language="javaScript" type="text/javascript">
-    initialize_all_footnotes();
-</script>
+</body>
+
+</html>

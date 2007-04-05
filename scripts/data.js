@@ -319,7 +319,7 @@ var psychicFunctions =
             "name":                 "восьмая - демонстративная (фоновая)",
             "dimension":            3,
             "aspectId":             "bl",
-            "aspectDescription":    "белая логика",
+            "aspectDescription":    "чёрная логика",
             "coordinates":          [ 1, -1, 1 ],
             "description":          "работает автоматически, постоянно, не заостряя внимания"
         }
