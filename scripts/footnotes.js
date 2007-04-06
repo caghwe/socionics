@@ -1,6 +1,8 @@
 var SectionIntro = "Примечания";
 var FootnoteBackToTextCaption ="[обратно в текст]";
 var FootnoteIntroCaption = "Примечание ";
+addAnEvent( window, 'load', initializeFootnotes );
+
 
 function initializeFootnotes()
 {

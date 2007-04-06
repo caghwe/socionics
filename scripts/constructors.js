@@ -1,3 +1,10 @@
+function makeChildElement( givenParent, givenTagName, givenClassName )
+{
+    var myChild = document.createElement( givenTagName );
+    givenParent.appendChild( myChild );
+    myChild.className = givenClassName;
+    return myChild;
+}
 function appendAspects( givenParent )
 {
     for( var myAspectId = 0; myAspectId < psychicFunctions.length; myAspectId ++ )
@@ -48,16 +55,12 @@ function makeSelector( givenOptionProcessor, givenInitialSelection )
     }
     makeSelection( givenInitialSelection );
 }
-function getAspectIconPath( givenAspect )
-{
-    return "../images/" + givenAspect + ".gif";
-}
 function appendAspectIconById( givenParent, givenAspectId )
 {
     var myDiv = document.createElement( "div" );
     givenParent.appendChild( myDiv );
 
-    var myAspectPictureSrc = getAspectIconPath( psychicFunctions[ givenAspectId ].aspectId );
+    var myAspectPictureSrc = lookupPathAspectIcon( psychicFunctions[ givenAspectId ].aspectId );
     var myAspectName = " - " + psychicFunctions[ givenAspectId ].aspectDescription;
 
     var myImage = document.createElement( "img" );

@@ -1,3 +1,6 @@
+addAnEvent( window, 'load', initializeClickOnPageLoadItems );
+
+
 function initializeClickOnPageLoadItems()
 {
     var myElements = array_elements_with_className( "clicked-onpageload" );

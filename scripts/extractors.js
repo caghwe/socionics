@@ -46,10 +46,17 @@ function lookupFunctionId( givenCoordinates )
     alert( "lookupFunctionId FAILED on input " + listObject( givenCoordinates ) );
     return null;
 }
+function resolveDichotomyName( givenTimId, givenDichotomyId )
+{
+    var myDichotomy = reininDichotomies[ givenDichotomyId ];
+    var myDichotomyIndex = ( myDichotomy.tim[ givenTimId ] == -1 ? 0 : 1 );
+    return myDichotomy.alt[ myDichotomyIndex ];
+}
 function resolveDichotomy( givenTimId, givenDichotomyId )
 {
     var myDichotomy = reininDichotomies[ givenDichotomyId ];
-    return myDichotomy.alt[ myDichotomy.tim[ givenTimId ] ];
+    var myTimAlternative = myDichotomy.tim[ givenTimId ];
+    return myTimAlternative;
 }
 function getAspectName( givenTimId, givenFunctionNumber )
 {

@@ -67,7 +67,7 @@ function fillAspect( givenFunctionNumber )
         {                       
             var myImage = document.createElement( "img" );
             givenParent.appendChild( myImage );
-            myImage.src = getAspectIconPath( getAspectName( givenTimId, givenFunctionNumber ) ); 
+            myImage.src = lookupPathAspectIcon( getAspectName( givenTimId, givenFunctionNumber ) ); 
             
             var mySub = document.createElement( "sub" );
             givenParent.appendChild( mySub );

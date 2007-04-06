@@ -55,6 +55,17 @@ function apply_to_array( givenArray, givenFunction )
         givenFunction( i, givenArray[ i ] );
     }
 }
+
+function rescaleToRange( givenMin, givenMax, givenValue )
+{
+    var myValue = getInRange( givenMin, givenMax, givenValue );
+    return ( myValue - givenMin )/( givenMax - givenMin );
+}
+function getInRange( givenMin, givenMax, givenValue )
+{
+    return ( givenMax < givenValue ? givenMax : (givenMin > givenValue ? givenMin : givenValue ) );
+}
+
 function isObject( givenObject) 
 {
     return (  ( typeof givenObject ) == 'object' );
@@ -75,4 +86,9 @@ function isString( givenObject )
         return ( givenObject.constructor.toString().match( /string/i ) != null);
     }
     return false;
+}
+function roundToDigits( givenFloat, givenDecimalsNumber )
+{
+    var myExponent = Math.pow( 10, givenDecimalsNumber );
+    return Math.round( givenFloat * myExponent ) / myExponent;
 }

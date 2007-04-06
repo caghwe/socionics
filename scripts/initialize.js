@@ -1,5 +1,0 @@
-function initializePage()
-{
-    initializeFootnotes();
-    initializeClickOnPageLoadItems();
-}

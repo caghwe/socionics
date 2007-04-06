@@ -7,6 +7,12 @@ function first_child_with_className( givenParent, givenClassName )
     }
     return null;
 }
+function firstConformingAncestor( givenElement, givenTest )
+{
+    if( ! givenElement ) return null;
+    if( givenTest( givenElement ) ) return givenElement;
+    return firstConformingAncestor( givenElement.parentNode, givenTest );
+}
 function array_elements_by_name_with_className( givenElementName, givenClassName )
 {
     // can I use XPath here?

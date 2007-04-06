@@ -1,0 +1,33 @@
+.slider 
+{
+    background: url( ../images/slider/bg.png ) repeat-x 50% 50%; 
+    margin: 0.5em auto; 
+    width: 300px; 
+    position: relative; 
+    height: 15px;
+}
+.slider img 
+{
+    left: 85px; 
+    position: absolute; 
+    top: 0px;
+}
+.slider .left 
+{
+    width: 2px;
+    height: 12px; 
+    position: absolute; 
+    top: 0px; 
+    left: 0px;
+    background: url( ../images/slider/left.png ) no-repeat 0px 1px;   
+}
+.slider .right
+{
+    width: 2px; 
+    height: 12px;
+    position: absolute; 
+    top: 0px; 
+    right: 0px; 
+    background: url( ../images/slider/right.png ) no-repeat 0px 1px;
+}
+

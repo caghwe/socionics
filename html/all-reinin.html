@@ -1,30 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
-        <title>
-            Все признаки Рейнина
-        </title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+        <title>
+            Признаки Рейнина
+        </title>
+
         <link rel="stylesheet" type="text/css" href="../styles/common.css" />
         <link rel="stylesheet" type="text/css" href="../styles/footnotes.css" />
+        <link rel="stylesheet" type="text/css" href="../styles/slider.css">
+
+        <script type="text/javascript" src="../scripts/filesystem.js"></script>
 
         <script type="text/javascript" src="../scripts/dom.js"></script>
         <script type="text/javascript" src="../scripts/utilities.js"></script>
+        <script type="text/javascript" src="../scripts/events.js"></script>
 
         <script type="text/javascript" src="../scripts/footnotes.js"></script>
         <script type="text/javascript" src="../scripts/timestamp.js"></script>
+        <script type="text/javascript" src="../scripts/slider.js"></script>
         <script type="text/javascript" src="../scripts/clickonpageload.js"></script>
-        <script type="text/javascript" src="../scripts/initialize.js"></script>
 
         <script type="text/javascript" src="../scripts/data.js"></script>
         <script type="text/javascript" src="../scripts/extractors.js"></script>
         <script type="text/javascript" src="../scripts/constructors.js"></script>
         <script type="text/javascript" src="../scripts/cube.js"></script>
         <script type="text/javascript" src="../scripts/matrix.js"></script>
+        <script type="text/javascript" src="../scripts/reinin.js"></script>
 
     </head>
-    <body onload="initializePage()">
+    <body>
         <div id="fullCubeList" class="scriptedDisplay">
             <script type="text/javascript">
                 var myParent = document.getElementById ( "fullCubeList" );
@@ -34,10 +41,13 @@
                     for( var myDichotomyId = 0; myDichotomyId < reininDichotomies.length; myDichotomyId ++ )
                     {
                         var myMessage = "ТИМ " + timFullNameById( myTimId ) + " наделён признаком Рейнина: "
-                            + resolveDichotomy( myTimId, myDichotomyId ) + "\n";
+                            + resolveDichotomyName( myTimId, myDichotomyId ) + "\n";
                         myParent.appendChild( document.createTextNode ( myMessage ) );
                         myParent.appendChild( document.createElement( "br" ) );
                     }
+                    var mySeparator = document.createElement( "hr" );
+                    myParent.appendChild( mySeparator );
+                    mySeparator.className ="section-separator";
                 }
             </script>
         </div>

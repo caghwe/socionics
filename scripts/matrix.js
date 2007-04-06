@@ -55,7 +55,9 @@ function transformPoint( givenMatrix, givenPoint )
     }
     if( givenMatrix[0].length != givenPoint.length )
     {
-        alert( "transformPoint failed: size mismatch" );
+        alert( "transformPoint failed because of size mismatch:\n    transformation has " 
+            + givenMatrix[ 0 ].length + " columns, whereas\n    transformed point has " 
+            + givenPoint.length + " rows" );
         return null;
     }
     var myResult = new Array( givenMatrix.length );
