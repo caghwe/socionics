@@ -58,11 +58,20 @@ function resolveDichotomy( givenTimId, givenDichotomyId )
     var myTimAlternative = myDichotomy.tim[ givenTimId ];
     return myTimAlternative;
 }
+function getAspectIconName( givenTimId, givenFunctionNumber )
+{
+    var myNewNumber = getAspectId( givenTimId, givenFunctionNumber );
+    return psychicFunctions[ myNewNumber ].aspectId;
+}
 function getAspectName( givenTimId, givenFunctionNumber )
+{
+    var myNewNumber = getAspectId( givenTimId, givenFunctionNumber );
+    return psychicFunctions[ myNewNumber ].aspectDescription;
+}
+function getAspectId( givenTimId, givenFunctionNumber )
 {
     var myTransforMatrix = linearRepresentation[ givenTimId ].matrix;
     var myOldVertex = psychicFunctions[ givenFunctionNumber ].coordinates;
     var myNewVertex = transformPoint( transposeMatrix( myTransforMatrix ), myOldVertex );
-    var myNewNumber = lookupFunctionId( myNewVertex );
-    return psychicFunctions[ myNewNumber ].aspectId;
+    return myNewNumber = lookupFunctionId( myNewVertex );
 }

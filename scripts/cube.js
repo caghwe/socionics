@@ -3,15 +3,26 @@ function appendCubeSelector( givenParent, givenInitialSelection )
     function timCubeOptionMaker()
     {
         this.range = linearRepresentation.length;
-        this.caption    = function ( givenTimId ) { return timFullNameById( givenTimId ) };
+        this.caption = function ( givenTimId ) { return timFullNameById( givenTimId ) };
     }
     var timOptions = new timCubeOptionMaker();
     var mySelector = makeSelectorNEW( givenParent, timOptions );
-    var myContent = makeContent( givenParent );
+
+    var myTable = makeChildElement( givenParent, "table", "container-table" );
+    var myTBody = makeChildElement( myTable, "tbody", "container-tbody" );
+
+    var myRow = makeChildElement( myTBody, "tr", "container-row" );
+    var myCube = makeChildElement( myRow, "td", "container-cube" );
+    var myAspects = makeChildElement( myRow, "td", "container-aspects" );
+
     function makeTimCubeSelection( givenTimId )
     {
-        removeAllChildren( myContent );
-        appendCube( myContent, givenTimId );
+        removeAllChildren( myCube );
+        appendCube( myCube, givenTimId );
+        
+        removeAllChildren( myAspects );
+        appendPsychicFunctions( myAspects, givenTimId );
+        
         mySelector.selectedIndex = givenTimId;
     }
     mySelector.onchange = function () 
@@ -22,32 +33,17 @@ function appendCubeSelector( givenParent, givenInitialSelection )
 }
 function makeSelectorNEW( givenParent, givenOptions  )
 {
-    var myForm = document.createElement( "form" );
-    givenParent.appendChild( myForm );
-
-    var mySelect    = document.createElement( "select" );
-    myForm.appendChild( mySelect );
+    var myForm      = makeChildElement( givenParent, "form", "selector-form" );
+    var mySelect    = makeChildElement( myForm, "select", "selector-select" );
     for( i = 0; i < givenOptions.range; i ++ )
     {
-        var myOption = document.createElement( "option" );
-        mySelect.appendChild( myOption );
+        var myOption = makeChildElement( mySelect, "option", "selector-option" );
         myOption.value = i;
         myOption.appendChild( document.createTextNode( givenOptions.caption( i ) ) );
     }
     return mySelect;
 }
-function makeContent( givenParent )
-{
-    var myContent = document.createElement( "div" );
-    givenParent.appendChild( myContent );
-    return myContent;
-}
 function appendCube( givenParent, givenTimId )
-{
-    var myDispatchTable = fillInCube();
-    appendTable( givenParent, myDispatchTable, givenTimId );
-}
-function fillInCube()
 {
     var myDispatchTable =
         [
@@ -59,18 +55,16 @@ function fillInCube()
             [ fillV,         fillD, fillB,         fillB, fillB, fillB, fillV,         fillD, fillB         ],
             [ fillAspect(0), fillH, fillH,         fillH, fillH, fillH, fillAspect(1), fillB, fillB         ]
         ];
-    return myDispatchTable;
+    appendTable( givenParent, myDispatchTable, givenTimId );
 }
 function fillAspect( givenFunctionNumber )
 {
     return function ( givenTimId, givenParent )
         {                       
-            var myImage = document.createElement( "img" );
-            givenParent.appendChild( myImage );
-            myImage.src = lookupPathAspectIcon( getAspectName( givenTimId, givenFunctionNumber ) ); 
-            
-            var mySub = document.createElement( "sub" );
-            givenParent.appendChild( mySub );
+            var myImage = makeChildElement( givenParent, "img", "aspect-image" );
+            myImage.src = lookupPathAspectIcon( getAspectIconName( givenTimId, givenFunctionNumber ) ); 
+           
+            var mySub = makeChildElement( givenParent, "sub", "aspect-index" );            
             mySub.appendChild( document.createTextNode(  givenFunctionNumber + 1 ) );          
         };
 }               

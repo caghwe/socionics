@@ -11,8 +11,7 @@ function appendTimestamp( givenParent )
         var myTime = appendZero( getHours() ) + ":" + appendZero( getMinutes() ) + " " + getGMToffset( myTimeStamp);
         myString = myDay + ", " + myDate + " " + myMonth + " " + myYear + " года, " + myTime;
     }
-    removeAllChildren( givenParent );
-    givenParent.appendChild( document.createTextNode( myString ) );
+    appendOnlyChild( givenParent, document.createTextNode( myString ) );
 }
 function getGMToffset( givenTimeStamp ) 
 {

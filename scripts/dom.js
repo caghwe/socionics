@@ -49,3 +49,8 @@ function removeAllChildren( givenParent )
         givenParent.removeChild( givenParent.firstChild );
     }
 }
+function appendOnlyChild( givenParent, givenChild )
+{
+    removeAllChildren( givenParent );
+    givenParent.appendChild( givenChild );
+}

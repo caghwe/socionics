@@ -28,10 +28,18 @@
         <script type="text/javascript" src="../scripts/constructors.js"></script>
         <script type="text/javascript" src="../scripts/cube.js"></script>
         <script type="text/javascript" src="../scripts/matrix.js"></script>
+        <script type="text/javascript" src="../scripts/reinin-engine.js"></script>
         <script type="text/javascript" src="../scripts/reinin.js"></script>
 
     </head>
     <body>
+
+
+<center>
+<a href="./index.html">На главную</a>
+<hr class="section-separator" />
+</center>
+
 
 <h2>Групповая структура Модели А</h2>
 
@@ -264,7 +272,7 @@
 <div class="display-interactive">
     <span
         class="clicked-onpageload"
-        onclick="appendCubeSelector( this, 7 )">
+        onclick="appendCubeSelector( this, 0 )">
     </span>
 </div>
 
@@ -559,9 +567,8 @@ function multXY()
         var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, myMatrixX ) );
 
         var myParent = document.getElementById( "multYX" );
-        removeAllChildren( myParent );
         myDiv = document.createElement( "div" );
-        myParent.appendChild( myDiv );
+        appendOnlyChild( myParent, myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
         appendMatrix( myParent, myRelationIdYX );
@@ -643,9 +650,9 @@ function actionXY()
         var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, myMatrixX ) );
 
         var myParent = document.getElementById( "actionYX" );
-        removeAllChildren( myParent );
+
         myDiv = document.createElement( "div" );
-        myParent.appendChild( myDiv );
+        appendOnlyChild( myParent, myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( timNameById( myRelationIdYX ) ) );
         appendMatrix( myParent, myRelationIdYX );
@@ -736,9 +743,8 @@ function transitXY()
         var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, transposeMatrix( myMatrixX ) ) );
 
         var myParent = document.getElementById( "transitYX" );
-        removeAllChildren( myParent );
         myDiv = document.createElement( "div" );
-        myParent.appendChild( myDiv );
+        appendOnlyChild( myParent, myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
         appendMatrix( myParent, myRelationIdYX );
@@ -763,8 +769,6 @@ appendTransitSelector( "transitY", 4 );
 appendTransitSelector( "transitX", 7 );
 transitXY();
 </script>
-
-<hr class="section-separator" />
 
 </body>
 

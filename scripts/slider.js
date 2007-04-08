@@ -5,75 +5,80 @@ addAnEvent( document, 'mousemove', function( givenEvent )
         mySliderDiv.onchange( givenEvent );
         return true;
     } );
-
-
-
+    
+    
+    
 function isSliderDiv( givenElement )
 {
-    return ( givenElement.className && givenElement.className == "slider" );
+    return ( givenElement && givenElement.className && givenElement.className == "slider" );
 }
-function Slider( givenMin, givenMax, givenInitialValue, givenUpdateFunction )
+function Slider( givenMin, givenMax, givenInitialValue, givenFunction )
 {
     this.min = givenMin;
     this.max = givenMax;
     this.val = givenInitialValue;
-    this.update = givenUpdateFunction;
-    this.relativeValue = function()
-        {
-            with( this ){ return rescaleToRange( min, max, val ); }
-        };
-    this.formatedValue = function()
-        {
-            return roundToDigits( this.val, 3 );
-        };
-    this.isActive = false;
-}
-function resyncAll( givenEvent, givenSliderObject, givenSliderDiv, givenKnob )
-{    
-    var myOffset = givenSliderDiv.offsetLeft;
-    var sliderWidth = givenSliderDiv.scrollWidth;
-    var knobWidth = givenKnob.scrollWidth;
-    var adjustedWidth = sliderWidth - knobWidth;  
+    this.notify = givenFunction;
+    
+    this.container = null;
+    this.knob = null;
 
-    givenKnob.style.left = adjustedWidth * givenSliderObject.relativeValue() + "px";
-    givenSliderObject.update( givenSliderObject.formatedValue() );                     
+    this.active = false;
+    this.activate = function() { this.active = true; };
+    this.deactivate = function() { this.active = false; };
 
-    if( ! ( givenEvent && givenSliderObject.isActive ) ) return;
-    
-    var myX = givenEvent.clientX; 
-    
-    var myMin = givenSliderObject.min;
-    var myMax = givenSliderObject.max;
-    var myRange = myMax - myMin;
-       
-    var rangeRelativeX = ( myX - myOffset - knobWidth / 2 ) / adjustedWidth;
-    givenSliderObject.val = getInRange( myMin, myMax, myMin + myRange * rangeRelativeX );
-    
-    stopEvent( givenEvent );
+    this.resync = function () 
+        {   
+            with( this )
+            {
+                var adjustedWidth = container.scrollWidth - knob.scrollWidth; 
+                knob.style.left = adjustedWidth * rescaleToRange( min, max, val )  + "px";
+                notify( val );
+            }                     
+        };
+    this.update = function ( givenEvent )
+        {                   
+            if( ! ( givenEvent && givenEvent.clientX && this.active ) ) return;
+            with( this )
+            {
+                var adjustedOffset = container.offsetLeft + knob.scrollWidth / 2;
+                var adjustedWidth = container.scrollWidth - knob.scrollWidth;
+                var rangeRelativeX = ( givenEvent.clientX - adjustedOffset ) / adjustedWidth;
+
+                val = checkedInRange( min, max, min + ( max - min ) * rangeRelativeX );
+            }
+            stopEvent( givenEvent );
+        };
 }
-function appendSlider( givenParent, givenSliderObject, givenUpdateFunction )
+
+function appendSlider( givenParent, givenSliderObject )
 {    
     var mySliderDiv     = makeChildElement( givenParent, "div", "slider" );
     var myLeftDiv       = makeChildElement( mySliderDiv, "div", "left" );
     var myRightDiv      = makeChildElement( mySliderDiv, "div", "right" );
     var myKnob          = makeChildElement( mySliderDiv, "img", "knob" );   
     myKnob.src          = lookupPathSliderKnob();
-
-    mySliderDiv.onchange = function( givenEvent ) 
-        {
-            resyncAll( givenEvent, givenSliderObject, mySliderDiv, myKnob );
-        };
-    addAnEvent( mySliderDiv, 'mousedown', function( givenEvent )
-        {
-            givenSliderObject.isActive = true;
-            resyncAll( givenEvent, givenSliderObject, mySliderDiv, myKnob );
-        });
-    addAnEvent( mySliderDiv, 'mouseup', function( givenEvent )
-        {
-            givenSliderObject.isActive = false;
-            stopEvent( givenEvent );
-        });   
-    mySliderDiv.onchange();
+    
+    with( givenSliderObject )
+    {
+        container = mySliderDiv;
+        knob = myKnob;
+    
+        var resyncUpdate = function ( givenEvent ) { resync(); update( givenEvent ); };
+        
+        mySliderDiv.onchange = resyncUpdate;
+        
+        addAnEvent( mySliderDiv, 'mousedown', function( givenEvent ) 
+            { 
+                activate();   
+                resyncUpdate( givenEvent ); 
+            } );
+            
+        addAnEvent( mySliderDiv, 'mouseup',   function( givenEvent ) 
+            { 
+                deactivate(); 
+                resyncUpdate( givenEvent ); 
+            } );
+            
+        resyncUpdate();
+    } 
 }
-
-

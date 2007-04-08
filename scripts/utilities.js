@@ -1,24 +1,15 @@
 function Lister()
 {
     this.message = "";
-    function makeIndent( givenLevel )
-    {
-        var myIndent = "";
-        for( var i = 0; i < givenLevel; i ++ ) 
-        { 
-            myIndent += "    "; 
-        }
-        return myIndent;
-    }
     this.processValue = function( givenKey, givenValue, givenLevel )
         {
             if( !givenLevel ) givenLevel = 0;
-            this.message += makeIndent( givenLevel ) + givenKey + " = " + givenValue + "\n";
+            this.message += repeatString( " ", givenLevel*4 ) + givenKey + " = " + givenValue + "\n";
         };
     this.processKey = function( givenKey, givenLevel )
         {
             if( !givenLevel ) givenLevel = 0;
-            this.message += makeIndent( givenLevel ) + givenKey + " =\n";
+            this.message += repeatString( " ", givenLevel*4 ) + givenKey + " =\n";
         };
 }
 function listObject( givenObject )
@@ -58,14 +49,13 @@ function apply_to_array( givenArray, givenFunction )
 
 function rescaleToRange( givenMin, givenMax, givenValue )
 {
-    var myValue = getInRange( givenMin, givenMax, givenValue );
+    var myValue = checkedInRange( givenMin, givenMax, givenValue );
     return ( myValue - givenMin )/( givenMax - givenMin );
 }
-function getInRange( givenMin, givenMax, givenValue )
+function checkedInRange( givenMin, givenMax, givenValue )
 {
     return ( givenMax < givenValue ? givenMax : (givenMin > givenValue ? givenMin : givenValue ) );
 }
-
 function isObject( givenObject) 
 {
     return (  ( typeof givenObject ) == 'object' );
@@ -87,8 +77,21 @@ function isString( givenObject )
     }
     return false;
 }
-function roundToDigits( givenFloat, givenDecimalsNumber )
+function roundToDigits( givenFloat, givenDecimalLength )
 {
-    var myExponent = Math.pow( 10, givenDecimalsNumber );
+    var myExponent = Math.pow( 10, givenDecimalLength );
     return Math.round( givenFloat * myExponent ) / myExponent;
+}
+function formatDecimal( givenFloat, givenDecimalLength )
+{
+    var myString = ( roundToDigits( givenFloat, givenDecimalLength  ) ).toString();
+    var myMatchIndex = myString.indexOf( "." );
+    if( myMatchIndex >=0 ) return myString + repeatString( "0", givenDecimalLength + 1 + myMatchIndex - myString.length );
+    return myString + "." + repeatString( "0", givenDecimalLength );
+}  
+function repeatString( givenString, givenTimes )
+{
+    var myResult = "";
+    for( var i = 0; i < givenTimes; i ++ ) myResult += givenString;
+    return myResult;
 }

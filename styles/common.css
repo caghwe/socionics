@@ -46,36 +46,54 @@ li
     margin-bottom: 1em;
     padding: 1em;
 }
-.left-alternative
+
+
+
+
+.sliders-table
 {
-    vertical-align: top;
-    position: relative;
-    top: 5px;
-    text-align: right;
+    width: 620px;
 }
-.right-alternative
+.dichotomy-row
 {
-    vertical-align: top;
-    position: relative;
-    top: 5px;
+}
+.left-output, .right-output, .tim-result
+{   
+    text-align: right;
+    padding-right: 2px;
+    padding-left: 2px;
+    border: outset 2px;
+    background-color: rgb( 250, 230, 230 );
+    width: 40px;
+}
+.left-dichotomy
+{   
+    text-align: right;
+    font-weight: bold;
+}
+.right-dichotomy
+{
     text-align: left;
+    font-weight: bold;
 }
 .slider-selector
 {
-    vertical-align: middle;
+    padding-top: 4px;
+    vertical-align: bottom;
     text-align: center;
+    width: 180px;
 }
+
+
+
 .tims-table
-{
-    table-layout: fixed;
-}
-.tim-caption
 {
     width: 200px;
 }
-.tim-result
+.tim-caption
 {
-    width: 120px;
+    width: 130px;
+    text-align: center;
 }
 .submit-button
 {
@@ -86,3 +104,21 @@ li
     cursor: pointer;
     font-weight: bold;
 }
+
+
+.psychic-functions-header-name, .psychic-functions-header-dim, .psychic-functions-header-aspect
+{
+    text-align: left;
+    font-weight: bold;
+    border-bottom: solid black 1px;
+    border-left: solid black 1px;
+}
+.psychic-function-name, .psychic-function-dimension, .psychic-function-aspect
+{
+    text-align: left;
+    border-bottom: dotted black 1px;
+    border-left: solid black 1px;
+}
+
+
+

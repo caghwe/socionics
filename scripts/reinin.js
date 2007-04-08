@@ -1,103 +1,79 @@
-function makeReinin( givenParent, givenTimId )
-{   
-    makeButton( givenParent, "Подсчитать барицентрические коэффициенты", function(){ myTestResults.result(); } );                   
-    var myContainerTable    = makeChildElement( givenParent, "table", "container-table" );
-    var myContainerBody     = makeChildElement( myContainerTable, "tbody", "container-tbody" );   
-    var myContainerRow      = makeChildElement( myContainerBody, "tr", "container-row" );
-    var mySlidersContainer   = makeChildElement( myContainerRow, "td", "sliders-container" );
-    var myTimsContainer     = makeChildElement( myContainerRow, "td", "tims-container" );
-                 
-    var myTestResults = new TestResultsKeeper();
-    makeDichotomyTable( mySlidersContainer, myTestResults, givenTimId );
-    function makeSlidersUpdater( givenTimId )
-    {
-        return function ()
-            {
-                removeAllChildren( givenParent );
-                makeReinin( givenParent, givenTimId );
-            };
-    };
-    makeTimTable( myTimsContainer, myTestResults, makeSlidersUpdater );
-}
-function makeDichotomyTable( givenParent, givenResultsKeeper, givenTimId )
-{
-    var myDichotomyTable = makeChildElement( givenParent, "table", "sliders-table" );
-    var myBody  = makeChildElement( myDichotomyTable, "tbody", "sliders-tbody" );
-   
-    for( var myDichotomyId = 0; myDichotomyId < reininDichotomies.length; myDichotomyId ++ )
-    {            
-        var myRow = makeChildElement( myBody, "tr", "dichotomy" );
-        var myDichotomy = reininDichotomies[ myDichotomyId ]; 
-        
-        var myLeftAlternative = makeChildElement( myRow, "td", "left-alternative" );
-        myLeftAlternative.appendChild( document.createTextNode( myDichotomy.alt[ 0 ] ) );
-        var myLeftOutput = makeChildElement( myLeftAlternative, "div", "left-output" );
-
-        var mySlider = makeChildElement( myRow, "td", "slider-selector" );
-
-        var myRightAlternative = makeChildElement( myRow, "td", "right-alternative" );
-        myRightAlternative.appendChild( document.createTextNode( myDichotomy.alt[ 1 ] ) );
-        var myRightOutput = makeChildElement( myRightAlternative, "div", "right-output" );
-        
-        var myUpdater = createUpdater( givenResultsKeeper, myDichotomyId, myLeftOutput, myRightOutput );
-
-        var myAlternative = ( givenTimId >= 0 ? resolveDichotomy( givenTimId, myDichotomyId ) : 0 );
-        var mySliderObject  = new Slider( -1, 1, myAlternative, myUpdater );
-        appendSlider( mySlider, mySliderObject, myUpdater );
-    }
-}
-function createUpdater( givenResultsKeeper, givenDichotomyId, givenLeft, givenRight )
-{
-    return function ( givenValue ) 
-        { 
-            givenLeft.innerHTML     = "[ " + ( givenValue > 0 ? 0 : - givenValue ) + " ]"; 
-            givenRight.innerHTML    = "[ " + ( givenValue > 0 ? givenValue : 0 ) + " ]";
-            givenResultsKeeper.setSliderSelections( givenDichotomyId, givenValue );
-        };
-}
 function TestResultsKeeper()
 {
-    this.sliderSelections = new Array();
-    this.timSignalElements = new Array();
-    this.setSliderSelections = function ( givenDichotomyId, givenValue )
+    this.sliders = new Array();
+    this.timElements = new Array();
+    this.resetSliders = function ( givenTimId )
         {
-            this.sliderSelections[ givenDichotomyId ] = givenValue;
-        };
-    this.inform = function() { return listObject( this.sliderSelections ); };
-    this.result = function()
-        {            
-            this.sliderSelections[ 15 ]  = 1;
-            var myTimDistribution = transformPoint( this.transformer, this.sliderSelections );
-            var myScalingFactor = 16;
-            
-            var myMin = 100;
-            var myMax = -100;
-            var myTotal = 0;
-            
-//            alert( "the tim distribution is " + listObject( mytimSignalElements ) );
-
-            for( var i = 0; i < this.timSignalElements.length; i ++ )
+            for( var i = 0; i < this.sliders.length; i ++ )
             {
-                var myElement = this.timSignalElements[ i ];
-                removeAllChildren( myElement );            
-                var myTimProbability = roundToDigits( myTimDistribution[ i ] / 16, 3  );
-                
-                myMin = ( myMin > myTimProbability ? myTimProbability : myMin );
-                myMax = ( myMax < myTimProbability ? myTimProbability : myMax );
-                myTotal += myTimProbability;
-                
-                myElement.appendChild( document.createTextNode( myTimProbability ) );
+                this.sliders[ i ].val = resolveDichotomy( givenTimId, i );
+                this.sliders[ i ].resync();
             }
-//            alert( "The range is [ " + myMin + ", " + myMax + " ] and total is " + myTotal );
-//            alert( "Processed " + this.timSignalElements.length + " tims for the distribution of dichotomies\n" + this.inform() );    
+        };    
+    this.result = function()
+        {   
+            var myResponses = new Array(); 
+            for( var i = 0; i < this.sliders.length; i++ )
+            {  
+                myResponses[ i ] = this.sliders[ i ].val;
+            }           
+            var myTimDistribution = this.transformer( myResponses );
+            for( var i = 0; i < this.timElements.length; i ++ )
+            {
+                var myElement = this.timElements[ i ];
+                var myResult = document.createTextNode( formatFloatOutput( myTimDistribution[ i ] ) )
+                appendOnlyChild( myElement, myResult );
+            }
         };
     this.bindOutput = function ( givenTimId, givenElement )
         {
-            this.timSignalElements[ givenTimId ] = givenElement;
+            this.timElements[ givenTimId ] = givenElement;
         }
-    this.transformer = makeReininTimToDichotomyTransformer();
+    this.transformer = makeReininEngine();
 }
-function makeTimTable( givenParent, givenResultsKeeper, givenUpdateFunction )
+function makeReinin( givenParent, givenTimId )
+{  
+    var myResultsKeeper = new TestResultsKeeper();
+//    makeButton( givenParent, "Подсчитать коэффициенты корреляции", function(){ myResultsKeeper.result(); } ); 
+                      
+    var myContainerTable    = makeChildElement( givenParent,        "table",    "container-table" );
+    var myContainerBody     = makeChildElement( myContainerTable,   "tbody",    "container-tbody" );   
+    var myContainerRow      = makeChildElement( myContainerBody,    "tr",       "container-row" );
+    var mySlidersContainer  = makeChildElement( myContainerRow,     "td",       "sliders-container" );
+    var myTimsContainer     = makeChildElement( myContainerRow,     "td",       "tims-container" );
+                 
+    makeDichotomyTable( mySlidersContainer, myResultsKeeper );
+    makeTimTable( myTimsContainer, myResultsKeeper );
+}
+function makeDichotomyTable( givenParent, givenResultsKeeper )
+{
+    var myTable = makeChildElement( givenParent, "table", "sliders-table" );
+    var myBody  = makeChildElement( myTable, "tbody", "sliders-tbody" );
+   
+    for( var myDichotomyId = 0; myDichotomyId < reininDichotomies.length; myDichotomyId ++ )
+    {       
+        var myDichotomy = reininDichotomies[ myDichotomyId ];
+             
+        var myRow = makeChildElement( myBody, "tr", "dichotomy-row" );
+        
+        var myLeftDichotomy = makeChildElement( myRow, "td", "left-dichotomy" );
+        myLeftDichotomy.appendChild( document.createTextNode( myDichotomy.alt[ 0 ] ) );
+        var myLeftOutput = makeChildElement( myRow, "td", "left-output" );
+
+        var mySliderContainer = makeChildElement( myRow, "td", "slider-selector" );
+
+        var myRightOutput = makeChildElement( myRow, "td", "right-output" );
+        var myRightDichotomy = makeChildElement( myRow, "td", "right-dichotomy" );
+        myRightDichotomy.appendChild( document.createTextNode( myDichotomy.alt[ 1 ] ) );
+        
+        var myUpdater = createSingleSliderResync( givenResultsKeeper, myDichotomyId, myLeftOutput, myRightOutput );
+        
+        var mySliderObject  = new Slider( -1, 1, 0, myUpdater );
+        givenResultsKeeper.sliders[ givenResultsKeeper.sliders.length ] = mySliderObject;
+        appendSlider( mySliderContainer, mySliderObject );
+    }
+}
+function makeTimTable( givenParent, givenResultsKeeper )
 {
     var myTable = makeChildElement( givenParent, "table", "tims-table" );
     var myBody  = makeChildElement( myTable, "tbody", "tims-tbody" );
@@ -106,10 +82,29 @@ function makeTimTable( givenParent, givenResultsKeeper, givenUpdateFunction )
     {      
         var myRow = makeChildElement( myBody, "tr", "tim-row" );
         var myTimCaption = makeChildElement( myRow, "td", "tim-caption" );
-        makeButton( myTimCaption, timNameById( myTimId ), givenUpdateFunction( myTimId ) );
+        
+        makeButton( myTimCaption, timNameById( myTimId ), createAllSlidersReset( givenResultsKeeper, myTimId ) );
+        
         var myTimResult = makeChildElement( myRow, "td", "tim-result" );
+        myTimResult.appendChild( document.createTextNode( " " ) );
         givenResultsKeeper.bindOutput( myTimId, myTimResult );
     }
+}
+function createSingleSliderResync( givenResultsKeeper, givenDichotomyId, givenLeft, givenRight )
+{
+    return function ( givenValue ) 
+        { 
+            givenLeft.innerHTML  = formatFloatOutput( givenValue > 0 ? 0 : - givenValue ); 
+            givenRight.innerHTML = formatFloatOutput( givenValue > 0 ? givenValue : 0 );
+            givenResultsKeeper.result();
+        };
+}
+function createAllSlidersReset( givenResultsKeeper, givenTimId )
+{
+    return function () 
+        {
+            givenResultsKeeper.resetSliders( givenTimId );
+        };
 }
 function makeButton( givenParent, givenCaption, givenUpdateFunction )
 {
@@ -117,39 +112,11 @@ function makeButton( givenParent, givenCaption, givenUpdateFunction )
     mySubmit.appendChild( document.createTextNode( givenCaption ) );
     mySubmit.onclick = givenUpdateFunction;
 }
-function getReininMatrix()
+function formatFloatOutput( givenFloat )
 {
-    // Матрица из -1 и 1.
-    // Строки соответствуют дихотомиям, столбцы -- ТИМам.
-    // Строк всего 15, столбцов -- 16.
-    // Каждая строка задаёт распределение вероятности соответствующей дихотомии на множестве по ТИМов.
-    // Таким образом, применив эту матрицу к 16-мерному вектору, 
-    // дающему распределение вероятности на множестве ТИМов,
-    // мы получим соответствующее этому вектору распределение вероятности на множестве дихотомий
-    // (т.е. вводные данные теста Рейнина), с точностью то преобразования (x-1)*2.
-    
-    // Матрица становится ортогональной после деления на 4 (т.е. для её обращения надо 
-    // транспонированную матрицу поделить на 16).
-    
-    var myMatrix = new Array();
-    for( var myDichotomyId = 0; myDichotomyId < reininDichotomies.length; myDichotomyId ++ )
-    {
-        myMatrix[ myDichotomyId ] = reininDichotomies[ myDichotomyId  ].tim;
-    }
-    return myMatrix
+    return Math.round( givenFloat * 100 ) + "%";
 }
-function makeReininTimToDichotomyTransformer()
+function roundFloat( givenFloat )
 {
-    var myTimToSliderTransformer = getReininMatrix();
-    myTimToSliderTransformer[ 15 ] = new Array();
-    for( i = 0; i < linearRepresentation.length; i ++ )
-    {
-        myTimToSliderTransformer[ 15 ][ i ] = 1;
-    }
-    var mySliderToTimTransformer = transposeMatrix( myTimToSliderTransformer );
-    
-//    var mustBeIdentity = productOfMatricies( mySliderToTimTransformer, myTimToSliderTransformer );
-//    document.write( "<pre>this must be a unit matrix:\n" + listObject( mustBeIdentity ) + "</pre>" );
-    
-    return mySliderToTimTransformer;
+    return roundToDigits( givenFloat, 2 );
 }

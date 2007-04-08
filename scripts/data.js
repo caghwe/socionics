@@ -269,7 +269,7 @@ var psychicFunctions =
             "name":                 "первая - главная",
             "dimension":            3,
             "aspectId":             "bi",
-            "aspectDescription":    "чёрная интуиция",
+            "aspectDescription":    "интуиция возможностей",
             "coordinates":          [ -1, -1, -1 ],
             "description":          "определяет программу действий человека, его жизненные позиции"
         },
@@ -277,7 +277,7 @@ var psychicFunctions =
             "name":                 "вторая - творческая",
             "dimension":            2,
             "aspectId":             "wl",
-            "aspectDescription":    "белая логика",
+            "aspectDescription":    "структурная логика",
             "coordinates":          [ 1, -1, -1 ],
             "description":          "определяет, каким образом человек реализует первую функцию"
         },
@@ -285,7 +285,7 @@ var psychicFunctions =
             "name":                 "третья - ролевая",
             "dimension":            1,
             "aspectId":             "bs",
-            "aspectDescription":    "чёрная сенсорика",
+            "aspectDescription":    "волевая сенсорика",
             "coordinates":          [ 1, 1, -1 ],
             "description":          "проявляется в новой обстановке, например, когда человек вступает в контакт с окружающими, или если происходит что-то неожиданное"
         },
@@ -293,7 +293,7 @@ var psychicFunctions =
             "name":                 "четвертая - болевая",
             "dimension":            0,
             "aspectId":             "we",
-            "aspectDescription":    "белая этика",
+            "aspectDescription":    "этика отношений",
             "coordinates":          [ -1, 1, -1 ],
             "description":          "слабое место человека, функция комплексов, мешающих развитию личности"
         },
@@ -301,7 +301,7 @@ var psychicFunctions =
             "name":                 "пятая - внушаемая",
             "dimension":            0,
             "aspectId":             "ws",
-            "aspectDescription" :   "белая сенсорика",
+            "aspectDescription" :   "сенсорика ощущений",
             "coordinates":          [ 1, 1, 1 ],
             "description":          "по ней человек нуждается в поддержке либо конкретными действиями, либо дельными советами и рекомендациями. Информация по этой функции успокаивает человека, вселяет в него уверенность"
         },
@@ -309,7 +309,7 @@ var psychicFunctions =
             "name":                 "шестая - активационная (референтная, оценочная)",
             "dimension":            1,
             "aspectId":             "be",
-            "aspectDescription":    "чёрная этика",
+            "aspectDescription":    "этика эмоций",
             "coordinates":          [ -1, 1, 1 ],
             "description":          "С помощью этой функции человек определяет, каким должен быть внешний мир, информация по аспекту этой функции активизирует его, побуждает к действию."
         },
@@ -317,7 +317,7 @@ var psychicFunctions =
             "name":                 "седьмая - ограничительная (наблюдательная)",
             "dimension":            2,
             "aspectId":             "wi",
-            "aspectDescription":    "белая интуиция",
+            "aspectDescription":    "интуиция времени",
             "coordinates":          [-1, -1, 1 ],
             "description":          "служит для отслеживания информации по ее аспекту, поступающей извне, следит за излишними проявлениями такой информации. срабатывает, если человек чувствует давление, которое вынуждает его защищаться."
         },
@@ -325,7 +325,7 @@ var psychicFunctions =
             "name":                 "восьмая - демонстративная (фоновая)",
             "dimension":            3,
             "aspectId":             "bl",
-            "aspectDescription":    "чёрная логика",
+            "aspectDescription":    "деловая логика",
             "coordinates":          [ 1, -1, 1 ],
             "description":          "работает автоматически, постоянно, не заостряя внимания"
         }
