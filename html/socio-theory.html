@@ -379,7 +379,7 @@
     </span> &nbsp; и задаётся матрицей
 <div id="relationRelativeExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( document.getElementById ( "relationRelativeExample"), relationRelative );
+        appendRelationMatrix( document.getElementById ( "relationRelativeExample"), relationRelative );
     </script>
 </div>
 Это отношение сохраняет вертность и нальность.
@@ -397,7 +397,7 @@
     </span> &nbsp; и задаётся матрицей
 <div id="relationBusinessExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( document.getElementById ( "relationBusinessExample"), relationBusiness );
+        appendRelationMatrix( document.getElementById ( "relationBusinessExample"), relationBusiness );
     </script>
 </div>
 Это отношение меняет логика на этика и сенсорика на интуита, но сохраняет вертность и нальность.
@@ -415,7 +415,7 @@
     </span> &nbsp; и задаётся матрицей
 <div id="relationConflictExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( document.getElementById ( "relationConflictExample"), relationConflict  );
+        appendRelationMatrix( document.getElementById ( "relationConflictExample"), relationConflict  );
     </script>
 </div>
 Это отношение меняет вертность и нальность.
@@ -433,7 +433,7 @@
     </span> &nbsp; и задаётся матрицей
 <div id="relationMirrorExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( document.getElementById ( "relationMirrorExample"), relationMirror );
+        appendRelationMatrix( document.getElementById ( "relationMirrorExample"), relationMirror );
     </script>
 </div>
 Это отношение меняет вертность и нальность.
@@ -457,7 +457,7 @@
     </span> &nbsp; задаётся матрицей
 <div id="relationOppositionExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( document.getElementById ( "relationOppositionExample"), relationOpposition );
+        appendRelationMatrix( document.getElementById ( "relationOppositionExample"), relationOpposition );
     </script>
 </div>
 </p>
@@ -476,7 +476,7 @@
 
 <div id="relationRevisorExample" class="scriptedDisplay">
     <script type="text/javascript">
-        appendMatrix( document.getElementById ( "relationRevisorExample"), relationRevisor );
+        appendRelationMatrix( document.getElementById ( "relationRevisorExample"), relationRevisor );
     </script>
 </div>
 
@@ -571,7 +571,7 @@ function multXY()
         appendOnlyChild( myParent, myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
-        appendMatrix( myParent, myRelationIdYX );
+        appendRelationMatrix( myParent, myRelationIdYX );
     }
 }
 function multOptionMaker( givenName )
@@ -580,7 +580,7 @@ function multOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenParent, givenRelId );
+            appendRelationMatrix( givenParent, givenRelId );
             multXY();
         }
 }
@@ -655,7 +655,7 @@ function actionXY()
         appendOnlyChild( myParent, myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( timNameById( myRelationIdYX ) ) );
-        appendMatrix( myParent, myRelationIdYX );
+        appendRelationMatrix( myParent, myRelationIdYX );
     }
 }
 function actionRELOptionMaker( givenName )
@@ -664,7 +664,7 @@ function actionRELOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenParent, givenRelId );
+            appendRelationMatrix( givenParent, givenRelId );
             actionXY();
         }
 }
@@ -674,7 +674,7 @@ function actionTIMOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenParent, givenRelId );
+            appendRelationMatrix( givenParent, givenRelId );
             actionXY();
         }
 }
@@ -720,15 +720,23 @@ actionXY();
         <td align="center" valign="center">&nbsp;</td>
         <td align="center" valign="center">Борис:</td>
         <td align="center" valign="center">&nbsp;</td>
-        <td align="center" valign="center">Анатолий:
-            <span style="position: relative; top: +4.7em;">-1</span></td>
+        <td align="center" valign="center">Анатолий:</td>
     </tr>
     <tr>
         <td align="center" valign="top" id="transitYX" width="30%"></td>
         <td align="center" valign="center">=</td>
         <td align="center" valign="top" id="transitY" width="30%"></td>
         <td align="center" valign="center">x</td>
-        <td align="center" valign="top" id="transitX" width="30%"></td>
+        <td align="center" valign="top">
+            <table>
+                <tr>
+                    <td align="center" id="transitX"></td>
+                    <td align="center" valign="top">
+                        <span style="font-size: 150%; position: relative; top: 1.3em;">-1</span>
+                    </td>
+                </td>
+            </table>
+        </td>
     </tr>
 </table>
 
@@ -747,7 +755,7 @@ function transitXY()
         appendOnlyChild( myParent, myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
-        appendMatrix( myParent, myRelationIdYX );
+        appendRelationMatrix( myParent, myRelationIdYX );
     }
 }
 function transitOptionMaker( givenName )
@@ -756,7 +764,7 @@ function transitOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenParent, givenRelId );
+            appendRelationMatrix( givenParent, givenRelId );
             transitXY();
         }
 }
@@ -769,6 +777,13 @@ appendTransitSelector( "transitY", 4 );
 appendTransitSelector( "transitX", 7 );
 transitXY();
 </script>
+
+<div id="footnotes-endnotes-container"></div>
+
+<center>
+<hr class="section-separator" />
+<a href="./index.html">На главную</a>
+</center>
 
 </body>
 

@@ -30,13 +30,6 @@ function appendPsychicFunctions( givenParent, givenTimId )
         myAspect.appendChild( document.createTextNode( getAspectName( givenTimId, i ) ) );
     }
 }
-function makeChildElement( givenParent, givenTagName, givenClassName )
-{
-    var myChild = document.createElement( givenTagName );
-    givenParent.appendChild( myChild );
-    myChild.className = givenClassName;
-    return myChild;
-}
 function appendAspects( givenParent )
 {
     for( var myAspectId = 0; myAspectId < psychicFunctions.length; myAspectId ++ )
@@ -101,63 +94,106 @@ function appendAspectIconById( givenParent, givenAspectId )
 
     myDiv.appendChild( document.createTextNode( myAspectName ) );
 }
-function appendTable( givenParent, givenDispatchTable, givenObject )
+function appendTable( givenParent, givenDispatch )
 {
-    var myTable = document.createElement( "table" );
-    givenParent.appendChild( myTable );
-//    myTable.style[ "display" ] = "inline";
+    var myContainer     = makeChildElement( givenParent,    "div",      "dispatch-container" );
+    var myTable         = makeChildElement( myContainer,    "table",    "dispatch-table" );
+    var myTBody         = makeChildElement( myTable,        "tbody",    "dispatch-body" );
 
-    var myTableBody = document.createElement( "tbody" );
-    myTable.appendChild( myTableBody );
-
-    for( var i = 0; i < givenDispatchTable.length; i ++ )
+    for( var i = 0; i < givenDispatch.rowCount; i ++ )
     {
-        var myRow = document.createElement( "tr" );
-        myTableBody.appendChild( myRow );
-        for( var j = 0; j < givenDispatchTable[0].length; j ++ )
+        var myRow       = makeChildElement( myTBody,        "tr",       "dispatch-row" );
+        for( var j = 0; j < givenDispatch.columnCount; j ++ )
         {
-            var myCell = document.createElement( "td" );
-            myRow.appendChild( myCell );
-            givenDispatchTable[i][j]( givenObject, myCell );
+            var myCell  = makeChildElement( myRow,          "td",       "dispatch-cell" );
+            givenDispatch.appendEntry( myCell, i, j );
         }
     }
 }
-function appendMatrix( givenParent, givenTimId )
+function MatrixDrawingDispatch( givenMatrix )
 {
-    var myDispatchTable = fillInMatrix();
-    appendTable( givenParent, myDispatchTable, givenTimId );
+    this.rowCount = givenMatrix.length;
+    this.columnCount = givenMatrix[ 0 ].length + 2;
+    this.appendEntry = function ( givenParent, givenRowIndex, givenColumnIndex )
+        {
+            if( givenColumnIndex == 0 )
+            {
+                givenParent.className = ( ( givenRowIndex == 0 )? "upper-left-corner" : 
+                    ( ( givenRowIndex == givenMatrix.length - 1 ) ? "lower-left-corner" : "left-border" ) );
+                givenParent.appendChild( document.createTextNode( " " ) );
+                return;
+            }
+            if( givenColumnIndex == givenMatrix[ 0 ].length + 1 )
+            {
+                givenParent.className = ( ( givenRowIndex == 0 )? "upper-right-corner" : 
+                    ( ( givenRowIndex == givenMatrix.length - 1 ) ? "lower-right-corner" : "right-border" ) );
+                givenParent.appendChild( document.createTextNode( " " ) );
+                return;
+            } 
+            var myMatrixEntry = givenMatrix[ givenRowIndex ][ givenColumnIndex - 1 ];
+            givenParent.appendChild( document.createTextNode( myMatrixEntry ) );
+        };
+}     
+function appendRelationMatrix( givenParent, givenTimId )
+{
+    var myMatrix = linearRepresentation[ givenTimId ].matrix;
+    appendMatrix( givenParent, myMatrix );
 }
-function fillInMatrix()
+function appendMatrix( givenParent, givenMatrix )
 {
+    var myDispatch = new MatrixDrawingDispatch( givenMatrix );
+    appendTable( givenParent, myDispatch );
+}
+function appendCube( givenParent, givenTimId )
+{
+    function fillAspect( givenFunctionNumber )
+        {
+            return function( aParent )
+                {   
+                    var myContainer = makeChildElement( aParent, "span", "vertex-container" );
+                    
+                    var myImage = makeChildElement( myContainer, "img", "aspect-image" );
+                    myImage.src = lookupPathAspectIcon( getAspectIconName( givenTimId, givenFunctionNumber ) );  
+
+                    var mySub = makeChildElement( myContainer, "sub", "aspect-index" );
+                    mySub.appendChild( document.createTextNode(  givenFunctionNumber + 1 ) );
+                };
+        };
     var myDispatchTable =
         [
-            [ fillV, fillMatrixEntry(0,0), fillMatrixEntry(0,1), fillMatrixEntry(0,2), fillV ],
-            [ fillV, fillMatrixEntry(1,0), fillMatrixEntry(1,1), fillMatrixEntry(1,2), fillV ],
-            [ fillV, fillMatrixEntry(2,0), fillMatrixEntry(2,1), fillMatrixEntry(2,2), fillV ]
+            [ fillB,         fillB, fillAspect(5), fillH, fillH, fillH,         fillH, fillAspect(4) ],
+            [ fillB,         fillD, fillV,         fillB, fillB, fillB,         fillD, fillV         ],
+            [ fillAspect(6), fillH, fillH,         fillH, fillH, fillAspect(7), fillB, fillV         ],
+            [ fillV,         fillB, fillV,         fillB, fillB, fillV,         fillB, fillV         ],
+            [ fillV,         fillB, fillAspect(3), fillH, fillH, fillV,         fillH, fillAspect(2) ],
+            [ fillV,         fillD, fillB,         fillB, fillB, fillV,         fillD, fillB         ],
+            [ fillAspect(0), fillH, fillH,         fillH, fillH, fillAspect(1), fillB, fillB         ]
         ];
-    return myDispatchTable;
+    function CubeDrawingDispatch( timId )
+    {
+        this.rowCount = myDispatchTable.length;
+        this.columnCount = myDispatchTable[ 0 ].length;
+        this.appendEntry = function ( givenParent, givenRowIndex, givenColumnIndex )
+            {
+                myDispatchTable[ givenRowIndex ][ givenColumnIndex ]( givenParent );
+            };
+    }
+    var myCubeDrawingDispatch = new CubeDrawingDispatch( givenTimId );
+    appendTable( givenParent, myCubeDrawingDispatch );
 }
-function fillMatrixEntry( givenRow, givenColumn )
-{
-    return function ( givenTimId, givenParent )
-        {
-            var myMatrix = linearRepresentation[ givenTimId ].matrix;
-            givenParent.appendChild( document.createTextNode(  myMatrix[ givenRow ][ givenColumn ] ) );
-        };
-}
-function fillB( givenTimId, givenParent )
+function fillB( givenParent )
 {
     givenParent.appendChild( document.createTextNode( " " ) );
 }
-function fillD( givenTimId, givenParent )
+function fillD( givenParent )
 {
     givenParent.appendChild( document.createTextNode( "/" ) );
 }
-function fillV( givenTimId, givenParent )
+function fillV( givenParent )
 {
     givenParent.appendChild( document.createTextNode( "|" ) );
 }
-function fillH( givenTimId, givenParent )
+function fillH( givenParent )
 {
-    givenParent.appendChild( document.createTextNode( "--" ) );
+    givenParent.appendChild( document.createTextNode( "-" ) );
 }

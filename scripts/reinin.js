@@ -5,9 +5,8 @@ function TestResultsKeeper()
     this.resetSliders = function ( givenTimId )
         {
             for( var i = 0; i < this.sliders.length; i ++ )
-            {
-                this.sliders[ i ].val = resolveDichotomy( givenTimId, i );
-                this.sliders[ i ].resync();
+            { 
+                this.sliders[ i ].setValue( resolveDichotomy( givenTimId, i ) );
             }
         };    
     this.result = function()
@@ -15,7 +14,7 @@ function TestResultsKeeper()
             var myResponses = new Array(); 
             for( var i = 0; i < this.sliders.length; i++ )
             {  
-                myResponses[ i ] = this.sliders[ i ].val;
+                myResponses[ i ] = this.sliders[ i ].getValue();
             }           
             var myTimDistribution = this.transformer( myResponses );
             for( var i = 0; i < this.timElements.length; i ++ )
@@ -44,6 +43,7 @@ function makeReinin( givenParent, givenTimId )
                  
     makeDichotomyTable( mySlidersContainer, myResultsKeeper );
     makeTimTable( myTimsContainer, myResultsKeeper );
+    myResultsKeeper.result();
 }
 function makeDichotomyTable( givenParent, givenResultsKeeper )
 {
@@ -96,6 +96,7 @@ function createSingleSliderResync( givenResultsKeeper, givenDichotomyId, givenLe
         { 
             givenLeft.innerHTML  = formatFloatOutput( givenValue > 0 ? 0 : - givenValue ); 
             givenRight.innerHTML = formatFloatOutput( givenValue > 0 ? givenValue : 0 );
+            //
             givenResultsKeeper.result();
         };
 }

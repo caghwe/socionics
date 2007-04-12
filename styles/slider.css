@@ -1,13 +1,15 @@
-.slider 
+.slider-container 
 {
     background: url( ../images/slider/bg.png ) repeat-x 50% 50%; 
+    
     width: 180px; 
     height: 15px;    
     margin: 0.5em auto; 
     
     position: relative; 
+    cursor: crosshair;
 }
-.slider img 
+.slider-knob 
 {
     position: absolute; 
     top: 0px;
@@ -15,9 +17,10 @@
     
     cursor: pointer;
 }
-.slider .left 
+.slider-left 
 {
     background: url( ../images/slider/left.png ) no-repeat 0px 1px;
+    
     width: 2px;
     height: 12px; 
     
@@ -25,9 +28,10 @@
     top: 0px; 
     left: 0px;   
 }
-.slider .right
+.slider-right
 {
     background: url( ../images/slider/right.png ) no-repeat 0px 1px;
+    
     width: 2px; 
     height: 12px;
     

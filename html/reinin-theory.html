@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         <title>
-            Матричное представление интерТИМных отношений
+            Вероятностное типирование с помощью признаков Рейнина
         </title>
 
         <link rel="stylesheet" type="text/css" href="../styles/common.css" />
@@ -33,25 +33,50 @@
 
     </head>
     <body>
-        <center>
-            <a href="./index.html">На главную</a>
-        </center>
-        <hr class="section-separator" />
-        <div id="fullRelList" style="text-align: center;">
-            <script type="text/javascript">
-                var myParent = document.getElementById ( "fullRelList" );
-                for( var myRelId = 0; myRelId < linearRepresentation.length; myRelId ++ )
-                {
-                    myParent.appendChild( document.createTextNode( relationNameById( myRelId )  + ":" ) );
-                    appendRelationMatrix( myParent, myRelId );
-                    var mySeparator = document.createElement( "hr" );
-                    myParent.appendChild( mySeparator );
-                    mySeparator.className ="section-separator";
-                }
-            </script>
-        </div>
-        <center>
-            <a href="./index.html">На главную</a>
-        </center>
-    </body>
+
+
+<center>
+<a href="./index.html">На главную</a>
+<hr class="section-separator" />
+</center>
+
+<h2>Вероятностное типирование с помощью признаков Рейнина</h2>
+
+<i>Александр Касюков</i> (<a href="mailto:kasiuka@sunysuffolk.edu">kasiuka@sunysuffolk.edu</a>)
+
+<p>
+Опубликовано
+<span class="footnote">
+    <span class="footnote-caption">2007-4-??</span>
+        <span class="footnote-body">
+            Последняя редакция:
+            <span
+                class="clicked-onpageload"
+                onclick="appendTimestamp( this )">
+            </span>.
+        </span>
+    </span>
+по адресу
+<a href="http://www2.sunysuffolk.edu/kasiuka/socionics/html/reinin-theory.html">http://www2.sunysuffolk.edu/kasiuka/socionics/html/reinin-theory.html</a>
+</p>
+
+<hr class="section-separator" />
+
+<div class="display-interactive">
+    <span
+        class="clicked-onpageload"
+        onclick="appendMatrix( this, getReininMatrix() );">
+    </span>
+</div>
+
+
+<div id="footnotes-endnotes-container"></div>
+
+
+<center>
+<hr class="section-separator" />
+<a href="./index.html">На главную</a>
+</center>
+
+</body>
 </html>

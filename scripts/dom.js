@@ -1,3 +1,10 @@
+function makeChildElement( givenParent, givenTagName, givenClassName )
+{
+    var myChild = document.createElement( givenTagName );
+    givenParent.appendChild( myChild );
+    myChild.className = givenClassName;
+    return myChild;
+}
 function first_child_with_className( givenParent, givenClassName )
 {
     for ( var i=0; i < givenParent.childNodes.length; i++ )

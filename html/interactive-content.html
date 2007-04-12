@@ -81,7 +81,7 @@ function multXY()
         appendOnlyChild( myParent, myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
-        appendMatrix( myParent, myRelationIdYX );
+        appendRelationMatrix( myParent, myRelationIdYX );
     }
 }
 function multOptionMaker( givenName )
@@ -90,7 +90,7 @@ function multOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenParent, givenRelId );
+            appendRelationMatrix( givenParent, givenRelId );
             multXY();
         }
 }
@@ -150,7 +150,7 @@ function actionXY()
         appendOnlyChild( myParent, myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( timNameById( myRelationIdYX ) ) );
-        appendMatrix( myParent, myRelationIdYX );
+        appendRelationMatrix( myParent, myRelationIdYX );
     }
 }
 function actionRELOptionMaker( givenName )
@@ -159,7 +159,7 @@ function actionRELOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenParent, givenRelId );
+            appendRelationMatrix( givenParent, givenRelId );
             actionXY();
         }
 }
@@ -169,7 +169,7 @@ function actionTIMOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenParent, givenRelId );
+            appendRelationMatrix( givenParent, givenRelId );
             actionXY();
         }
 }
@@ -224,7 +224,7 @@ function transitXY()
         appendOnlyChild( myParent, myDiv );
         myDiv.className = "like-select";
         myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
-        appendMatrix( myParent, myRelationIdYX );
+        appendRelationMatrix( myParent, myRelationIdYX );
     }
 }
 function transitOptionMaker( givenName )
@@ -233,7 +233,7 @@ function transitOptionMaker( givenName )
     this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
     this.action = function ( givenRelId, givenParent )
         {
-            appendMatrix( givenParent, givenRelId );
+            appendRelationMatrix( givenParent, givenRelId );
             transitXY();
         }
 }

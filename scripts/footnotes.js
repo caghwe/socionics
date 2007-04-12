@@ -9,9 +9,12 @@ function initializeFootnotes()
     var myFootnotes = array_elements_by_name_with_className( "span", "footnote" );
     if( myFootnotes.length > 0 )
     {
-        var endFootnotes = document.createElement( "h3")
+        var endNoteContainer = initialize_endNote_Container();
+
+        var endFootnotes =  makeChildElement( endNoteContainer, "h3", "end-note-header" );
         endFootnotes.appendChild( document.createTextNode( SectionIntro ) );
-        document.body.appendChild( endFootnotes );
+        
+        //document.body.appendChild( endFootnotes );
 
         apply_to_array( myFootnotes, initialize_single_footnote );
     }
@@ -24,7 +27,6 @@ function initialize_single_footnote( givenNumber, givenFootnote )
         { 
             myFootnoteBody.className = "footnote-body-hidden"; 
         };
-
     var myFootnoteCaption = first_child_with_className( givenFootnote, "footnote-caption" );
     myFootnoteCaption.className = "footnote-caption";    
     myFootnoteCaption.onmousedown = function() 
@@ -50,23 +52,20 @@ function linkToEndNote( givenNumber, givenFootnote, givenContent )
 }
 function makeEndNote( givenNumber, givenFootnote, givenContent )
 {
-    var endNoteContainer = document.createElement( "div" );
-    document.body.appendChild( endNoteContainer );
-    endNoteContainer.className = "footnote-endnote";
+    var endNotesContainer = document.getElementById( "footnotes-endnotes-container" );
+    var myNote =  makeChildElement( endNotesContainer, "div", "footnote-endnote" );
 
-    var myTitle = document.createElement( "a" );
-    myTitle.id = endnoteId( givenNumber );
-    endNoteContainer.appendChild( myTitle );
-    myTitle.innerHTML = "<b>" + FootnoteIntroCaption + ( givenNumber + 1 ) + ".</b> ";
+    var myAnchor =  makeChildElement( myNote, "a", "end-note" );
+    myAnchor.id = endnoteId( givenNumber );
 
-    var myContent = document.createElement( "span");
-    endNoteContainer.appendChild( myContent );
+    myAnchor.innerHTML = "<b>" + FootnoteIntroCaption + ( givenNumber + 1 ) + ".</b> ";
+
+    var myContent = makeChildElement( myNote, "span", "end-note" );
     myContent.innerHTML = givenContent.innerHTML;
 
-    var goBack = document.createElement( "a" );
-    endNoteContainer.appendChild( goBack );
-    goBack.innerHTML = "<span>" + FootnoteBackToTextCaption + "</span>";
-    goBack.href = "#" + footnoteId( givenNumber );
+    myBackLink = makeChildElement( myNote, "a", "back-link" );
+    myBackLink.innerHTML = "<span>" + FootnoteBackToTextCaption + "</span>";
+    myBackLink.href = "#" + footnoteId( givenNumber );
 }
 function footnoteId( givenFootnoteNumber )
 {
@@ -75,4 +74,15 @@ function footnoteId( givenFootnoteNumber )
 function endnoteId( givenFootnoteNumber )
 {
     return "endNote" + givenFootnoteNumber;
+}
+function initialize_endNote_Container()
+{
+    var endNoteContainer = document.getElementById( "footnotes-endnotes-container" );
+    if( ! endNoteContainer )
+    {
+        endNoteContainer = makeChildElement( document.body, "div", "footnotes-endnotes-container" );
+        endNoteContainer.id = "footnotes-endnotes-container";
+    }
+    endNoteContainer.className = "footnote-endnote";    
+    return endNoteContainer;
 }

@@ -1,6 +1,6 @@
 function timNameById( givenTimId )
 {
-    return linearRepresentation[ givenTimId ].nick;
+    return linearRepresentation[ givenTimId ].mbti;//nick;
 }
 function timFullNameById( givenTimId )
 {
