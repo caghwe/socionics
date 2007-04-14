@@ -1,0 +1,54 @@
+.sliders-table
+{
+    width: 620px;
+}
+.dichotomy-row
+{
+}
+.left-output, .right-output, .tim-result
+{
+    text-align: right;
+    padding-right: 2px;
+    padding-left: 2px;
+    border: outset 2px;
+    background-color: rgb( 250, 230, 230 );
+    width: 40px;
+}
+.left-dichotomy
+{
+    text-align: right;
+    font-weight: bold;
+}
+.right-dichotomy
+{
+    text-align: left;
+    font-weight: bold;
+}
+.slider-selector
+{
+    padding-top: 4px;
+    vertical-align: bottom;
+    text-align: center;
+    width: 180px;
+}
+
+
+
+.tims-table
+{
+    width: 200px;
+}
+.tim-caption
+{
+    width: 130px;
+    text-align: center;
+}
+.submit-button
+{
+    border: outset 3px;
+    background-color: rgb( 220, 220, 220 );
+    padding: 2px;
+    margin-top: 2px;
+    cursor: pointer;
+    font-weight: bold;
+}

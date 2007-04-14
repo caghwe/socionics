@@ -46,11 +46,10 @@ function apply_to_array( givenArray, givenFunction )
         givenFunction( i, givenArray[ i ] );
     }
 }
-
 function rescaleToRange( givenMin, givenMax, givenValue )
 {
     var myValue = checkedInRange( givenMin, givenMax, givenValue );
-    return ( myValue - givenMin )/( givenMax - givenMin );
+    return ( myValue - givenMin ) / ( givenMax - givenMin );
 }
 function checkedInRange( givenMin, givenMax, givenValue )
 {
@@ -58,7 +57,7 @@ function checkedInRange( givenMin, givenMax, givenValue )
 }
 function isObject( givenObject) 
 {
-    return (  ( typeof givenObject ) == 'object' );
+    return ( ( typeof givenObject ) == 'object' );
 }
 function isArray( givenObject )
 {

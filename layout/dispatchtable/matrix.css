@@ -1,0 +1,34 @@
+.upper-right-corner
+{
+    border-top: solid black 1px;
+    border-right: solid black 1px;
+    margins: 0px, 0px, 0px, 0px;
+}
+.lower-right-corner
+{
+    border-bottom: solid black 1px;
+    border-right: solid black 1px;
+    margin: 0px, 0px, 0px, 0px;
+    padding: 0px 0px 0px 0px;
+}
+.upper-left-corner
+{
+    border-top: solid black 1px;
+    border-left: solid black 1px;
+}
+.lower-left-corner
+{
+    border-bottom: solid black 1px;
+    border-left: solid black 1px;
+    margin: 0;
+}
+.left-border
+{
+    border-left: solid black 1px;
+    margin: 0;
+}
+.right-border
+{
+    border-right: solid black 1px;
+    margin: 0;
+}

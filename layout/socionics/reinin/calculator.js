@@ -34,7 +34,9 @@ function makeReinin( givenParent, givenTimId )
 {  
     var myResultsKeeper = new TestResultsKeeper();
 //    makeButton( givenParent, "Подсчитать коэффициенты корреляции", function(){ myResultsKeeper.result(); } ); 
-                      
+
+    var myHeaderContainer   = makeChildElement( givenParent,        "div",      "calculator-header" );
+ 
     var myContainerTable    = makeChildElement( givenParent,        "table",    "container-table" );
     var myContainerBody     = makeChildElement( myContainerTable,   "tbody",    "container-tbody" );   
     var myContainerRow      = makeChildElement( myContainerBody,    "tr",       "container-row" );
@@ -42,8 +44,11 @@ function makeReinin( givenParent, givenTimId )
     var myTimsContainer     = makeChildElement( myContainerRow,     "td",       "tims-container" );
                  
     makeDichotomyTable( mySlidersContainer, myResultsKeeper );
-    makeTimTable( myTimsContainer, myResultsKeeper );
+    var mySorting = makeTimTable( myTimsContainer, myResultsKeeper );
+    makeButton( myHeaderContainer, "Упорядочить ТИМы по убыванию вероятностей", mySorting ); 
+
     myResultsKeeper.result();
+    
 }
 function makeDichotomyTable( givenParent, givenResultsKeeper )
 {
@@ -86,9 +91,41 @@ function makeTimTable( givenParent, givenResultsKeeper )
         makeButton( myTimCaption, timNameById( myTimId ), createAllSlidersReset( givenResultsKeeper, myTimId ) );
         
         var myTimResult = makeChildElement( myRow, "td", "tim-result" );
-        myTimResult.appendChild( document.createTextNode( " " ) );
         givenResultsKeeper.bindOutput( myTimId, myTimResult );
     }
+    function readNumber( givenRow )
+    {
+                
+        var myCell = first_child_with_className( givenRow, "tim-result" );
+        var myText = ( document.all? myCell.innerText : myCell.textContent );
+        myText.match( /^(\d*)%$/ );
+        return parseFloat( RegExp.$1 );
+    }
+    function sortByProbability( rowA, rowB )
+    {
+        var a = readNumber( rowA );
+        var b = readNumber( rowB );
+
+        return ( (a < b) ? 1 : ((a > b) ? -1 : 0));
+    }
+    return function ()
+    {
+        var mySortedRows = load_collection_to_array( myBody.childNodes ).sort( sortByProbability ); 
+        removeAllChildren( myBody );
+        for( var i = 0; i < mySortedRows.length; i ++ )
+        {
+            myBody.appendChild( mySortedRows[  i ] );
+        } 
+    }
+}
+function load_collection_to_array( givenCollection )
+{
+    var newArray = new Array();
+    for( var i = 0; i < givenCollection.length; i++ )
+    {
+        newArray[ i ] = givenCollection.item( i );
+    }
+    return newArray;
 }
 function createSingleSliderResync( givenResultsKeeper, givenDichotomyId, givenLeft, givenRight )
 {

@@ -1,6 +1,6 @@
 .slider-container 
 {
-    background: url( ../images/slider/bg.png ) repeat-x 50% 50%; 
+    background: url( images/bg.png ) repeat-x 50% 50%; 
     
     width: 180px; 
     height: 15px;    
@@ -19,7 +19,7 @@
 }
 .slider-left 
 {
-    background: url( ../images/slider/left.png ) no-repeat 0px 1px;
+    background: url( images/left.png ) no-repeat 0px 1px;
     
     width: 2px;
     height: 12px; 
@@ -30,7 +30,7 @@
 }
 .slider-right
 {
-    background: url( ../images/slider/right.png ) no-repeat 0px 1px;
+    background: url( images/right.png ) no-repeat 0px 1px;
     
     width: 2px; 
     height: 12px;

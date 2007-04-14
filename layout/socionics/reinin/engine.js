@@ -1,4 +1,4 @@
-function makeReininEngine()
+function makeReininEngineTALANOV()  
 {
     return function ( givenSlidersSelection )
         {
@@ -7,16 +7,9 @@ function makeReininEngine()
             givenSlidersSelection[ 15 ]  = 1;
             var myTimCoefficients = transformPoint( myTransformation, givenSlidersSelection );
 
-
-            // ---------------------------------------------------------------------
-            //
-            // барицентрические коэффициенты: 
             //var myProcessor = new ResultsetProcessor( function ( x ) { return x / 16; } );
-            //
-            // коэффициенты корреляции: 
+
             var myProcessor = new ResultsetProcessor( function ( x ) { return x/15  - 1 / 15; } );
-            //
-            //-----------------------------------------------------------------------
             
             processObject( myTimCoefficients, myProcessor );
 
@@ -25,7 +18,38 @@ function makeReininEngine()
             return myProcessor.result;
         };
 }
-function ResultsetProcessor( givenAffineTransformation )
+function sliderDensity( givenDichotomyId, givenTimId, givenValue )
+{
+    if( givenValue > 1 || givenValue < -1 ) return 0;
+     
+    var myDichotomy = reininDichotomies[ givenDichotomyId ];
+    var myReininCoef = myDichotomy.tim[ givenTimId ];
+    
+    return ( ( 1 / 3 )* myReininCoef * givenValue + ( 1 / 2 ) );
+}
+function makeReininEngine()
+{
+    return function ( givenSliderSelection )
+        {   
+            
+            var myResult = new Array(); 
+            for( var i = 0; i < 16; i ++ ) myResult[ i ] = 1; 
+            var myTotal = 0;   
+            for( var myTimId = 0; myTimId < 16; myTimId ++ )
+            {
+                for( var myDichotomyId = 0; myDichotomyId < 15; myDichotomyId ++ )
+                {
+                    myResult[ myTimId ] *= sliderDensity( myDichotomyId, myTimId, 
+                        givenSliderSelection[ myDichotomyId ] );
+                }
+                myTotal += myResult[ myTimId ];
+            }
+            for( var i = 0; i < 16; i ++ ) myResult[ i ] = myResult[ i ] / myTotal;
+            return myResult;
+        };
+}
+function ResultsetProcessor( givenAffineTransformation ) 
+// считает профиль Таланова (или хрен знает что ещё), а не распределение вероятности на множестве ТИМов
 {
     this.max = - 1000;
     this.min = 1000;
@@ -50,19 +74,29 @@ function ResultsetProcessor( givenAffineTransformation )
 function makeReininTimToDichotomyTransformer()
 {
     var myTimToSliderTransformer = getReininMatrix();
-    
-    myTimToSliderTransformer[ 15 ] = new Array();
-    for( i = 0; i < linearRepresentation.length; i ++ )
-    {
-        myTimToSliderTransformer[ 15 ][ i ] = 1;
-    }
-    
+    appendUnitRow( myTimToSliderTransformer );
     var mySliderToTimTransformer = transposeMatrix( myTimToSliderTransformer );
 
 //    var mustBeIdentity = productOfMatricies( mySliderToTimTransformer, myTimToSliderTransformer );
-//    document.write( "<pre>this must be a unit matrix:\n" + listObject( mustBeIdentity ) + "</pre>" );
+//    appendMatrix( document.body, mustBeIdentity );
 
     return mySliderToTimTransformer;
+}
+function appendUnitRow( givenMatrix )
+{
+    var origRows = givenMatrix.length;
+    var origCols = givenMatrix[ 0 ].length;
+    if( ! origCols ) 
+    {
+        alert( "appendUnitRow failed: the input " + listObject( givenMatrix ) + " does not seem to be a matrix" );
+        return givenMatrix;
+    }
+    givenMatrix[ origRows ] = new Array();
+    for( var i = 0; i < origCols; i ++ )
+    {
+        givenMatrix[ origRows ][ i ] = 1;
+    } 
+    return givenMatrix;
 }
 function getReininMatrix()
 {

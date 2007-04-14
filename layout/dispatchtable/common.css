@@ -1,0 +1,29 @@
+.dispatch-container
+{
+    margin: 15px;
+}
+.dispatch-table
+{
+    border-width: 0 0 0 0;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    white-space: no-wrap;
+}
+.dispatch-cell
+{
+    text-align: right;
+    padding: 5px;
+    white-space: nowrap;
+    text-wrap: none;
+    word-wrap: none;
+}
+.dispatch-container
+{
+    width 10%;
+}
+.vertex-container
+{
+    position: relative;
+    left: 8px;
+}

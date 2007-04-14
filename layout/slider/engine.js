@@ -1,14 +1,6 @@
-addAnEvent( document, "mousemove", function( givenEvent )
-    {
-        var mySliderDiv = firstConformingAncestor( getEventOriginator( givenEvent ), isSliderDiv );
-        if ( ! ( mySliderDiv && mySliderDiv.onchange ) ) return false;  
-        mySliderDiv.onchange( givenEvent );
-        return true;
-    } );
-    
-function isSliderDiv( givenElement )
+function lookupPathSliderKnob()
 {
-    return ( givenElement && givenElement.className && givenElement.className == "slider-container" );
+    return "../layout/slider/images/knob.png";
 }
 function Slider( givenMin, givenMax, givenInitialValue, givenNotifierFunction )
 {
@@ -34,6 +26,8 @@ function Slider( givenMin, givenMax, givenInitialValue, givenNotifierFunction )
     this.activate = function() 
         { 
             active = true; 
+            addAnEvent( document, "mousemove", container.onchange );
+            addAnEvent( document, "mouseup", this.deactivate );
         };
     this.deactivate = function( givenEvent ) 
         { 
@@ -82,6 +76,6 @@ function appendSlider( givenParent, givenSliderObject )
                 update( givenEvent ); 
             } );      
         addAnEvent( mySliderDiv, "mouseup",  deactivate );
-        addAnEvent( mySliderDiv, "mouseout", deactivate );     
+        //addAnEvent( mySliderDiv, "mouseout", deactivate );     
     } 
 }

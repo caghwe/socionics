@@ -8,28 +8,38 @@
             Вероятностное типирование с помощью признаков Рейнина
         </title>
 
-        <link rel="stylesheet" type="text/css" href="../styles/common.css" />
-        <link rel="stylesheet" type="text/css" href="../styles/footnotes.css" />
-        <link rel="stylesheet" type="text/css" href="../styles/slider.css">
+        <link rel="stylesheet" type="text/css" href="../layout/common/styles.css" />
+        <script type="text/javascript" src="../layout/common/dom.js"></script>
+        <script type="text/javascript" src="../layout/common/events.js"></script>
+        <script type="text/javascript" src="../layout/common/matrixalg.js"></script>
+        <script type="text/javascript" src="../layout/common/utilities.js"></script>
+        <script type="text/javascript" src="../layout/common/clickonpageload.js"></script>
 
-        <script type="text/javascript" src="../scripts/filesystem.js"></script>
+        <link rel="stylesheet" type="text/css" href="../layout/dispatchtable/common.css" />
+        <link rel="stylesheet" type="text/css" href="../layout/dispatchtable/matrix.css" />
+        <script type="text/javascript" src="../layout/dispatchtable/engine.js"></script>
 
-        <script type="text/javascript" src="../scripts/dom.js"></script>
-        <script type="text/javascript" src="../scripts/utilities.js"></script>
-        <script type="text/javascript" src="../scripts/events.js"></script>
 
-        <script type="text/javascript" src="../scripts/footnotes.js"></script>
-        <script type="text/javascript" src="../scripts/timestamp.js"></script>
-        <script type="text/javascript" src="../scripts/slider.js"></script>
-        <script type="text/javascript" src="../scripts/clickonpageload.js"></script>
+        <link rel="stylesheet" type="text/css" href="../layout/footnotes/style.css" />
+        <script type="text/javascript" src="../layout/footnotes/engine.js"></script>
 
-        <script type="text/javascript" src="../scripts/data.js"></script>
-        <script type="text/javascript" src="../scripts/extractors.js"></script>
-        <script type="text/javascript" src="../scripts/constructors.js"></script>
-        <script type="text/javascript" src="../scripts/cube.js"></script>
-        <script type="text/javascript" src="../scripts/matrix.js"></script>
-        <script type="text/javascript" src="../scripts/reinin-engine.js"></script>
-        <script type="text/javascript" src="../scripts/reinin.js"></script>
+        <link rel="stylesheet" type="text/css" href="../layout/slider/style.css">
+        <script type="text/javascript" src="../layout/slider/engine.js"></script>
+
+        <script type="text/javascript" src="../layout/timestamp/engine.js"></script>
+
+
+        <script type="text/javascript" src="../layout/socionics/common/data.js"></script>
+        <script type="text/javascript" src="../layout/socionics/common/extractors.js"></script>
+        <script type="text/javascript" src="../layout/socionics/common/constructors.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../layout/socionics/aspects/style.css">
+        <script type="text/javascript" src="../layout/socionics/aspects/cube.js"></script>
+        <script type="text/javascript" src="../layout/socionics/aspects/engine.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../layout/socionics/reinin/style.css">
+        <script type="text/javascript" src="../layout/socionics/reinin/calculator.js"></script>
+        <script type="text/javascript" src="../layout/socionics/reinin/engine.js"></script>
 
     </head>
     <body>
@@ -47,7 +57,7 @@
 <p>
 Опубликовано
 <span class="footnote">
-    <span class="footnote-caption">2007-4-??</span>
+    <span class="footnote-caption">2007-04-15</span>
         <span class="footnote-body">
             Последняя редакция:
             <span
@@ -62,12 +72,513 @@
 
 <hr class="section-separator" />
 
-<div class="display-interactive">
+<p>
+    Соционическое типирование основано на использовании четырёх
+
+<span class="footnote">
+    <span class="footnote-caption">дихотомий:</span>
+    <span class="footnote-body">
+        Использованный далее порядок дихотомий соответствует написанию,
+                принятому в типировании по методике Майерс-Бриггс.
+    </span>
+</span>
+
+        экстраверсия &#8212; интроверсия,
+        сенсорика &#8212; интуиция,
+        этика &#8212; логика,
+        рациональность &#8212; иррациональность.
+    Каждая из этих дихотомий независимо делит множество всех людей на две группы.
+        Таким образом, в соционике рассматриваются 16 типов.
+        Эти четыре дихотомии будут называться в дальнейшем дихотомиями Юнга.
+        Множество из четырёх элементов, соответствующих дихотомиям Юнга,
+            будет обозначаться <i>J</i>.
+</p>
+
+<p>
+    Основная трудность в определении типа с помощью дихотомий Юнга
+        заключается в том, что для многих тестируемых затруднительно выбрать одну из альтернатив,
+            предлагаемых той или иной дихотомией.
+    Мы не касаемся здесь природы этого
+
+<span class="footnote">
+    <span class="footnote-caption">явления.</span>
+    <span class="footnote-body">
+        Анализ статистических данных,
+            собранных в процессе типирования по сходной методике Майерс-Бриггс,
+                показал что распределение ответов соответствует нормальному, а не бимодальному.
+        Поэтому одно из возможных объяснений трудности дихотомического типирования
+            &#8212; неверность самого фундаментального постулата
+                    о дихотомичности вышеназванных четырёх характеристик.
+        Возможно и альтернативное объяснение этой трудности.
+        А именно, можно предположить, что у некоторых людей
+            та или иная характеристика (даже будучи объективно представленной в психике)
+                "провалена" и не проявлена в наблюдаемом виде.
+    </span>
+</span>
+
+
+    Одно из возможных решений этой проблемы было предложено Григорием Рейниным.
+    Его идея заключалась в рассмотрении других дихотомий, в дополнение к четырём дихотомиям Юнга.
+    Рейнин дал формальное математическое определение 11-ти дихотомий,
+        которые вместе с дихотомиями Юнга и называются "признаками Рейнина".
+    Позднее было описано наполнение этих признаков, т.е. их соответствие
+        наблюдаемым психологическим характеристикам.
+</p>
+
+<p>При использовании признаков Рейнина в типировании,
+    испытуемый даёт пятнадцать взаимозависимых ответов.
+        Достигаемая за счёт этого избыточность информации повышает (по сравнению с типированием лишь по дихотомиям Юнга)
+            шанс выделения "полезного сигнала".
+    Фактически, эта идея является применением к соционическому типированию теории
+        кодов, исправляющих ошибки.</p>
+
+<h3>Признаки Рейнина</h3>
+
+<p>Множество функций с областью определения <i>X</i> и областью значений <i>Y</i>
+        будет обозначаться <i>F( X, Y )</i>.
+    При этом предполагается, что  <i>X</i> и <i>Y</i> &#8212;
+        произвольные множества.
+    Если множество <i>Y</i> имеет структуру линейного пространства,
+        то и множество функций <i>F( X, Y )</i>
+            также имеет структуру линейного пространства.
+    Для элементов <i>F( X, Y )</i>,
+        операции векторного сложения и произведения на число определяются поточечно.
+    Например, если <i>f</i> и <i>g</i> &#8212;
+            две функции из <i>F( X, Y )</i>,
+    то их сумма в смысле линейного пространства <i>F( X, Y )</i> определяется как
+                        функция, принимающая в точке <i>x</i> значение
+                            <i>f( x ) + g( x )</i>.
+</p>
+
+<p>С формальной точки зрения, множество ТИМов  <i>T</i> &#8212; это множество
+    функций с областью определения <i>J</i>
+        и областью значений <i>Z/2Z</i> (где <i>Z/2Z</i> &#8212; группа вычетов по модулю два):</p>
+
+    <center><br /><br />
+        <i>T = F( J, Z/2Z )</i>.
+        <br /><br /><br />
+    </center>
+
+<p>Если фиксировать порядок дихотомий,
+    то каждую функцию на множестве <i>J</i>
+        можно записать в виде строки её значений.
+    Например, при использовании порядка указанного выше, ТИМ 'Есенин'
+        будет соответствовать функции <i>f = ( 1, 1, 0, 1 )</i>,
+        что означает: экстраверсия (0) &#8212; <u>интроверсия (1)</u>,
+        сенсорика (0) &#8212; <u>интуиция (1)</u>,
+        <u>этика (0)</u> &#8212; логика (1);
+        рациональность (0) &#8212; <u>иррациональность (1)</u>.
+<p>
+Поскольку <i>Z/2Z</i> является полем (а, значит, тем более &#8212; линейным пространством),
+        то множество ТИМов <i>T</i> и само имеет структуру
+            четырёхмерного линейного пространства над полем <i>Z/2Z</i>.
+</p>
+
+<p>Множество всех возможных соционических признаков <i>A</i> &#8212; это множество
+        всех возможных функций с
+            областью определения <i>T</i>
+            и областью значений <i>Z/2Z</i>:</p>
+
+        <center>
+        <i>A = F( T, Z/2Z ) = F( F( J, Z/2Z ), Z/2Z )</i>.
+        </center>
+
+<p>
+    С содержательной точки зрения, представленный функцией <i>h</i> признак выполняется для тех ТИМов,
+        на которых функция <i>h</i> принимает значение 1, и не выполняется для остальных (т.е. для ТИМов,
+            на которых <i>h</i> принимает значение 0).
+    Множество всех признаков <i>А</i> имеет структуру
+            шестнадцатимерного линейного пространства над полем <i>Z/2Z</i>.
+</p>
+
+<p>
+    Имеется каноническое вложение множества дихотомий Юнга <i>J</i> во множество всех
+        соционических признаков.
+    А именно, допустим что <i>x</i> &#8212; одна из четырёх дихотомий Юнга.
+    Тогда дихотомии <i>x</i> соответствует функция на множестве ТИМов,
+        принимающая на ТИМе <i>f</i> значение <i>f( x )</i>.
+    Признаки Рейнина  &#8212; это линейная оболочка
+        образа канонического вложения <i>J</i> в <i>A</i>.
+    </p>
+
+<p>Образ <i>J</i> при каноническом вложении в <i>A</i>
+    образует линейно независимую систему векторов. Поэтому признаки Рейнина &#8212;
+        это четырёхмерное подпространство в шестнадцатимерном линейном пространстве <i>A</i>.
+    Следовательно, всего признаков Рейнина шестнадцать.
+    (Мы также считаем и нулевой признак Рейнина.
+        Поскольку его использование в типировании лишено смысла,
+            обычно говорят о пятнадцати признаках Рейнина.)
+    Множество всех признаков Рейнина изоморфно <i>(Z/2Z)<sup>4</sup></i> &#8212; и как множество,
+        и как группа, и как линейное пространство над полем <i>Z/2Z</i>.
+
+Отождествляя дихотомии Юнга <i>J</i> с их образом при каноническом вложении в <i>A</i>,
+    а признаки Рейнина &#8212; с <i>(Z/2Z)<sup>4</sup></i>,
+        можно написать цепочку строгих вложений:</p>
+
+<center>
+
+        <i>
+            J
+            <font face="Symbol">&Igrave;</font>
+            (Z/2Z )<sup>4</sup>
+            <font face="Symbol">&Igrave;</font>
+            A
+        </i>,
+
+</center>
+
+<p>т.е. признаки Рейнина включают в себя все дихотомии Юнга (в качестве генераторов)
+    и сами входят в список всех возможных соционических признаков.</p>
+
+<h3>Вероятностное типирование</h3>
+
+<p>Займёмся теперь калькулятором Рейнина. В этом разделе мы рассмотрим допущения и посылки,
+    лежащие в основе его конструкции. Мы будем подходить к этому вопросу
+    с вероятностной точки зрения.
+</p>
+
+<p>
+    Наша <b>первая посылка</b> состоит в том, что соционический ТИМ объективно существует.
+    Поэтому соответствующий тестированию статистический эксперимент состоит в следующем.
+    Произвольно выбранный человек произвольного соционического ТИМа
+            отмечает тем или иным способом свою субъективную уверенность в выраженности у него
+                того или иного признака Рейнина.
+
+    Исходами (т.е. элементарными событиями) этого эксперимента являются наборы вида
+
+        <i>(t, s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub>)</i>,
+
+    где <i>t</i> &#8212; это ТИМ тестируемого,
+        а <i>s<sub>i</sub></i>
+            (для всех <i>i</i>, таких что
+                <i>1 <FONT FACE="Symbol">&#163;</FONT>  i  <FONT FACE="Symbol">&#163;</FONT> 15</i>)
+                    это вещественное число в интервале <i>[ -1, 1 ]</i>, выражающее
+                        степень уверенности тестируемого в выраженности у него <i>i</i>-го признака Рейнина.
+
+
+    Таким образом, наше вероятностное пространство состоит из шестнадцати
+        пятнадцатимерных кубов. Обозначим это вероятностное пространство <i>R</i>.</p>
+
+<p>Задача калькулятора Рейнина состоит в нахождении распределения вероятности на
+    множестве <i>T</i> всех соционических ТИМов.
+    В решении этой задачи мы будем исходить из некоторого
+        априорного распределения вероятности <i>P</i> на пространстве <i>R</i>.
+    Существование такого распределения вероятности &#8212; наша <b>вторая посылка</b>.
+    Более того, мы будем предполагать, что это распределение вероятности непрерывно
+        и описывается некоторой функцией плотности
+
+            <i>g( t, s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> )</i>.</p>
+
+<p>
+    Для каждого данного набора результатов прохождения теста
+        <i>(s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub>)</i>,
+            калькулятор Рейнина должен рассчитать условную вероятность
+
+            <i>P( t<sub>*</sub> | s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> )</i>.
+
+Эта вероятность даётся формулой Байеса:</p>
+
+<i>
+
+<table cellPadding="2" align="center">   <!-- fraction -->
+    <tr>
+        <td rowspan="2" valign="middle">
+            P( t<sub>*</sub> | s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> ) =
+        </td>
+        <td style="border-bottom: solid black 1px; padding: .5em">
+            g( t<sub>*</sub>, s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> )
+        </td>
+    </tr>
+    <tr>
+        <td align="middle">
+            k( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> )
+        </td>
+    </tr>
+</table>
+
+</i>
+
+<p>где</p>
+    <ul>
+        <li>
+        <i>P( t<sub>*</sub> | s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> )</i>
+        &#8212; вероятность того, что испытуемый имеет ТИМ <i>t<sub>*</sub></i> при условии
+            выбора им степеней выраженности признаков Рейнина
+                <i> s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub></i>
+        </li>
+        <li>
+            <i>g( t<sub>*</sub>, s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> )</i>
+        &#8212; плотность совместного распределения случайных величин
+                <i>t<sub>*</sub>, s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub></i>
+        </li>
+        <li>
+        <i>k( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> )</i>
+            &#8212; маргинальное распределение случайных величин
+                <i>s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub></i>
+        </li>
+    </ul>
+
+
+<p>В свою очередь, </p>
+
+<center>
+<i>
+    g( t<sub>*</sub>, s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> )
+    =
+    q( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> | t<sub>*</sub> ) &#183; P( t<sub>*</sub> )
+</i>
+</center>
+
+<p>где</p>
+    <ul>
+        <li>
+            <i>q( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> | t<sub>*</sub> )</i>
+            &#8212; плотность распределения вероятности того,
+            что испытуемый имеющий ТИМ <i>t<sub>*</sub></i>
+                выберет степени выраженности признаков Рейнина
+                <i> s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub></i>
+        </li>
+        <li>
+            <i>P( t<sub>*</sub> )</i>
+                &#8212; вероятность ТИМа <i>t<sub>*</sub></i>, т.е. частота ТИМа <i>t<sub>*</sub></i> в популяции
+        </li>
+    </ul>
+
+<p>С помощью формулы полной вероятности, маргинальное распределение
+        <i>k( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> )</i>
+            может быть (также как и плотность <i>g</i>) выражено через функцию
+            <i>q( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> | t )</i>
+                :</p>
+
+<center>
+                <table>
+                    <tr>
+                        <td valign="middle">
+                            k( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> ) =
+                        </td>
+                        <td align="center" valign="top">
+                            <b style="font-size: 130%"><FONT FACE="Symbol">&#229;</FONT></b>
+                        </td>
+                        <td valign="middle">
+                            <i>q( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> | t ) &#183; P( t )</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="center" valign="middle">
+                            <i>t <FONT FACE="Symbol">&#206;</FONT> T</i>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+</center>
+
+<p>Здесь суммирование происходит по всем возможным ТИМам, поэтому сумма содержит всего 16 членов.</p>
+
+<p>Соединяя воедино все полученные формулы, получаем следующее выражение:</p>
+
+<i>
+
+<table cellPadding="2" align="center">   <!-- fraction -->
+    <tr>
+        <td></td>
+        <td align="center">
+            q( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> | t<sub>*</sub> ) &#183; P( t<sub>*</sub> )
+        </td>
+    </tr>
+    <tr>
+        <td align="right" valign="middle">
+            P( t<sub>*</sub> | s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> ) =
+        </td>
+        <td style="position: relative; top: -.5em;">
+            _________________________________
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="center">
+            <table>
+                <tr height="50%">
+                        <td align="center" valign="top">
+                            <b style="font-size: 130%"><FONT FACE="Symbol">&#229;</FONT></b>
+                        </td>
+                        <td valign="middle">
+                            <i>q( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> | t ) &#183; P( t )</i>
+                        </td>
+                </tr>
+                    <tr>
+                        <td align="center" valign="middle">
+                            <i>t <FONT FACE="Symbol">&#206;</FONT> T</i>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+        </td>
+    </tr>
+</table>
+
+</i>
+
+
+<p>В качестве <b>третьей посылки</b> примем что все ТИМы равновероятны: <i>P( t ) = 1/16</i>.
+    Тогда получаем формулу:</p>
+
+<i>
+
+<table cellPadding="2" align="center">   <!-- fraction -->
+    <tr>
+        <td></td>
+        <td align="center">
+            q( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> | t<sub>*</sub> )
+        </td>
+    </tr>
+    <tr>
+        <td align="right" valign="middle">
+            P( t<sub>*</sub> | s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> ) =
+        </td>
+        <td style="position: relative; top: -.5em;">
+            ___________________________
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="center">
+            <table>
+                <tr height="50%">
+                        <td align="center" valign="top">
+                            <b style="font-size: 130%"><FONT FACE="Symbol">&#229;</FONT></b>
+                        </td>
+                        <td valign="middle">
+                            <i>q( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> | t )</i>
+                        </td>
+                </tr>
+                    <tr>
+                        <td align="center" valign="middle">
+                            <i>t <FONT FACE="Symbol">&#206;</FONT> T</i>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+        </td>
+    </tr>
+</table>
+
+</i>
+
+<p>Осталось разобраться с  <i>q( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> | t<sub>*</sub> )</i>
+            &#8212; плотностью распределения вероятности того,
+            что испытуемый имеющий ТИМ <i>t<sub>*</sub></i>
+                выберет степени выраженности признаков Рейнина
+                <i> s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub></i>.
+Эти плотности распределения однозначно определяют распределение вероятности на всём пространтстве <i>R</i>
+    (при известной частоте ТИМов в популяции или в предположении об их равновероятности).
+</p>
+
+<p>В качестве <b>четвёртой посылки</b>, примем что выборы значений дихотомий
+    <i> s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub></i>
+        независимы друг от друга. Тогда</p>
+
+<center>
+    <i>
+    q( s<sub>1</sub>, s<sub>2</sub>, ... , s<sub>15</sub> | t<sub>*</sub> )
+    =
+    r<sub>1,t<sub>*</sub></sub>( s<sub>1</sub> )
+    &#183; ... &#183;
+    r<sub>15,t<sub>*</sub></sub>( s<sub>15</sub> )
+    </i>
+</center>
+
+<p>Здесь <i>r<sub>i,t<sub>*</sub></sub>( s<sub>i</sub> )</i> &#8212; маргинальное распределение вероятности
+    того, что испытуемый имеющий ТИМ <i>t<sub>*</sub></i> выберет значение
+        <i>s<sub>i</sub></i>
+            при рассмотрении <i>i</i>-го признака Рейнина.</p>
+
+
+<p>Наконец, в качестве <b>пятой посылки</b>, примем что плотность маргинального
+    распределения вероятности <i>r<sub>i,t<sub>*</sub></sub>( s<sub>i</sub> )</i>
+        описывается формулой:</p>
+
+<i>
+<table align="center">   <!-- result = numerator/denominator -->
+    <tr>
+        <td></td>
+        <td align="center">1</td>
+        <td></td>
+        <td align="center">1</td>
+    </tr>
+    <tr>
+        <td align="right" valign="middle"> <!-- the result of the formula -->
+            r<sub>i,t<sub>*</sub></sub>( s ) =
+        </td>
+        <td style="position: relative; top: -.6em;">
+            ___
+        </td>
+        <td align="center">    <!-- the numerator of the formula -->
+            <FONT FACE="Symbol">s</FONT><sub>i,t<sub>*</sub></sub> &#183; s  +
+        </td>
+        <td style="position: relative; top: -.6em;">
+            ___
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="center">3</td>
+        <td></td>
+        <td align="center">2</td>
+    </tr>
+</table>
+</i>
+
+<p>Здесь коэффициент <i><FONT FACE="Symbol">s</FONT><sub>i,t<sub>*</sub></sub></i>
+    равен <i>-1</i> или <i>1</i> в зависимости от того, какая из двух альтернатив
+        <i>i</i>-го признака Рейнина проявляется у ТИМа <i>t</i>.
+        Все эти коэффициенты образуют матрицу, называемую матрицей Рейнина.
+    Строки этой матрицы соответствуют признакам Рейнина (и их 15), а столбцы &#8212; ТИМам (и их 16).
+        Вот эта матрица:</p>
+
+<center>
     <span
         class="clicked-onpageload"
         onclick="appendMatrix( this, getReininMatrix() );">
     </span>
-</div>
+</center>
+
+<p>Калькулятор Рейнина, основанный на этих посылках, доступен
+    <a href="reinin-calculator.html">здесь</a>.</p>
+
+<!--
+
+<pre>
+McCrae, R R; Costa, P T (1989)
+Reinterpreting the Myers-Briggs Type Indicator From the Perspective of the Five-Factor Model of Personality.
+Journal of Personality, 57(1):17-40.
+
+Stricker, L J; Ross, J (1964)
+An Assessment of Some Structural Properties of the Jungian Personality Typology.
+Journal of Abnormal and Social Psychology, 68(1):62-71.
+
+
+Bess, T.L. & Harvey, R.J. (2001, April).
+Bimodal score distributions and the MBTI: Fact or artifact?
+Paper presented at the Annual Conference of the Society for Industrial and Organizational Psychology, San Diego.
+
+Matthews, P (2004)
+The MBTI is a flawed measure of personality. bmj.com Rapid Responses. But see also Clack & Allen's response to Matthews.
+</pre>
+
+
+
+
+
+    <span
+        class="clicked-onpageload"
+        onclick="appendMatrixProduct( this, linearRepresentation[ 3 ].matrix, linearRepresentation[ 5 ].matrix );">
+    </span>
+
+-->
+
+
+
 
 
 <div id="footnotes-endnotes-container"></div>

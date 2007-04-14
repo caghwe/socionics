@@ -1,0 +1,22 @@
+.psychic-functions-table
+{
+    border-collapse: collapse;
+}
+.psychic-functions-header-name, .psychic-functions-header-dim, .psychic-functions-header-aspect
+{
+    text-align: left;
+    font-weight: bold;
+    border: solid black .1em;
+    padding: .3em;
+}
+.psychic-function-name, .psychic-function-dimension, .psychic-function-aspect
+{
+    text-align: left;
+    border: solid black .1em;
+    padding: 5px;
+}
+.vertex-container
+{
+    position: relative;
+    top: .2em;
+}

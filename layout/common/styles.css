@@ -1,0 +1,48 @@
+body
+{
+    font-family : verdana, arial, helvetica, sans-serif;
+    font-size: 80%;
+    font-variant : normal;
+}  
+p
+{
+    text-align: justify;
+}          
+li
+{   
+    padding-bottom: 1em;
+}
+.term-firstuse
+{
+    font-family: Times New Roman;
+    font-style: italic;
+    font-size: 115%;
+}
+.like-select
+{
+    border-top: 2px inset;
+    border-bottom: 2px inset;
+    border-left:  2px inset;
+    border-right: 2px inset;
+}
+.section-separator
+{
+    color: #009;
+    height: .2em;
+    border: .2em solid #009;
+    clear: both;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 100%;
+}
+.display-interactive
+{
+    border: .3em outset;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    padding: 1em;
+}
+
+
+
+
