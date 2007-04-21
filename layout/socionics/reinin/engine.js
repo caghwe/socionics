@@ -25,6 +25,9 @@ function sliderDensity( givenDichotomyId, givenTimId, givenValue )
     var myDichotomy = reininDichotomies[ givenDichotomyId ];
     var myReininCoef = myDichotomy.tim[ givenTimId ];
     
+    // так можно уменьшить относительный вклад 0-й дихотомии:
+    // if( givenDichotomyId == 0 ) return ( ( 1 / 10 )* myReininCoef * givenValue + ( 1 / 2 ) ); 
+    
     return ( ( 1 / 3 )* myReininCoef * givenValue + ( 1 / 2 ) );
 }
 function makeReininEngine()

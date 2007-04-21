@@ -45,7 +45,11 @@ function makeReinin( givenParent, givenTimId )
                  
     makeDichotomyTable( mySlidersContainer, myResultsKeeper );
     var mySorting = makeTimTable( myTimsContainer, myResultsKeeper );
-    makeButton( myHeaderContainer, "Упорядочить ТИМы по убыванию вероятностей", mySorting ); 
+    makeButton( myHeaderContainer, "Упорядочить ТИМы по убыванию вероятностей", function ()
+        {           
+            myResultsKeeper.result();
+            mySorting();
+        } ); 
 
     myResultsKeeper.result();
     
@@ -93,21 +97,7 @@ function makeTimTable( givenParent, givenResultsKeeper )
         var myTimResult = makeChildElement( myRow, "td", "tim-result" );
         givenResultsKeeper.bindOutput( myTimId, myTimResult );
     }
-    function readNumber( givenRow )
-    {
-                
-        var myCell = first_child_with_className( givenRow, "tim-result" );
-        var myText = ( document.all? myCell.innerText : myCell.textContent );
-        myText.match( /^(\d*)%$/ );
-        return parseFloat( RegExp.$1 );
-    }
-    function sortByProbability( rowA, rowB )
-    {
-        var a = readNumber( rowA );
-        var b = readNumber( rowB );
 
-        return ( (a < b) ? 1 : ((a > b) ? -1 : 0));
-    }
     return function ()
     {
         var mySortedRows = load_collection_to_array( myBody.childNodes ).sort( sortByProbability ); 
@@ -126,6 +116,21 @@ function load_collection_to_array( givenCollection )
         newArray[ i ] = givenCollection.item( i );
     }
     return newArray;
+}
+function readNumber( givenRow )
+{
+            
+    var myCell = first_child_with_className( givenRow, "tim-result" );
+    var myText = ( document.all? myCell.innerText : myCell.textContent );
+    myText.match( /^(\d*)%$/ );
+    return parseFloat( RegExp.$1 );
+}
+function sortByProbability( rowA, rowB )
+{
+    var a = readNumber( rowA );
+    var b = readNumber( rowB );
+
+    return ( (a < b) ? 1 : ((a > b) ? -1 : 0));
 }
 function createSingleSliderResync( givenResultsKeeper, givenDichotomyId, givenLeft, givenRight )
 {

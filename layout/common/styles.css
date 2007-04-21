@@ -18,6 +18,20 @@ li
     font-style: italic;
     font-size: 115%;
 }
+.term-definition
+{
+    font-family: Times New Roman;
+    font-style: italic;
+    font-size: 115%;
+    color: red;
+}
+b.term-definition
+{
+    font-family: arial;
+    font-style: normal;
+    font-size: 100%;
+    color: red;
+}
 .like-select
 {
     border-top: 2px inset;
