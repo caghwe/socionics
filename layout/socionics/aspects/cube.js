@@ -1,12 +1,13 @@
 function appendCubeSelector( givenParent, givenInitialSelection )
-{   
+{
+    removeAllChildren( givenParent );
     function timCubeOptionMaker()
     {
         this.range = linearRepresentation.length;
         this.caption = function ( givenTimId ) { return timFullNameById( givenTimId ) };
     }
     var timOptions = new timCubeOptionMaker();
-    var mySelector = makeSelectorNEW( givenParent, timOptions );
+    var mySelector = makeSelector( givenParent, timOptions );
 
     var myTable = makeChildElement( givenParent, "table", "container-table" );
     var myTBody = makeChildElement( myTable, "tbody", "container-tbody" );
@@ -17,21 +18,17 @@ function appendCubeSelector( givenParent, givenInitialSelection )
 
     function makeTimCubeSelection( givenTimId )
     {
-        removeAllChildren( myCube );
         appendCube( myCube, givenTimId );
-        
-        removeAllChildren( myAspects );
         appendPsychicFunctions( myAspects, givenTimId );
-        
         mySelector.selectedIndex = givenTimId;
     }
-    mySelector.onchange = function () 
-    { 
-        makeTimCubeSelection( mySelector.selectedIndex ); 
+    mySelector.onchange = function ()
+    {
+        makeTimCubeSelection( mySelector.selectedIndex );
     };
     makeTimCubeSelection( givenInitialSelection );
 }
-function makeSelectorNEW( givenParent, givenOptions  )
+function makeSelector( givenParent, givenOptions  )
 {
     var myForm      = makeChildElement( givenParent, "form", "selector-form" );
     var mySelect    = makeChildElement( myForm, "select", "selector-select" );
@@ -45,24 +42,25 @@ function makeSelectorNEW( givenParent, givenOptions  )
 }
 function appendCube( givenParent, givenTimId )
 {
+    removeAllChildren( givenParent );
     function fillAspect( givenFunctionNumber )
         {
             return function( aParent )
-                {   
+                {
                     var myContainer = makeChildElement( aParent, "span", "vertex-container" );
-                    
+
                     var myImage = makeChildElement( myContainer, "img", "aspect-image" );
-                    myImage.src = lookupPathAspectIcon( getAspectIconName( givenTimId, givenFunctionNumber ) );  
+                    myImage.src = lookupPathAspectIcon( getAspectIconName( givenTimId, givenFunctionNumber ) );
 
                     var mySub = makeChildElement( myContainer, "sub", "aspect-index" );
                     mySub.appendChild( document.createTextNode(  givenFunctionNumber + 1 ) );
                 };
         };
     var myDispatchTable =
-        [ 
+        [
             // xyz-coordinates, x is horizontal, z iz vertical, y is going away
             // vert( x, y ), horiz( y, z ), diag( x, z )
-            
+
             [ blankCell,        blankCell,      fillAspect(5),  horiz( 1, 1 ),  horiz( 1, 1 ),  horiz( 1, 1 ),  horiz( 1, 1 ),  fillAspect(4) ],
             [ blankCell,        diag( 0, 1 ),   vert( 0, 1 ),   blankCell,      blankCell,      blankCell,      diag( 1, 1 ),   vert( 1, 1 )  ],
             [ fillAspect(6),    horiz( 0, 1 ),  horiz( 0, 1 ),  horiz( 0, 1 ),  horiz( 0, 1 ),  fillAspect(7),  blankCell,      vert( 1, 1 )  ],
@@ -113,5 +111,3 @@ function horiz( y, z )
             givenParent.innerHTML = "&#8212;";
         }
 }
-             
-

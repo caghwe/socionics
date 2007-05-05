@@ -3,13 +3,13 @@ body
     font-family : verdana, arial, helvetica, sans-serif;
     font-size: 80%;
     font-variant : normal;
-}  
+}
 p
 {
     text-align: justify;
-}          
+}
 li
-{   
+{
     padding-bottom: 1em;
 }
 .term-firstuse
@@ -32,13 +32,6 @@ b.term-definition
     font-size: 100%;
     color: red;
 }
-.like-select
-{
-    border-top: 2px inset;
-    border-bottom: 2px inset;
-    border-left:  2px inset;
-    border-right: 2px inset;
-}
 .section-separator
 {
     color: #009;
@@ -56,7 +49,19 @@ b.term-definition
     margin-bottom: 1em;
     padding: 1em;
 }
-
-
-
-
+.equation-table
+{
+    text-align: center;
+}
+.equation-result-header, .equation-left-header, .equation-right-header
+{
+    vertical-align: baseline;
+    width: 30%;
+}
+.like-select
+{
+    border-top: 2px inset;
+    border-bottom: 2px inset;
+    border-left:  2px inset;
+    border-right: 2px inset;
+}

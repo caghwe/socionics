@@ -547,29 +547,12 @@
 ... и затем вычислить произведение матриц: <i><b>Y</b> x <b>X</b></i>:
 </p>
 
-
-<table>
-    <tr>
-        <td align="center" valign="center">Кем Виталий приходится Анатолию, матрица <i><b>Y</b> x <b>X</b></i>:</td>
-        <td align="center" valign="center">&nbsp;</td>
-        <td align="center" valign="center">Кем Виталий приходится Борису, матрица <i><b>Y</b></i>:</td>
-        <td align="center" valign="center">&nbsp;</td>
-        <td align="center" valign="center">Кем Борис приходится Анатолию, матрица <i><b>X</b></i>:</td>
-    </tr>
-    <tr>
-        <td align="center" valign="top" id="multYX" width="30%"></td>
-        <td align="center" valign="center">=</td>
-        <td align="center" valign="top" id="multY" width="30%"></td>
-        <td align="center" valign="center">x</td>
-        <td align="center" valign="top" id="multX" width="30%"></td>
-    </tr>
-</table>
-
-<script type="text/javascript">
-appendMultSelector( "multY", 4 );
-appendMultSelector( "multX", 7 );
-multXY();
-</script>
+<center>
+    <span
+        class="clicked-onpageload"
+        onclick="appendRelationGroupProduct( this, 2, 3 )">
+    </span>
+</center>
 
 <h4>Групповое действие</h4>
 
@@ -586,41 +569,12 @@ multXY();
 </p>
 
 
-<table>
-    <tr>
-        <td align="center" valign="center">Борис,
-            матрица
-            <br /><i><b>X</b></i>( Анатолий ):</td>
-        <td align="center" valign="center">&nbsp;</td>
-        <td align="center" valign="center">Кем Борис приходится Анатолию,
-            матрица <i><b>X</b></i>:</td>
-        <td align="center" valign="center">Анатолий:</td>
-    </tr>
-    <tr>
-        <td align="center" valign="top" id="actionYX" width="30%"></td>
-        <td align="center" valign="center">=</td>
-        <td align="center" valign="top" id="actionY" width="30%"></td>
-        <td align="center" valign="top" width="30%">
-            <table>
-                <tr>
-                    <td align="center">
-                        <span style="font-size: 450%; display: inline;">(</span>
-                    </td>
-                    <td align="center" id="actionX"></td>
-                    <td align="center">
-                        <span style="font-size: 450%; display: inline;">)</span>
-                    </td>
-                </td>
-            </table>
-    </tr>
-</table>
-
-
-<script type="text/javascript">
-appendActionRELSelector( "actionY", 4 );
-appendActionTIMSelector( "actionX", 7 );
-actionXY();
-</script>
+<center>
+    <span
+        class="clicked-onpageload"
+        onclick="appendRelationGroupAction( this, 2, 3 )">
+    </span>
+</center>
 
 <h4>Транзиты действия</h4>
 
@@ -642,38 +596,12 @@ actionXY();
         </center>
 рассмотренного выше.</p>
 
-<table>
-    <tr>
-        <td align="center" valign="center">Кем Борис приходится Анатолию, матрица
-                <br />( Борис ) x ( Анатолий )<sup>-1</sup>:</td>
-        <td align="center" valign="center">&nbsp;</td>
-        <td align="center" valign="center">Борис:</td>
-        <td align="center" valign="center">&nbsp;</td>
-        <td align="center" valign="center">Анатолий:</td>
-    </tr>
-    <tr>
-        <td align="center" valign="top" id="transitYX" width="30%"></td>
-        <td align="center" valign="center">=</td>
-        <td align="center" valign="top" id="transitY" width="30%"></td>
-        <td align="center" valign="center">x</td>
-        <td align="center" valign="top">
-            <table>
-                <tr>
-                    <td align="center" id="transitX"></td>
-                    <td align="center" valign="top">
-                        <span style="font-size: 150%; position: relative; top: 1.5em; left: -.2em;">-1</span>
-                    </td>
-                </td>
-            </table>
-        </td>
-    </tr>
-</table>
-
-<script type="text/javascript">
-appendTransitSelector( "transitY", 4 );
-appendTransitSelector( "transitX", 7 );
-transitXY();
-</script>
+<center>
+    <span
+        class="clicked-onpageload"
+        onclick="appendRelationGroupTransit( this, 2, 3 )">
+    </span>
+</center>
 
 <div id="footnotes-endnotes-container"></div>
 

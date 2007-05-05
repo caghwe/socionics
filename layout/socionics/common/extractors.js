@@ -25,6 +25,16 @@ function relationIdByTimIds( firstTimId, secondTimId )
     var transforMatrix  = productOfMatricies( secondTimMatrix, transposeMatrix( firstTimMatrix ) );
     return lookupRelationId( transforMatrix );
 }
+function lookupRelationIdByJung( givenJung )
+{
+    for( i = 0; i < linearRepresentation.length; i ++ )
+    {
+//        alert( "Jung is comparing\n" + listObject( linearRepresentation[ i ].jd ) + "\nand\n" + listObject( givenJung ) );
+        if( areEqualMatricies( linearRepresentation[ i ].jd, givenJung ) ) return i;
+    }
+    alert( "lookupRelationIdByJung FAILED on input " + listObject( givenJung ) );
+    return 1;
+}
 function lookupRelationId( givenMatrix )
 {
     for( i = 0; i < linearRepresentation.length; i ++ )

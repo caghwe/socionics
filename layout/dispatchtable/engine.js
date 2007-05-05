@@ -14,6 +14,30 @@ function appendTable( givenParent, givenDispatch )
         }
     }
 }
+function ColumnDrawingDispatch( givenMatrix )
+{
+    this.rowCount = givenMatrix.length;
+    this.columnCount = 3;
+    this.appendEntry = function ( givenParent, givenRowIndex, givenColumnIndex )
+        {
+            if( givenColumnIndex == 0 )
+            {
+                givenParent.className = ( ( givenRowIndex == 0 )? "upper-left-corner" :
+                    ( ( givenRowIndex == givenMatrix.length - 1 ) ? "lower-left-corner" : "left-border" ) );
+                givenParent.appendChild( document.createTextNode( " " ) );
+                return;
+            }
+            if( givenColumnIndex == 2 )
+            {
+                givenParent.className = ( ( givenRowIndex == 0 )? "upper-right-corner" :
+                    ( ( givenRowIndex == givenMatrix.length - 1 ) ? "lower-right-corner" : "right-border" ) );
+                givenParent.appendChild( document.createTextNode( " " ) );
+                return;
+            }
+            var myMatrixEntry = givenMatrix[ givenRowIndex ];
+            givenParent.appendChild( document.createTextNode( myMatrixEntry ) );
+        };
+}
 function MatrixDrawingDispatch( givenMatrix )
 {
     this.rowCount = givenMatrix.length;
@@ -75,5 +99,10 @@ function appendMatrix( givenParent, givenMatrix )
 function appendInverseMatrix( givenParent, givenMatrix )
 {
     var myDispatch = new MatrixInverseDrawingDispatch( givenMatrix );
+    appendTable( givenParent, myDispatch );
+}
+function appendColumn( givenParent, givenMatrix )
+{
+    var myDispatch = new ColumnDrawingDispatch( givenMatrix );
     appendTable( givenParent, myDispatch );
 }

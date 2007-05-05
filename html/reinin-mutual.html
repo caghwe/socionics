@@ -1,11 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
 <html>
+
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         <title>
-            Аспекты ТИМов
+            Калькулятор Рейнина
         </title>
 
         <link rel="stylesheet" type="text/css" href="../layout/common/styles.css" />
@@ -42,28 +44,58 @@
         <script type="text/javascript" src="../layout/socionics/reinin/engine.js"></script>
 
     </head>
+
     <body>
-</div>
+
         <center>
             <a href="./index.html">На главную</a>
         </center>
-        <hr class="section-separator" />
-        <div id="fullCubeList" style="text-align: center;">
-            <script type="text/javascript">
-                var myParent = document.getElementById ( "fullCubeList" );
-                for( var myTimId = 0; myTimId < linearRepresentation.length; myTimId ++ )
-                {
-                    var myCubeContainer = makeChildElement( myParent, "div", "cube-container" );
-                    myParent.appendChild( document.createTextNode( timFullNameById( myTimId )  + ":" ) );
-                    appendCube( myCubeContainer, myTimId );
-                    var mySeparator = document.createElement( "hr" );
-                    myParent.appendChild( mySeparator );
-                    mySeparator.className ="section-separator";
-                }
-            </script>
-        </div>
+
+            <ul>
+                <li>
+                    Используйте ползунки &#8212;
+                        для задания степени выраженности у Вас и Вашего партнёра
+                            того или иного признака Рейнина.
+                </li>
+                <li>
+                    Hажмите на кнопку ТИМа &#8212;
+                        чтобы получить признаки Рейнина этого ТИМа.
+                </li>
+                <li>
+                    Обновите страницу &#8212;
+                        для сброса информации.
+                </li>
+                <li>
+                    Нажмите на панель "Подсчитать кем Ваш партнёр является по отношению к Вам" &#8212;
+                        чтобы подсчитать вероятности отношений и упорядочить по убыванию вероятности ТИМов и отношений.
+                </li>
+            </ul>
+
+        <p style="font-size: 70%;">
+            Все вычисления производятся на Вашем компьютере и результаты теста
+                не посылаются на сервер, поэтому можно пройти тест и после отключения от интернета
+                    (но тогда не удастся обновить страницу).
+            Весь сайт можно скачать в виде архива по ссылке с <a href="./index.html">главной страницы</a>.
+            <span style="color:red;">
+                Помните, что калькулятор Рейнина
+                    сам по себе не является тестом для определения ТИМа.
+                Изучите наполнение признаков Рейнина перед использованием этого калькулятора.</span>
+        </p>
+
+            <hr class="section-separator" />
+
         <center>
+
+            <div
+                class="clicked-onpageload"
+                onclick="makeMutualReinin( this )">
+            </div>
+
+            <hr class="section-separator" />
             <a href="./index.html">На главную</a>
+
         </center>
+
     </body>
+
 </html>

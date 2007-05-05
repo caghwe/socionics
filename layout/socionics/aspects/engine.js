@@ -4,6 +4,8 @@ function lookupPathAspectIcon( givenAspect )
 }
 function appendPsychicFunctions( givenParent, givenTimId )
 {
+    removeAllChildren( givenParent );
+    
     var myTable = makeChildElement( givenParent, "table", "psychic-functions-table" );
     var myTBody = makeChildElement( myTable, "tbody", "psychic-functions-tbody" );
 

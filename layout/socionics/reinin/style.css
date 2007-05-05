@@ -5,7 +5,7 @@
 .dichotomy-row
 {
 }
-.left-output, .right-output, .tim-result
+.left-output, .right-output, .tim-result, .rel-result
 {
     text-align: right;
     padding-right: 2px;
@@ -14,7 +14,7 @@
     background-color: rgb( 250, 230, 230 );
     width: 40px;
 }
-.left-dichotomy
+.left-dichotomy, .rel-caption
 {
     text-align: right;
     font-weight: bold;
@@ -31,7 +31,16 @@
     text-align: center;
     width: 180px;
 }
-
+.header-cell
+{
+    font-weight: bold;
+    font-size: 150%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border: outset 2px;
+    background-color: rgb( 250, 230, 230 );
+}
 
 
 .tims-table
@@ -52,3 +61,5 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+rel-caption

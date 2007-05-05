@@ -1,190 +1,195 @@
-function readSelectedMatrix( givenName )
+function nickExtractor( givenRep )
 {
-    var mySelector =  document.getElementById( givenName + "Select" );
-    if( mySelector )
-    {
-        var myId = mySelector.selectedIndex;
-        var myMatrix = linearRepresentation[ myId ].matrix;
-        return myMatrix;
-    }
+    return givenRep.nick;
 }
-function makeSelector( givenOptionProcessor, givenInitialSelection )
+function relExtractor( givenRep )
 {
-    var myParent = document.getElementById( givenOptionProcessor.name );
-    var myForm      = document.createElement( "form" );
-    myForm.name = givenOptionProcessor.name + "Form";
-    myForm.id = givenOptionProcessor.name + "Form";
-    
-    var myContent   = document.createElement( "div" );
-    myContent.id = givenOptionProcessor.name + "Div";
-    
-    var mySelect    = document.createElement( "select" );
-    mySelect.name = givenOptionProcessor.name + "Select";
-    mySelect.id = givenOptionProcessor.name + "Select";
-    
-    myParent.appendChild( myForm );
-    myForm.appendChild( mySelect );
-    myForm.appendChild( myContent );
-    function makeSelection( givenOption )
-    {
-        removeAllChildren( myContent );
-        givenOptionProcessor.action( givenOption, myContent );
-        mySelect.selectedIndex = givenOption;
-    }
-    mySelect.onchange = function () { makeSelection( mySelect.selectedIndex ); };
-    for( i = 0; i < linearRepresentation.length; i ++ )
-    {
-        var myOption = document.createElement( "option" );
-        mySelect.appendChild( myOption );
-        myOption.value = i;
-        myOption.appendChild( document.createTextNode( givenOptionProcessor.caption( i ) ) );
-    }
-    makeSelection( givenInitialSelection );
+    return givenRep.rel;
 }
-function multXY()
+function appendRelationGroupProduct( givenParent, givenInitialLeft, givenInitialRight )
 {
-    var myMatrixX = readSelectedMatrix( "multX" );
-    var myMatrixY = readSelectedMatrix( "multY" );
-
-    if( myMatrixX && myMatrixX )
-    {
-        var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, myMatrixX ) );
-
-        var myParent = document.getElementById( "multYX" );
-        myDiv = document.createElement( "div" );
-        appendOnlyChild( myParent, myDiv );
-        myDiv.className = "like-select";
-        myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
-        appendRelationMatrix( myParent, myRelationIdYX );
-    }
-}
-function multOptionMaker( givenName )
-{
-    this.name = givenName;
-    this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
-    this.action = function ( givenRelId, givenParent )
-        {
-            appendRelationMatrix( givenParent, givenRelId );
-            multXY();
-        }
-}
-function appendMultSelector( givenName, givenInitialSelection )
-{
-    var myMultOptionProcessor = new multOptionMaker( givenName );
-    makeSelector( myMultOptionProcessor, givenInitialSelection );
-}
-function actionXY()
-{
-    var myMatrixX = readSelectedMatrix( "actionX" );
-    var myMatrixY = readSelectedMatrix( "actionY" );
-
-    if( myMatrixX && myMatrixX )
-    {
-        var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, myMatrixX ) );
-
-        var myParent = document.getElementById( "actionYX" );
-        myDiv = document.createElement( "div" );
-        appendOnlyChild( myParent, myDiv );
-        myDiv.className = "like-select";
-        myDiv.appendChild( document.createTextNode( timNameById( myRelationIdYX ) ) );
-        appendRelationMatrix( myParent, myRelationIdYX );
-    }
-}
-function actionRELOptionMaker( givenName )
-{
-    this.name = givenName;
-    this.caption = function ( givenRelId ) { return relationNameById( givenRelId ) };
-    this.action = function ( givenRelId, givenParent )
-        {
-            appendRelationMatrix( givenParent, givenRelId );
-            actionXY();
-        }
-}
-function actionTIMOptionMaker( givenName )
-{
-    this.name = givenName;
-    this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
-    this.action = function ( givenRelId, givenParent )
-        {
-            appendRelationMatrix( givenParent, givenRelId );
-            actionXY();
-        }
-}
-function appendActionRELSelector( givenName, givenInitialSelection )
-{
-    var myRELOptionProcessor = new actionRELOptionMaker( givenName );
-    makeSelector( myRELOptionProcessor, givenInitialSelection );
-}
-function appendActionTIMSelector( givenName, givenInitialSelection )
-{
-    var myTIMOptionProcessor = new actionTIMOptionMaker( givenName );
-    makeSelector( myTIMOptionProcessor, givenInitialSelection );
-}
-function transitXY()
-{
-    var myMatrixX = readSelectedMatrix( "transitX" );
-    var myMatrixY = readSelectedMatrix( "transitY" );
-
-    if( myMatrixX && myMatrixX )
-    {
-        var myRelationIdYX = lookupRelationId( productOfMatricies( myMatrixY, transposeMatrix( myMatrixX ) ) );
-
-        var myParent = document.getElementById( "transitYX" );
-        myDiv = document.createElement( "div" );
-        appendOnlyChild( myParent, myDiv );
-        myDiv.className = "like-select";
-        myDiv.appendChild( document.createTextNode( relationNameById( myRelationIdYX ) ) );
-        appendRelationMatrix( myParent, myRelationIdYX );
-    }
-}
-function transitOptionMaker( givenName )
-{
-    this.name = givenName;
-    this.caption = function ( givenRelId ) { return timNameById( givenRelId ) };
-    this.action = function ( givenRelId, givenParent )
-        {
-            appendRelationMatrix( givenParent, givenRelId );
-            transitXY();
-        }
-}
-function appendTransitSelector( givenName, givenInitialSelection )
-{
-    var myTransitOptionProcessor = new transitOptionMaker( givenName );
-    makeSelector( myTransitOptionProcessor, givenInitialSelection );
-}
-
-     
-function appendMatrixProduct( givenParent, givenLeftMatrix, givenRightMatrix )
-{
-    var myDispatchTable =
-        [
-            [ 
-                function ( aParent ) { appendMatrix( aParent, productOfMatricies( givenLeftMatrix, givenRightMatrix ) ); },
-                function ( aParent ) { aParent.appendChild( document.createTextNode( "=" ) ); },
-                function ( aParent ) { appendMatrix( aParent, givenLeftMatrix ); },
-                function ( aParent ) { aParent.appendChild( document.createTextNode( "x" ) ); },
-                function ( aParent ) { appendInverseMatrix( aParent, givenRightMatrix ); } 
-            ]
-        ];
-    var myMatrixProductDispatch = new TabularDispatch( myDispatchTable );
-    appendTable( givenParent, myMatrixProductDispatch );
-}
-function TabularDispatch( givenDispatchTable )
-{
-    this.rowCount = givenDispatchTable.length;
-    this.columnCount = givenDispatchTable[ 0 ].length;
-    this.appendEntry = function ( givenParent, givenRowIndex, givenColumnIndex )
-        {
-            givenDispatchTable[ givenRowIndex ][ givenColumnIndex ]( givenParent );
+    var myCaption = new function() 
+        { 
+            this.result = "Кем Виталий приходится Анатолию, матрица <i><b>Y</b> x <b>X</b></i>:";
+            this.left   = "Кем Виталий приходится Борису, матрица <i><b>Y</b></i>:";
+            this.right  = "Кем Борис приходится Анатолию, матрица <i><b>X</b></i>:";
         };
-}
-function appendJung( givenParent, givenTimId )
-{
-    for( var myDichotomyId = 0; myDichotomyId < reininDichotomies.length; myDichotomyId ++ )
+    var myEquation = new TripartiteEquation( givenParent, myCaption );
+    var myLeftSelect = new SelectorObject( linearRepresentation, relExtractor, givenInitialLeft );
+    var myRightSelect = new SelectorObject( linearRepresentation, relExtractor, givenInitialRight );
+    function makeSync( givenSelectorParent, givenSelectorObject )
     {
-                        var myMessage = "ТИМ " + timFullNameById( myTimId ) + " наделён признаком Рейнина: "
-                            + resolveDichotomyName( myTimId, myDichotomyId ) + "\n";
-                        myParent.appendChild( document.createTextNode ( myMessage ) );
-                        myParent.appendChild( document.createElement( "br" ) );
+        return function ()
+            {
+                var myLeftMatrix    = linearRepresentation[ myLeftSelect.getSelection() ].matrix;
+                var myRightMatrix   = linearRepresentation[ myRightSelect.getSelection() ].matrix;
+                var myResultMatrix  = productOfMatricies( myLeftMatrix, myRightMatrix );
+        
+                removeAllChildren( myEquation.resultContainer );                
+                appendMatrix( myEquation.resultContainer, myResultMatrix );
+        
+                var myRelationId = lookupRelationId( myResultMatrix );
+                appendOnlyChild( myEquation.resultHeader, document.createTextNode( relationNameById( myRelationId ) ) );               
+
+                removeAllChildren(  givenSelectorParent );
+                var myChangedMatrix = linearRepresentation[ givenSelectorObject.getSelection() ].matrix;
+                appendMatrix( givenSelectorParent, myChangedMatrix );
+            };
     }
+    myLeftSelect.setSync( makeSync( myEquation.leftContainer, myLeftSelect ) );
+    myRightSelect.setSync( makeSync( myEquation.rightContainer, myRightSelect ) );
+   
+    myLeftSelect.append( myEquation.leftHeader );
+    myRightSelect.append( myEquation.rightHeader );
+}
+function appendRelationGroupAction( givenParent, givenInitialLeft, givenInitialRight )
+{
+    var myCaption = new function() 
+        { 
+            this.result = "Борис,<br />матрица <i><b>X</b></i>( Анатолий ):";
+            this.left   = "Кем Борис приходится Анатолию,<br />матрица <i><b>X</b></i>:";
+            this.right  = "Анатолий:";
+        };
+    var myEquation = new TripartiteEquation( givenParent, myCaption );
+    var myLeftSelect = new SelectorObject( linearRepresentation, relExtractor, givenInitialLeft );
+    var myRightSelect = new SelectorObject( linearRepresentation, nickExtractor, givenInitialRight );
+    function makeSync( givenSelectorParent, givenSelectorObject )
+    {
+        return function ()
+            {
+                var myLeftMatrix    = linearRepresentation[ myLeftSelect.getSelection() ].matrix;
+                var myRightMatrix   = linearRepresentation[ myRightSelect.getSelection() ].matrix;
+                var myResultMatrix  = productOfMatricies( myLeftMatrix, myRightMatrix );
+        
+                removeAllChildren( myEquation.resultContainer );                
+                appendMatrix( myEquation.resultContainer, myResultMatrix );
+        
+                var myRelationId = lookupRelationId( myResultMatrix );
+                appendOnlyChild( myEquation.resultHeader, document.createTextNode( timNameById( myRelationId ) ) );               
+
+                removeAllChildren(  givenSelectorParent );
+                var myChangedMatrix = linearRepresentation[ givenSelectorObject.getSelection() ].matrix;
+                appendMatrix( givenSelectorParent, myChangedMatrix );
+            };
+    }        
+    myLeftSelect.setSync( makeSync( myEquation.leftContainer, myLeftSelect ) );
+    myRightSelect.setSync( makeSync( myEquation.rightContainer, myRightSelect ) );
+   
+    myLeftSelect.append( myEquation.leftHeader );
+    myRightSelect.append( myEquation.rightHeader );
+}
+function appendRelationGroupTransit( givenParent, givenInitialLeft, givenInitialRight )
+{
+    var myCaption = new function() 
+        { 
+            this.result = "Кем Борис приходится Анатолию,<br />матрица ( Борис ) x ( Анатолий )<sup>-1</sup>:";
+            this.left   = "Борис:";
+            this.right  = "Анатолий:";
+        };
+    var myEquation = new TripartiteEquation( givenParent, myCaption );
+    var myLeftSelect = new SelectorObject( linearRepresentation, nickExtractor, givenInitialLeft );
+    var myRightSelect = new SelectorObject( linearRepresentation, nickExtractor, givenInitialRight );
+    function commonSync( givenSelectorParent, givenSelectorObject )
+    {
+        var myLeftMatrix    =  linearRepresentation[ myLeftSelect.getSelection() ].matrix;
+        var myRightMatrix   = linearRepresentation[ myRightSelect.getSelection() ].matrix;
+        var myResultMatrix  = productOfMatricies( myLeftMatrix, transposeMatrix( myRightMatrix ) );
+        
+        removeAllChildren( myEquation.resultContainer );                
+        appendMatrix( myEquation.resultContainer, myResultMatrix );
+        
+        var myRelationId = lookupRelationId( myResultMatrix );
+        appendOnlyChild( myEquation.resultHeader, document.createTextNode( relationNameById( myRelationId ) ) );               
+
+        removeAllChildren(  givenSelectorParent );
+    }        
+    function makeLeftSync( givenSelectorParent, givenSelectorObject ) 
+    {
+        return function ()
+            {   
+                commonSync( givenSelectorParent, givenSelectorObject );
+                var myChangedMatrix = linearRepresentation[ givenSelectorObject.getSelection() ].matrix;
+                appendMatrix( givenSelectorParent, myChangedMatrix );
+            };
+    }
+    function makeRightSync( givenSelectorParent, givenSelectorObject ) 
+    {
+        return function ()
+            {
+                commonSync( givenSelectorParent, givenSelectorObject );
+                var myChangedMatrix = linearRepresentation[ givenSelectorObject.getSelection() ].matrix;
+                appendInverseMatrix( givenSelectorParent, myChangedMatrix );
+            };
+    }   
+    myLeftSelect.setSync( makeLeftSync( myEquation.leftContainer, myLeftSelect ) );
+    myRightSelect.setSync( makeRightSync( myEquation.rightContainer, myRightSelect ) );
+   
+    myLeftSelect.append( myEquation.leftHeader );
+    myRightSelect.append( myEquation.rightHeader );
+}
+function TripartiteEquation( givenParent, givenCaption )
+{    
+    var myTable = makeChildElement( givenParent, "table", "equation-table" );    
+    var myBody = makeChildElement( myTable, "tbody", "equation-body" );    
+
+    var myCaptionRow = makeChildElement( myBody, "tr", "equation-headers" );  
+    var myResultCaption = makeChildElement( myCaptionRow, "td", "equation-result-caption" );
+    myResultCaption.innerHTML = givenCaption.result;
+    
+    var myEqualCaption = makeChildElement( myCaptionRow, "td", "equation-equal-caption" );
+    
+    var myLeftHeader = makeChildElement( myCaptionRow, "td", "equation-left-caption" );
+    myLeftHeader.innerHTML = givenCaption.left;
+    
+    var myOperHeader = makeChildElement( myCaptionRow, "td", "equation-oper-caption" );
+    var myRightHeader = makeChildElement( myCaptionRow, "td", "equation-right-caption" );
+    myRightHeader.innerHTML = givenCaption.right;
+    
+    var myHeaderRow = makeChildElement( myBody, "tr", "equation-headers" );  
+    var myResultHeader = makeChildElement( myHeaderRow, "td", "equation-result-header" );
+    this.resultHeader = makeChildElement( myResultHeader, "div", "like-select" );
+    var myEqualHeader = makeChildElement( myHeaderRow, "td", "equation-equal-header" );
+    this.leftHeader = makeChildElement( myHeaderRow, "td", "equation-left-header" );
+    var myOperHeader = makeChildElement( myHeaderRow, "td", "equation-oper-header" );
+    this.rightHeader = makeChildElement( myHeaderRow, "td", "equation-right-header" );
+
+    var myContentRow = makeChildElement( myBody, "tr", "equation-content" ); 
+    this.resultContainer = makeChildElement( myContentRow, "td", "equation-result" );
+    var myEqualSign = makeChildElement( myContentRow, "td", "equation-equal-sign" );
+    myEqualSign.appendChild( document.createTextNode( "=" ) );
+    this.leftContainer = makeChildElement( myContentRow, "td", "equation-left" );
+    var myOperSign = makeChildElement( myContentRow, "td", "equation-oper-sign" );
+    myOperSign.appendChild( document.createTextNode( "x" ) );
+    this.rightContainer = makeChildElement( myContentRow, "td", "equation-right" );
+}
+function SelectorObject( givenOptionsArray, givenCaptionExtracter, givenInitialSelection )
+{
+    var sync = null;
+    var selection = null;
+    var setSelection = function ( givenIndex ) { selection = givenIndex };
+
+    this.getSelection = function () { return selection; };
+    this.setSync = function ( givenSyncFunction ) { sync = givenSyncFunction; };
+
+    setSelection( givenInitialSelection );
+    this.append = function ( givenParent )
+        {
+            var myForm = makeChildElement( givenParent, "form", "selector-form" );
+            var mySelect = makeChildElement( myForm, "select", "selector-select" );
+            for( i = 0; i < givenOptionsArray.length; i ++ )
+            {
+                var myOption = makeChildElement( mySelect, "option", "selector-option" );
+                myOption.value = i;
+                var myCaption = givenCaptionExtracter( givenOptionsArray[ i ] );
+                myOption.appendChild( document.createTextNode( myCaption ) );
+            }                     
+            mySelect.selectedIndex = givenInitialSelection;
+            function update()
+            { 
+                setSelection( mySelect.selectedIndex );
+                sync();
+            }
+            mySelect.onchange = update;
+            update();               
+        };
 }
