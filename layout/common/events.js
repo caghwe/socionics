@@ -1,6 +1,6 @@
 function addAnEvent( givenElement, givenEventName, givenFunction )
 {
-    if( givenElement.attachEvent )
+    if( givenElement.attachEvent)
     {   // IE
         givenElement.attachEvent( "on" + givenEventName, givenFunction );
     }
