@@ -1,7 +1,13 @@
+var entropyContainer = document.createElement( "div" );
+var maxEntropy = 0;
+
+
+
 function TestResultsKeeper()
 {
     this.sliders = new Array();
     this.timElements = new Array();
+    this.entropy = 0;
     this.resetSliders = function ( givenTimId )
         {
             for( var i = 0; i < this.sliders.length; i ++ )
@@ -21,12 +27,20 @@ function TestResultsKeeper()
     this.result = function()
         {
             var myTimDistribution = this.distribution();
+            this.entropy = 0;
             for( var i = 0; i < this.timElements.length; i ++ )
             {
+                this.entropy -= myTimDistribution[ i ] * Math.log( myTimDistribution[ i ] );
                 var myElement = this.timElements[ i ];
                 var myResult = document.createTextNode( formatFloatOutput( myTimDistribution[ i ] ) )
                 appendOnlyChild( myElement, myResult );
             }
+            
+            var myEntropy = maxEntropy ? this.entropy/maxEntropy : 1;
+            var responseInfo = 1 - myEntropy;
+            appendOnlyChild( entropyContainer, 
+                document.createTextNode( "Ваш ответ содержит " + formatFloatOutput( responseInfo ) + " информации о ТИМе."  ) );
+
         };
     this.bindOutput = function ( givenTimId, givenElement )
         {
@@ -79,31 +93,31 @@ function makeMutualReinin( givenParent, givenTimId )
     var partnerResultsKeeper = new TestResultsKeeper();
     var myRelationsKeeper = new RelationKeeper()
 
-    var myHeaderContainer   = makeChildElement( givenParent,        "div",      "calculator-header" );
+    var myHeaderContainer       = makeChildElement( givenParent,            "div",      "calculator-header" );
 
-    var myContainerTable    = makeChildElement( givenParent,        "table",    "container-table" );
-    var myContainerBody     = makeChildElement( myContainerTable,   "tbody",    "container-tbody" );
+    var myContainerTable        = makeChildElement( givenParent,            "table",    "container-table" );
+    var myContainerBody         = makeChildElement( myContainerTable,       "tbody",    "container-tbody" );
 
-    var yourHeaderRow      = makeChildElement( myContainerBody,    "tr",       "header-row" );
-    var yourHeader  = makeChildElement( yourHeaderRow,     "td",       "header-cell" );
+    var yourHeaderRow           = makeChildElement( myContainerBody,        "tr",       "header-row" );
+    var yourHeader              = makeChildElement( yourHeaderRow,          "td",       "header-cell" );
     yourHeader.colSpan = 2;
     yourHeader.appendChild( document.createTextNode( "Ваш выбор" ) );
 
-    var yourContainerRow      = makeChildElement( myContainerBody,    "tr",       "container-row" );
-    var yourSlidersContainer  = makeChildElement( yourContainerRow,     "td",       "sliders-container" );
-    var yourTimsContainer     = makeChildElement( yourContainerRow,     "td",       "tims-container" );
+    var yourContainerRow        = makeChildElement( myContainerBody,        "tr",       "container-row" );
+    var yourSlidersContainer    = makeChildElement( yourContainerRow,       "td",       "sliders-container" );
+    var yourTimsContainer       = makeChildElement( yourContainerRow,       "td",       "tims-container" );
 
-    var partnerHeaderRow      = makeChildElement( myContainerBody,    "tr",       "header-row" );
-    var partnerHeader  = makeChildElement( partnerHeaderRow,     "td",       "header-cell" );
+    var partnerHeaderRow        = makeChildElement( myContainerBody,        "tr",       "header-row" );
+    var partnerHeader           = makeChildElement( partnerHeaderRow,       "td",       "header-cell" );
     partnerHeader.colSpan = 2;
     partnerHeader.appendChild( document.createTextNode( "Выбор Вашего партнёра" ) );
 
-    var partnerContainerRow      = makeChildElement( myContainerBody,    "tr",       "container-row" );
-    var partnerSlidersContainer  = makeChildElement( partnerContainerRow,     "td",       "sliders-container" );
-    var partnerTimsContainer     = makeChildElement( partnerContainerRow,     "td",       "tims-container" );
+    var partnerContainerRow     = makeChildElement( myContainerBody,        "tr",       "container-row" );
+    var partnerSlidersContainer = makeChildElement( partnerContainerRow,    "td",       "sliders-container" );
+    var partnerTimsContainer    = makeChildElement( partnerContainerRow,    "td",       "tims-container" );
 
-    var relationHeaderRow      = makeChildElement( myContainerBody,    "tr",       "header-row" );
-    var relationHeader  = makeChildElement( relationHeaderRow,     "td",       "header--cell" );
+    var relationHeaderRow       = makeChildElement( myContainerBody,        "tr",       "header-row" );
+    var relationHeader          = makeChildElement( relationHeaderRow,      "td",       "header--cell" );
     relationHeader.colSpan = 2;
 
     appendDichotomyTable( yourSlidersContainer, yourResultsKeeper );
@@ -143,9 +157,13 @@ function makeReinin( givenParent, givenTimId )
     var myTimTable = makeTimTable( myTimsContainer, myResultsKeeper );
     var mySorting = makeTableSorter( myTimTable, sortByProbability );
     appendButton( myHeaderContainer, "Упорядочить ТИМы по убыванию вероятностей", mySorting );
+    
+    myHeaderContainer.appendChild( entropyContainer );
+    
 //    appendButton( myHeaderContainer, "Подсчитать коэффициенты корреляции", function(){ myResultsKeeper.result(); } );
-
+    
     myResultsKeeper.result();
+    maxEntropy = myResultsKeeper.entropy;
 }
 function appendDichotomyTable( givenParent, givenResultsKeeper )
 {
