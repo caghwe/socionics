@@ -40,7 +40,47 @@
         <link rel="stylesheet" type="text/css" href="../layout/socionics/reinin/style.css">
         <script type="text/javascript" src="../layout/socionics/reinin/calculator.js"></script>
         <script type="text/javascript" src="../layout/socionics/reinin/engine.js"></script>
-
+<script>
+function createTable_relationGroup( givenParent )
+{
+	var tableName = 'sociorel_composition';
+	var myCreateScript = "CREATE TABLE " + tableName + "<br/>(<br/>	first INTEGER NOT NULL,<br/>	second INTEGER NOT NULL,<br/>	result INTEGER NOT NULL,<br/>		FOREIGN KEY( first ) REFERENCES sociorel( id ),<br/>		FOREIGN KEY( second ) REFERENCES sociorel( id ),<br/>		FOREIGN KEY( result ) REFERENCES sociorel( id ),<br/>		PRIMARY KEY( first, second )<br/>);<br/><br/>"
+	givenParent.innerHTML += myCreateScript;
+    for( var leftRelation = 0; leftRelation < linearRepresentation.length; leftRelation ++ )
+    {
+		for( var rightRelation = 0; rightRelation < linearRepresentation.length; rightRelation ++ )
+        {                
+			var myLeftMatrix    = linearRepresentation[ leftRelation ].matrix;
+			var myRightMatrix   = linearRepresentation[ rightRelation ].matrix;
+			var myResultMatrix  = productOfMatricies( myRightMatrix, myLeftMatrix );
+			var myResultRelation = lookupRelationId( myResultMatrix );
+			var myMessage = "INSERT INTO " + tableName + "( first, second, result ) VALUES( " + 
+							( leftRelation + 1 ) + ", " + ( rightRelation + 1 )+ ", " + ( myResultRelation + 1 ) + " );";
+			givenParent.appendChild( document.createTextNode( myMessage ) );
+			givenParent.appendChild( document.createElement( "br" ) );
+        }
+    }
+	givenParent.appendChild( document.createElement( "br" ) );
+}
+function createTable_relationAction( givenParent )
+{
+	var tableName = 'socioaspect_distribution';
+	var myCreateScript = "CREATE TABLE " + tableName + "<br/>(<br/>	sociotype INTEGER NOT NULL,<br/>	sociofunction INTEGER NOT NULL,<br/>	socioaspect INTEGER NOT NULL,<br/>		FOREIGN KEY( sociotype ) REFERENCES sociotype( id ),<br/>		FOREIGN KEY( sociofunction ) REFERENCES sociofunction( id ),<br/>		FOREIGN KEY( socioaspect ) REFERENCES socioaspect( id ),<br/>		PRIMARY KEY( sociotype, sociofunction )<br/>);<br/><br/>"
+	givenParent.innerHTML += myCreateScript;
+    for( var myTimId = 0; myTimId < linearRepresentation.length; myTimId ++ )
+    {
+		for( var myFunctionNumber = 0; myFunctionNumber < psychicFunctions.length; myFunctionNumber ++ )
+        {                
+			var myAspectId = getAspectId( myTimId, myFunctionNumber )
+			var myMessage = "INSERT INTO " + tableName + "( sociotype, sociofunction, socioaspect ) VALUES( " + 
+							( myTimId + 1 )+ ", " + ( myFunctionNumber + 1 )+ ", " + ( myAspectId + 1 ) + " );";
+			givenParent.appendChild( document.createTextNode( myMessage ) );
+			givenParent.appendChild( document.createElement( "br" ) );
+        }
+    }
+	givenParent.appendChild( document.createElement( "br" ) );
+}
+</script>
     </head>
     <body>
         <center>
@@ -50,20 +90,8 @@
         <div id="fullCubeList">
             <script type="text/javascript">
                 var myParent = document.getElementById ( "fullCubeList" );
-
-                for( var myTimId = 0; myTimId < linearRepresentation.length; myTimId ++ )
-                {
-                    for( var myDichotomyId = 0; myDichotomyId < reininDichotomies.length; myDichotomyId ++ )
-                    {
-                        var myMessage = "ТИМ " + timFullNameById( myTimId ) + " наделён признаком Рейнина: "
-                            + resolveDichotomyName( myTimId, myDichotomyId ) + "\n";
-                        myParent.appendChild( document.createTextNode ( myMessage ) );
-                        myParent.appendChild( document.createElement( "br" ) );
-                    }
-                    var mySeparator = document.createElement( "hr" );
-                    myParent.appendChild( mySeparator );
-                    mySeparator.className ="section-separator";
-                }
+				createTable_relationGroup( myParent );
+				createTable_relationAction( myParent )
             </script>
         </div>
         <center>
