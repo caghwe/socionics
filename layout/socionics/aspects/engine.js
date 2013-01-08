@@ -48,12 +48,11 @@ function appendAspectIconById( givenParent, givenAspectId )
     var myDiv = document.createElement( "div" );
     givenParent.appendChild( myDiv );
 
-    var myAspectPictureSrc = lookupPathAspectIcon( psychicFunctions[ givenAspectId ].aspectId );
     var myAspectName = " - " + psychicFunctions[ givenAspectId ].aspectDescription;
 
     var myImage = document.createElement( "img" );
     myDiv.appendChild( myImage );
-    myImage.src = myAspectPictureSrc;
+    myImage.src = lookupPathAspectIcon( psychicFunctions[ givenAspectId ].aspectId );
 
     myDiv.appendChild( document.createTextNode( myAspectName ) );
 }
