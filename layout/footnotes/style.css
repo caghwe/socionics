@@ -7,6 +7,7 @@
     padding: 1.5em;
     border: outset .2em;
     cursor: pointer;
+    z-index:100; 
 }
 .footnote-body-hidden
 {
@@ -26,4 +27,9 @@
 .footnote-endnote
 {
     margin-bottom: 1em;
+}
+body
+{
+    z-index: 99;
+    background-color: rgb( 255, 255, 255 );
 }
