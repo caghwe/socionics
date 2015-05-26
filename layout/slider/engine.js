@@ -5,6 +5,8 @@ function lookupPathSliderKnob()
 function Slider( givenMin, givenMax, givenInitialValue, givenNotifierFunction )
 {
     var val = givenInitialValue;
+    // changed by default to make initialization work
+    var valChanged = true;
     var active = false; 
     var container = null;
     var knob = null;
@@ -16,6 +18,8 @@ function Slider( givenMin, givenMax, givenInitialValue, givenNotifierFunction )
         };
     this.setValue = function ( givenValue )
         {
+            // mark value as changed only if it really was changed
+            valChanged = givenValue != val;
             val = givenValue;
             this.resync();
         };
@@ -36,9 +40,13 @@ function Slider( givenMin, givenMax, givenInitialValue, givenNotifierFunction )
         };
     this.resync = function () 
         {   
+            // doing nothing unless changed
+            if ( ! valChanged ) return;
             var adjustedWidth = container.scrollWidth - knob.scrollWidth; 
             knob.style.left = adjustedWidth * rescaleToRange( givenMin, givenMax, val )  + "px";
-            givenNotifierFunction( val );                   
+            givenNotifierFunction( val );
+            // no need to resync again unless the value has changed
+            valChanged = false;
         };
     this.update = function ( givenEvent )
         {                   
@@ -46,7 +54,8 @@ function Slider( givenMin, givenMax, givenInitialValue, givenNotifierFunction )
             var adjustedOffset = container.offsetLeft + knob.scrollWidth / 2;
             var adjustedWidth = container.scrollWidth - knob.scrollWidth;
             var rangeRelativeX = ( givenEvent.clientX - adjustedOffset ) / adjustedWidth;
-            val = checkedInRange( givenMin, givenMax, givenMin + ( givenMax - givenMin ) * rangeRelativeX );
+            // don't access value directly, we need to track changes to it
+            this.setValue(checkedInRange( givenMin, givenMax, givenMin + ( givenMax - givenMin ) * rangeRelativeX ));
             stopEvent( givenEvent );
         };
 }
