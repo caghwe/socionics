@@ -49,8 +49,17 @@ function Slider( givenMin, givenMax, givenInitialValue, givenNotifierFunction )
             valChanged = false;
         };
     this.update = function ( givenEvent )
-        {                   
-            if( ! ( active && givenEvent && givenEvent.clientX ) ) return;
+        {
+            // for single-touch events fetch coordinates
+            if (givenEvent.touches && givenEvent.touches.length == 1) {
+                // clientX of a touch event is given in device pixels, where pageX is in CSS pixels
+                givenEvent.clientX = givenEvent.touches.item(0).pageX;
+            }
+
+            // event can be ignored if we're not in an active state,
+            //or if an event has no click coordinates (case of multi-touch events)
+            if ( ! active || ! ( givenEvent && givenEvent.clientX ) ) return;
+
             var adjustedOffset = container.offsetLeft + knob.scrollWidth / 2;
             var adjustedWidth = container.scrollWidth - knob.scrollWidth;
             var rangeRelativeX = ( givenEvent.clientX - adjustedOffset ) / adjustedWidth;
