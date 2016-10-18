@@ -92,8 +92,15 @@ function appendSlider( givenParent, givenSliderObject )
                 activate();   
                 resync(); 
                 update( givenEvent ); 
-            } );      
+            } );
+        addAnEvent( mySliderDiv, "touchstart", function( givenEvent ) 
+            { 
+                activate();   
+                resync(); 
+                update( givenEvent ); 
+            } );
         addAnEvent( mySliderDiv, "mouseup",  deactivate );
+        addAnEvent( mySliderDiv, "touchend",  deactivate );
         //addAnEvent( mySliderDiv, "mouseout", deactivate );     
     } 
 }
